@@ -4,9 +4,34 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repository is
 
-This is a creative composition project, not a software application. The task, defined in `goal.md`, is to compose an original symphony as a playable music document — MIDI, MusicXML, ABC notation, or whatever format best serves the work. Claude is the composer.
+This is a creative composition project, not a software application. The task, defined in `goal.md`, is to compose an original symphony as a playable music document. Claude is the composer.
 
-There is no build system, linter, or test suite. If you introduce tooling (e.g. Python with music21/mido for MIDI generation, or a verovio/abcjs rendering step), document the exact commands here so future sessions can regenerate and verify the output.
+The symphony exists: **Symphony No. 1 in C minor, "The Window"** — four movements, ~18.5 minutes, generated as MIDI by Python/music21 from `compose/`. The creative record lives in `docs/` (inspiration, architecture plan, program notes, self-assessment).
+
+## Commands
+
+```sh
+.venv/bin/python compose/build.py        # regenerate all MIDI into output/
+.venv/bin/python compose/validate.py     # duration, channels, dynamic-arc gates
+.venv/bin/python compose/mvt1.py         # build + range-check a single movement
+```
+
+Environment: `python3 -m venv .venv && .venv/bin/pip install music21 mido` (Python 3.14 works).
+
+## Architecture
+
+- `compose/common.py` — the framework: a text DSL for notes (`'G4:q Eb5:e r:h'`, chords in parens), the `Orchestra` class (fixed 16-channel roster, one part per instrument section), texture helpers (`trem`, `arp`, `roll`), velocity-based dynamics with deterministic humanization, and the MIDI writer. The writer post-processes with mido to force each track onto its roster channel (music21 merges same-program parts) and percussion onto channel 10.
+- `compose/themes.py` — the cyclic material shared across movements (the motto/"Question", the "Answer", main themes).
+- `compose/mvt{1..4}.py` — one movement each; every movement runs standalone and exposes `compose(orchestra, t0) -> end_offset` for assembly. Offsets are music21 quarterLengths; real time comes from MetronomeMarks.
+- Each movement file defines a local `B(dsl, n)` guard asserting a melody spans exactly n bars — keep using it; it catches almost every entry error.
+
+## Conventions and gotchas
+
+- Range guards per instrument live in `ROSTER` (`common.py`); `check_ranges()` must report none before a movement is done.
+- Don't multiply DSL strings (`s * 4` concatenates without spaces); use the movement-local `R(dsl, times)` helper.
+- Pizzicato/arco = GM program switches via `Orchestra.program(name, offset, 45|48)`.
+- Write tremolos/trills as sounded notes (MIDI realism), not notation shorthand.
+- Builds are deterministic (seeded RNG in `common.py`); never remove the seed.
 
 ## Working process (from goal.md)
 
