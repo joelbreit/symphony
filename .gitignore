@@ -9,3 +9,10 @@ __pycache__/
 *.pyd
 *.pyw
 *.pyz
+
+# Node / web app
+web/node_modules/
+web/dist/
+
+# Generated web audio (regenerate from MIDI via fluidsynth + afconvert)
+web/public/audio/

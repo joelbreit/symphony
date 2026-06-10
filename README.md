@@ -32,6 +32,21 @@ fluidsynth -ni <your-soundfont>.sf2 output/symphony_full.mid -F symphony.wav
 
 (Any GM soundfont works — GeneralUser GS is a good free one.)
 
+## The web experience
+
+[`web/`](web/) contains a React app that plays the symphony with a live
+piano-roll visualization — notes color-coded by orchestral family, a fixed
+"window of attention" playhead (the future dim, the present ignited, the past
+cooling like memory), poetic section labels, a full-piece constellation seek
+bar, and per-instrument spotlighting. Mobile-first; audio pre-rendered to AAC.
+
+```sh
+cd web && npm install && npm run build   # → web/dist/, fully static, ~22MB
+```
+
+See [web/README.md](web/README.md) for publishing notes and
+[web/DESIGN.md](web/DESIGN.md) for the design language.
+
 ## Rebuilding from source
 
 The symphony is generated programmatically with music21:

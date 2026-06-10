@@ -14,7 +14,13 @@ The symphony exists: **Symphony No. 1 in C minor, "The Window"** — four moveme
 .venv/bin/python compose/build.py        # regenerate all MIDI into output/
 .venv/bin/python compose/validate.py     # duration, channels, dynamic-arc gates
 .venv/bin/python compose/mvt1.py         # build + range-check a single movement
+.venv/bin/python compose/export_web.py   # regenerate web note/section JSON
+cd web && npm run dev                    # piano-roll web app (build: npm run build)
 ```
+
+If movement code changes, regenerate in order: MIDI (`build.py`) → web JSON
+(`export_web.py`) → audio (fluidsynth + afconvert per `web/README.md`). The web
+app's sync depends on JSON and audio coming from the same MIDI generation.
 
 Environment: `python3 -m venv .venv && .venv/bin/pip install music21 mido` (Python 3.14 works).
 
