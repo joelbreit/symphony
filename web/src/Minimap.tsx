@@ -1,21 +1,24 @@
 import { useEffect, useRef } from 'react'
 import { NoteTuple } from './types'
-import { INSTRUMENT_COLORS, PITCH_MIN, PITCH_MAX } from './theme'
 
 interface Props {
   notesByMvt: NoteTuple[][]
   durations: number[]
   numerals: string[]
+  colors: string[]
+  accent: string
+  pitchMin: number
+  pitchMax: number
   getGlobalTime: () => number
   onSeek: (globalSec: number) => void
 }
 
-export default function Minimap({ notesByMvt, durations, numerals, getGlobalTime, onSeek }: Props) {
+export default function Minimap({ notesByMvt, durations, numerals, colors, accent, pitchMin, pitchMax, getGlobalTime, onSeek }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const wrapRef = useRef<HTMLDivElement>(null)
   const baseRef = useRef<HTMLCanvasElement | null>(null)
-  const propsRef = useRef({ notesByMvt, durations, getGlobalTime })
-  propsRef.current = { notesByMvt, durations, getGlobalTime }
+  const propsRef = useRef({ getGlobalTime })
+  propsRef.current = { getGlobalTime }
 
   const total = durations.reduce((a, b) => a + b, 0)
   const starts = durations.reduce<number[]>((acc, d, i) => {
@@ -37,19 +40,18 @@ export default function Minimap({ notesByMvt, durations, numerals, getGlobalTime
       const bctx = base.getContext('2d')!
       bctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       const scale = w / Math.max(total, 1)
-      const span = PITCH_MAX - PITCH_MIN
+      const span = pitchMax - pitchMin
       const pad = 4
       for (let m = 0; m < notesByMvt.length; m++) {
         const x0 = starts[m] * scale
         for (const [t, d, p, inst, v] of notesByMvt[m]) {
           const a = 0.18 + (v / 127) * 0.5
-          bctx.fillStyle = INSTRUMENT_COLORS[inst] + Math.round(a * 255).toString(16).padStart(2, '0')
-          const y = pad + (1 - (p - PITCH_MIN) / span) * (h - pad * 2)
+          bctx.fillStyle = colors[inst] + Math.round(a * 255).toString(16).padStart(2, '0')
+          const y = pad + (1 - (p - pitchMin) / span) * (h - pad * 2)
           bctx.fillRect(x0 + t * scale, y, Math.max(d * scale, 0.8), 1.4)
         }
       }
-      // movement boundaries + numerals
-      bctx.fillStyle = 'rgba(217,168,78,0.55)'
+      bctx.fillStyle = accent + '8c'
       bctx.font = '600 10px "Cormorant Garamond", serif'
       for (let m = 1; m < starts.length; m++) {
         bctx.fillRect(starts[m] * scale, 0, 1, h)
@@ -82,18 +84,16 @@ export default function Minimap({ notesByMvt, durations, numerals, getGlobalTime
       if (baseRef.current) ctx.drawImage(baseRef.current, 0, 0)
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       const x = (t / Math.max(total, 1)) * w
-      // dim the future
       ctx.fillStyle = 'rgba(11,14,20,0.5)'
       ctx.fillRect(x, 0, w - x, h)
-      // playhead
-      ctx.fillStyle = '#d9a84e'
+      ctx.fillStyle = accent
       ctx.fillRect(x - 0.75, 0, 1.5, h)
       raf = requestAnimationFrame(draw)
     }
     raf = requestAnimationFrame(draw)
     return () => { cancelAnimationFrame(raf); ro.disconnect() }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [notesByMvt, total])
+  }, [notesByMvt, total, colors, accent, pitchMin, pitchMax])
 
   const seekFromEvent = (e: React.PointerEvent) => {
     const rect = wrapRef.current!.getBoundingClientRect()

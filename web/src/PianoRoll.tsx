@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { NoteTuple } from './types'
-import { INSTRUMENT_COLORS, PITCH_MIN, PITCH_MAX } from './theme'
+import { hexToRgb, RGB } from './theme'
 
 interface Props {
   notes: NoteTuple[]
@@ -9,15 +9,11 @@ interface Props {
   playing: boolean
   started: boolean
   spotlight: number
+  colors: string[]
+  accent: string
+  pitchMin: number
+  pitchMax: number
 }
-
-interface RGB { r: number; g: number; b: number }
-
-const rgbCache: RGB[] = INSTRUMENT_COLORS.map(hex => ({
-  r: parseInt(hex.slice(1, 3), 16),
-  g: parseInt(hex.slice(3, 5), 16),
-  b: parseInt(hex.slice(5, 7), 16),
-}))
 
 function rgba(c: RGB, a: number) {
   return `rgba(${c.r},${c.g},${c.b},${a})`
@@ -34,16 +30,18 @@ function lowerBound(notes: NoteTuple[], t: number): number {
   return lo
 }
 
-export default function PianoRoll({ notes, duration, getTime, playing, started, spotlight }: Props) {
+export default function PianoRoll(props: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const wrapRef = useRef<HTMLDivElement>(null)
-  const stateRef = useRef({ notes, duration, playing, started, spotlight, getTime })
-  stateRef.current = { notes, duration, playing, started, spotlight, getTime }
+  const rgbColors = useMemo(() => props.colors.map(hexToRgb), [props.colors])
+  const accentRgb = useMemo(() => hexToRgb(props.accent), [props.accent])
+  const stateRef = useRef({ ...props, rgbColors, accentRgb })
+  stateRef.current = { ...props, rgbColors, accentRgb }
   const maxDurRef = useRef(8)
 
   useEffect(() => {
-    maxDurRef.current = notes.reduce((m, n) => Math.max(m, n[1]), 1)
-  }, [notes])
+    maxDurRef.current = props.notes.reduce((m, n) => Math.max(m, n[1]), 1)
+  }, [props.notes])
 
   useEffect(() => {
     const canvas = canvasRef.current!
@@ -65,17 +63,19 @@ export default function PianoRoll({ notes, duration, getTime, playing, started, 
     const ro = new ResizeObserver(resize)
     ro.observe(wrap)
 
-    const laneY = (pitch: number) => {
-      const span = PITCH_MAX - PITCH_MIN
-      return h - ((pitch - PITCH_MIN) / span) * h
-    }
+    const draw = () => {
+      const s = stateRef.current
+      const span = s.pitchMax - s.pitchMin
+      const laneY = (pitch: number) => h - ((pitch - s.pitchMin) / span) * h
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+      ctx.clearRect(0, 0, w, h)
 
-    const drawLanes = () => {
+      // octave lane lines
       ctx.strokeStyle = 'rgba(30,38,56,0.55)'
       ctx.lineWidth = 1
       ctx.fillStyle = 'rgba(138,143,163,0.4)'
       ctx.font = '9px Inter, sans-serif'
-      for (let p = 24; p <= 96; p += 12) {
+      for (let p = Math.ceil(s.pitchMin / 12) * 12; p <= s.pitchMax; p += 12) {
         const y = laneY(p)
         ctx.beginPath()
         ctx.moveTo(0, y)
@@ -83,14 +83,8 @@ export default function PianoRoll({ notes, duration, getTime, playing, started, 
         ctx.stroke()
         if (w > 640) ctx.fillText('C' + (p / 12 - 1), 6, y - 3)
       }
-    }
 
-    const draw = () => {
-      const s = stateRef.current
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-      ctx.clearRect(0, 0, w, h)
-      drawLanes()
-      const laneH = h / (PITCH_MAX - PITCH_MIN)
+      const laneH = h / span
       const noteH = Math.max(2, laneH * 1.7)
 
       if (!s.started) {
@@ -100,7 +94,7 @@ export default function PianoRoll({ notes, duration, getTime, playing, started, 
         for (let i = 0; i < s.notes.length; i++) {
           const [t, d, p, inst, v] = s.notes[i]
           const a = (0.16 + (v / 127) * 0.45) * breathe
-          ctx.fillStyle = rgba(rgbCache[inst], a)
+          ctx.fillStyle = rgba(s.rgbColors[inst], a)
           ctx.fillRect(t * scale, laneY(p) - noteH / 2, Math.max(d * scale, 1.5), noteH)
         }
         raf = requestAnimationFrame(draw)
@@ -144,7 +138,7 @@ export default function PianoRoll({ notes, duration, getTime, playing, started, 
           alpha = Math.max(0.1, 0.8 - fade * 0.65)
         }
         if (s.spotlight >= 0 && inst !== s.spotlight) alpha *= 0.18
-        const c = rgbCache[inst]
+        const c = s.rgbColors[inst]
         if (active && (s.spotlight < 0 || inst === s.spotlight)) {
           ctx.shadowColor = rgba(c, 0.9)
           ctx.shadowBlur = 9
@@ -155,7 +149,7 @@ export default function PianoRoll({ notes, duration, getTime, playing, started, 
       }
 
       // playhead core
-      ctx.fillStyle = 'rgba(217,168,78,0.9)'
+      ctx.fillStyle = rgba(s.accentRgb, 0.9)
       ctx.fillRect(playheadX - 0.75, 0, 1.5, h)
 
       raf = requestAnimationFrame(draw)

@@ -44,6 +44,11 @@ bar, and per-instrument spotlighting. Mobile-first; audio pre-rendered to AAC.
 cd web && npm install && npm run build   # → web/dist/, fully static, ~22MB
 ```
 
+The player hosts multiple compositions: each piece is a self-contained
+package under `web/public/pieces/`, and **[PIECES.md](PIECES.md)** documents
+how to package a new one (a MIDI file per movement is nearly all it takes —
+`tools/midi_to_piece.py` does the conversion).
+
 See [web/README.md](web/README.md) for publishing notes and
 [web/DESIGN.md](web/DESIGN.md) for the design language.
 
