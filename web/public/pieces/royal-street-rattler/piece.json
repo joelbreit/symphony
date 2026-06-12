@@ -1,0 +1,224 @@
+{
+ "schema": 1,
+ "id": "royal-street-rattler",
+ "title": "Royal Street Rattler",
+ "subtitle": "a Dixieland strut for six players",
+ "composer": "Claude",
+ "year": 2026,
+ "concept": "the rattle of a 1924 New Orleans streetcar, taught to strut by the band on the corner.",
+ "about": [
+  "Royal Street, late afternoon, 1924. A streetcar rattles toward the river, iron wheels clicking over the rail joints in a syncopation that never lands where you expect. On the corner, a six-piece band catches the rhythm out of the air — and by the second chorus every pedestrian on the block has stopped walking and started strutting.",
+  "The whole piece grows from that one cell: three repeated notes and a leap onto the offbeat, stated by woodblock before a single horn plays. It becomes the F-major Strut, turns minor under the balconies where the trombone growls, and rides out to the river in B♭, where the passengers tell their stories — a kid weaving through the crowd (clarinet), a riverboat man leaning on a post (tenor sax), the bandleader showing off in stop-time (trumpet).",
+  "I composed every melody, solo, and break note-by-note in Python, and let small constrained generators do what real bands do by formula: banjo four-to-the-bar, two-beat sousaphone with walkups, clarinet obbligato that fills the lead's holes, tailgate trombone with real pitch-bend smears. Swing is a timeline warp — offbeat eighths at 57.5% of the beat, the light fast swing of a street band, not a metronome's triplets.",
+  "Dixieland is conversation music: three melodic voices improvising at once without stepping on each other, over a rhythm section that never stops grinning. This is a transcription of one such conversation, on one good corner, at sundown."
+ ],
+ "credits": [
+  {
+   "label": "Composition",
+   "value": "Claude (Fable 5), generated as MIDI via Python/midiutil"
+  },
+  {
+   "label": "Rendering",
+   "value": "FluidSynth with the MuseScore General soundfont"
+  },
+  {
+   "label": "Duration",
+   "value": "about 3¾ minutes · ~5,600 notes"
+  }
+ ],
+ "theme": {
+  "accent": "#e8743d",
+  "instrumentColors": {
+   "trumpet-lead": "#f0564a",
+   "clarinet": "#f4a94f",
+   "trombone-tailgate": "#3fb8a4",
+   "tenor-sax": "#b07fe8",
+   "sousaphone": "#5d7d99",
+   "banjo": "#c9b48f",
+   "drums": "#8d86b8"
+  }
+ },
+ "instruments": [
+  {
+   "id": "trumpet-lead",
+   "name": "Trumpet",
+   "family": "brass"
+  },
+  {
+   "id": "clarinet",
+   "name": "Clarinet",
+   "family": "winds"
+  },
+  {
+   "id": "trombone-tailgate",
+   "name": "Trombone",
+   "family": "brass"
+  },
+  {
+   "id": "tenor-sax",
+   "name": "Tenor Sax",
+   "family": "winds"
+  },
+  {
+   "id": "sousaphone",
+   "name": "Sousaphone",
+   "family": "brass"
+  },
+  {
+   "id": "banjo",
+   "name": "Banjo",
+   "family": "strings"
+  },
+  {
+   "id": "drums",
+   "name": "Drums",
+   "family": "color"
+  }
+ ],
+ "movements": [
+  {
+   "id": "mvt1",
+   "num": "·",
+   "title": "Royal Street Rattler",
+   "key": "F major → B♭ major",
+   "tempoLabel": "Hot two-beat, ♩ = 198",
+   "note": "one continuous strut: three strains, three solos, a drum break, and the classic three-break tag.",
+   "duration": 236.0,
+   "noteCount": 5623,
+   "audio": "audio/mvt1.m4a",
+   "notes": "notes/mvt1.json",
+   "sections": [
+    [
+     0.0,
+     "the streetcar bell"
+    ],
+    [
+     9.7,
+     "the Strut"
+    ],
+    [
+     29.1,
+     "clarinet takes the tune"
+    ],
+    [
+     48.5,
+     "balcony shadows"
+    ],
+    [
+     67.9,
+     "the Strut returns"
+    ],
+    [
+     87.3,
+     "around the corner to B♭"
+    ],
+    [
+     92.1,
+     "out to the river"
+    ],
+    [
+     111.5,
+     "the kid in the crowd — clarinet"
+    ],
+    [
+     130.9,
+     "the riverboat man — tenor sax"
+    ],
+    [
+     150.3,
+     "the bandleader — stop-time"
+    ],
+    [
+     169.7,
+     "the rattle, drums alone"
+    ],
+    [
+     174.5,
+     "everybody dances"
+    ],
+    [
+     193.9,
+     "full boil"
+    ],
+    [
+     213.3,
+     "three breaks and out"
+    ]
+   ]
+  }
+ ],
+ "emblem": {
+  "label": "the rattle",
+  "states": [
+   {
+    "label": "the rattle",
+    "notes": [
+     {
+      "p": "F4"
+     },
+     {
+      "p": "F4"
+     },
+     {
+      "p": "F4"
+     },
+     {
+      "p": "A4",
+      "accent": true
+     }
+    ]
+   },
+   {
+    "label": "the rattle, full strut",
+    "trigger": {
+     "movement": "mvt1",
+     "time": 210.9
+    },
+    "notes": [
+     {
+      "p": "Bb4"
+     },
+     {
+      "p": "Bb4"
+     },
+     {
+      "p": "Bb4"
+     },
+     {
+      "p": "G4",
+      "accent": true
+     }
+    ]
+   }
+  ]
+ },
+ "moments": [
+  {
+   "movement": "mvt1",
+   "time": 1.2,
+   "text": "the hook arrives as pure percussion — three clicks and a leap, a wheel crossing a rail joint.",
+   "spotlight": "drums",
+   "hold": 8
+  },
+  {
+   "movement": "mvt1",
+   "time": 150.4,
+   "text": "stop-time: the band drops to single hits and the leader talks in the gaps.",
+   "spotlight": "trumpet-lead",
+   "hold": 10
+  },
+  {
+   "movement": "mvt1",
+   "time": 203.6,
+   "text": "the sousaphone breaks into a four-beat walk — the floor starts moving.",
+   "spotlight": "sousaphone",
+   "hold": 9
+  },
+  {
+   "movement": "mvt1",
+   "time": 221.6,
+   "text": "trombone, clarinet, trumpet — two beats of fame each. then two hits, one chord, and the streetcar plops off around the corner.",
+   "hold": 12
+  }
+ ]
+}

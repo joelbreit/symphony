@@ -1,0 +1,279 @@
+{
+ "schema": 1,
+ "id": "the-unfinished-spire",
+ "title": "The Unfinished Spire",
+ "subtitle": "an anthem for builders",
+ "composer": "Claude",
+ "year": 2026,
+ "concept": "an anthem for the builders of things they will not see finished.",
+ "about": [
+  "A cathedral construction site at first light, around 1300. Scaffolding wraps a half-built spire. The masons who laid the foundation are forty years dead; the children who will set the capstone are not yet born. A horn sounds across the site: work begins. The piece celebrates the quiet bargain those builders made — the work is worth doing even though I will not see the end of it.",
+  "Two themes carry the argument. The Anthem is the public voice: a sixteen-bar hymn that grows out of the opening horn call. The Doubt is the private one — a solo oboe, one mason alone, asking whether any of it matters. The secret of the piece is that the Doubt was composed against the Anthem's harmony from the start, so when the music finally blazes, the two sound together in counterpoint: the private voice was part of the hymn all along.",
+  "The turn comes after the piece's darkest music collapses onto a dominant chord and then — a full bar of silence. What follows is the wrong chord, C♭ major, lit from inside, with the first stroke of the bells: the sun cresting the unfinished spire. The answer is not 'it will be finished.' The answer is that the building is the cathedral. At the end the orchestra lets go and a single bell rings into the silence — the thing built outlives the day's work.",
+  "I am made of accumulated small human work, the way a cathedral is made of dressed stones; composing is the same act at a smaller scale, single notes that mean nothing assembled into something that might. This one is for everyone who cuts stone for a spire they will never see."
+ ],
+ "credits": [
+  {
+   "label": "Composition",
+   "value": "Claude (Fable 5), written as Python → MIDI, deterministic build"
+  },
+  {
+   "label": "Rendering",
+   "value": "FluidSynth with the GeneralUser GS soundfont"
+  },
+  {
+   "label": "Duration",
+   "value": "about 6 minutes · 4,203 notes"
+  }
+ ],
+ "theme": {
+  "accent": "#dd8e5e",
+  "instrumentColors": {
+   "harp-bells": "#e8c97a"
+  }
+ },
+ "instruments": [
+  {
+   "id": "flute",
+   "name": "Flute",
+   "family": "winds"
+  },
+  {
+   "id": "oboe",
+   "name": "Oboe",
+   "family": "winds"
+  },
+  {
+   "id": "clarinet",
+   "name": "Clarinet",
+   "family": "winds"
+  },
+  {
+   "id": "bassoon",
+   "name": "Bassoon",
+   "family": "winds"
+  },
+  {
+   "id": "horns",
+   "name": "Horns",
+   "family": "brass"
+  },
+  {
+   "id": "trumpets",
+   "name": "Trumpets",
+   "family": "brass"
+  },
+  {
+   "id": "trombones",
+   "name": "Trombones",
+   "family": "brass"
+  },
+  {
+   "id": "tuba",
+   "name": "Tuba",
+   "family": "brass"
+  },
+  {
+   "id": "timpani",
+   "name": "Timpani",
+   "family": "color"
+  },
+  {
+   "id": "percussion",
+   "name": "Percussion",
+   "family": "color"
+  },
+  {
+   "id": "violin-i",
+   "name": "Violin I",
+   "family": "strings"
+  },
+  {
+   "id": "violin-ii",
+   "name": "Violin II",
+   "family": "strings"
+  },
+  {
+   "id": "viola",
+   "name": "Viola",
+   "family": "strings"
+  },
+  {
+   "id": "cello",
+   "name": "Cello",
+   "family": "strings"
+  },
+  {
+   "id": "contrabass",
+   "name": "Contrabass",
+   "family": "strings"
+  },
+  {
+   "id": "harp-bells",
+   "name": "Harp · Bells",
+   "family": "color"
+  }
+ ],
+ "movements": [
+  {
+   "id": "mvt1",
+   "num": "·",
+   "title": "The Unfinished Spire",
+   "key": "E♭ major",
+   "tempoLabel": "Andante misterioso — Maestoso — Largamente",
+   "note": "dawn; the hymn; the doubt; the night; the sunrise; the bell that outlasts the day",
+   "duration": 367.5,
+   "noteCount": 4203,
+   "audio": "audio/mvt1.m4a",
+   "notes": "notes/mvt1.json",
+   "sections": [
+    [
+     0.0,
+     "dawn — mist over the site"
+    ],
+    [
+     13.9,
+     "the Summons"
+    ],
+    [
+     54.1,
+     "the anthem, sung low"
+    ],
+    [
+     95.9,
+     "the anthem, tutti"
+    ],
+    [
+     116.8,
+     "the work — many hands, one gesture"
+    ],
+    [
+     139.6,
+     "the work bears fruit"
+    ],
+    [
+     155.6,
+     "one mason, alone"
+    ],
+    [
+     180.2,
+     "the doubt, passed upward"
+    ],
+    [
+     205.9,
+     "the long night"
+    ],
+    [
+     223.0,
+     "doubt at scale"
+    ],
+    [
+     231.9,
+     "silence"
+    ],
+    [
+     235.5,
+     "sunrise — the awe chord, the first bell"
+    ],
+    [
+     259.0,
+     "apotheosis — the two themes, one music"
+    ],
+    [
+     298.1,
+     "one last shadow"
+    ],
+    [
+     310.4,
+     "the peal"
+    ],
+    [
+     322.1,
+     "the next morning, far off"
+    ],
+    [
+     341.2,
+     "the final blaze"
+    ],
+    [
+     350.6,
+     "one bell rings last"
+    ]
+   ]
+  }
+ ],
+ "emblem": {
+  "label": "the Summons",
+  "states": [
+   {
+    "label": "the Summons",
+    "notes": [
+     {
+      "p": "Bb3"
+     },
+     {
+      "p": "Eb4"
+     },
+     {
+      "p": "F4"
+     },
+     {
+      "p": "G4"
+     }
+    ]
+   },
+   {
+    "label": "the Anthem",
+    "trigger": {
+     "movement": "mvt1",
+     "time": 54.1
+    },
+    "notes": [
+     {
+      "p": "Eb4"
+     },
+     {
+      "p": "F4"
+     },
+     {
+      "p": "G4"
+     },
+     {
+      "p": "Bb4",
+      "accent": true
+     }
+    ]
+   }
+  ]
+ },
+ "moments": [
+  {
+   "movement": "mvt1",
+   "time": 155.61,
+   "text": "a single oboe: will any of this matter?",
+   "hold": 9,
+   "spotlight": "oboe"
+  },
+  {
+   "movement": "mvt1",
+   "time": 235.0,
+   "text": "a full bar of nothing — then the wrong chord, lit from inside. the first bell.",
+   "hold": 11,
+   "spotlight": "harp-bells"
+  },
+  {
+   "movement": "mvt1",
+   "time": 259.01,
+   "text": "the oboe's private song returns inside the anthem — it fit all along.",
+   "hold": 12,
+   "spotlight": "horns"
+  },
+  {
+   "movement": "mvt1",
+   "time": 350.64,
+   "text": "the orchestra lets go; one bell rings into the silence.",
+   "hold": 10,
+   "spotlight": "harp-bells"
+  }
+ ]
+}
