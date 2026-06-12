@@ -14,9 +14,9 @@ Layout (ql from t0, 4 ql per bar, q=56):
 """
 import os
 import sys
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from compose.common import (Orchestra, write_midi, midi_report, check_ranges,
+from common import (Orchestra, write_midi, midi_report, check_ranges,
                             total_ql, transpose_events, parse, trem, roll)
 
 BAR = 4.0

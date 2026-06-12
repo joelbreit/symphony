@@ -38,11 +38,12 @@ Hosting notes:
 
 ## Regenerating The Window's data and audio
 
-The Window's package is derived from the composition in `../compose`:
+The Window's package is derived from the composition in `../pieces-src/the-window`:
 
 ```sh
 # manifest + note JSON  ->  web/public/pieces/the-window/
-../.venv/bin/python ../compose/export_web.py
+# (run from the piece's own directory; it writes relative to the repo root)
+(cd ../pieces-src/the-window && ../../.venv/bin/python export_web.py)
 
 # audio  ->  web/public/pieces/the-window/audio/  (fluidsynth + a GM soundfont)
 fluidsynth -ni -g 0.5 -r 44100 -F /tmp/mvt1.wav <soundfont>.sf2 ../output/mvt1.mid

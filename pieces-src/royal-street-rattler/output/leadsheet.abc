@@ -1,0 +1,46 @@
+%% ROYAL STREET RATTLER — lead sheet
+%% Dixieland two-beat, light swing. Form:
+%%   Intro 8 | A A | B | A | mod 4 | Trio: theme, solos (cl/ts/tp),
+%%   drum break 4, shout, out chorus | tag 8 + plop
+%% Full performance: royal_street_rattler.mid
+
+X:1
+T:Royal Street Rattler
+T:A strain — The Strut
+C:Claude (Fable 5), June 2026
+M:4/4
+L:1/8
+Q:1/4=198 "swing"
+K:F
+"^pickup"CDE |"F" F F F A3 z c |"F" d c A F3 z2 |"D7" A A A ^F3 z D |
+"D7" A2 z ^F d3 z |"G7" d =B G E3 z2 |"G7" F G A =B3 z c |"C7" c c c _B3 z2 |
+"C7" A G E2 z4 "^clar. break" |"F" F F F A3 z c |"F7" d c A _e3 z2 |
+"Bb" d B d f3 z2 |"Bdim7" f d =B _A3 z2 |"F/C" A2 z2 A B =B c |
+"D7" d d d c3 z2 |"G7" =B d =B G "C7"_B G E z |"F" G _A A4 z2 |]
+
+X:2
+T:Royal Street Rattler
+T:B strain — Balcony Shadows (trombone lead, sounding pitch)
+M:4/4
+L:1/8
+Q:1/4=198 "swing"
+K:Dm
+"^pickup"A,, C, |"Dm" D,3 F, A,2 F,2 |"A7" E,4 ^C,2 A,,2 |"Dm" D,3 F, A,2 G, F, |
+"A7" E,6 E, G, |"Dm" A, A, A, F,3 z2 |"Dm/C" A, G, F, E,3 z2 |
+"Bb7" D, F, _A, B,3 z2 |"A7" A,2 G, E, ^C,2 z2 |"Dm" D,3 F, A,2 C2 |
+"D7" D4 "^smear up"C A, z2 |"Gm" B,3 G, D,2 G,2 |"Gm" B, B, B, G,3 z2 |
+"Dm" F,2 E, D, A,4 |"Bb7" B,2 _A, F, "A7"E,3 z |"Dm" D,2 F, A, D C A, z |
+"C7" G,3 E, C,2 B,, C, |]
+
+X:3
+T:Royal Street Rattler
+T:Trio — Out to the River
+M:4/4
+L:1/8
+Q:1/4=198 "swing"
+K:Bb
+"^pickup"F G |"Bb" d3 c B2 G2 |"Bb" F5 z F G |"F7" A3 G F2 c2 |"F7" c4 z B A G |
+"F7" A3 F e2 c2 |"F7" c4 A F G A |"Bb" B3 d f4 |"Bb7" f d B _A3 z2 |
+"Eb" G3 B e2 B2 |"Edim7" _d3 B G2 =E2 |"Bb/F" F2 B d f3 z |"G7" d =B G f3 z2 |
+"C7" =e c G B3 z2 |"F7" A c e c3 z2 |"Bb" B B B d3 z2 "^the rattle" |
+"F7" c2 A F G2 z2 |]

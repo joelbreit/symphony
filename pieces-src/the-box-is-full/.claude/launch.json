@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "listening-room",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "/Users/joel/code/workbench/symphony/web"],
+      "autoPort": true,
+      "port": 5173
+    }
+  ]
+}

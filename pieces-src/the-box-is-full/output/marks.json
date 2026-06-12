@@ -1,0 +1,69 @@
+{
+ "sections": [
+  [
+   0.0,
+   "insert cartridge"
+  ],
+  [
+   41.74,
+   "level 1 \u2014 the peddler struts"
+  ],
+  [
+   83.48,
+   "level 3 \u2014 first sweat"
+  ],
+  [
+   121.37,
+   "the rye field (music B)"
+  ],
+  [
+   168.04,
+   "the turquoise ring"
+  ],
+  [
+   188.04,
+   "the climb \u2014 levels 5 \u00b7 6 \u00b7 7"
+  ],
+  [
+   238.83,
+   "TETRIS! \u2014 four lines"
+  ],
+  [
+   255.33,
+   "the bottom drops"
+  ],
+  [
+   261.05,
+   "level 9 \u2014 kill screen"
+  ],
+  [
+   293.0,
+   "top out"
+  ],
+  [
+   299.56,
+   "score screen \u2014 the song goes on"
+  ],
+  [
+   329.56,
+   "the peddler's verse"
+  ],
+  [
+   367.06,
+   "press start"
+  ]
+ ],
+ "cues": {
+  "boot": 19.57,
+  "clear1": 118.22,
+  "ring": 168.04,
+  "level6": 208.04,
+  "level7": 223.83,
+  "tetris": 238.83,
+  "killscreen": 261.05,
+  "topout": 293.0,
+  "gameover": 299.56,
+  "press-start": 367.06
+ },
+ "end": 370.81
+}

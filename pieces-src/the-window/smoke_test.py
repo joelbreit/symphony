@@ -1,9 +1,9 @@
 """Pipeline smoke test: instruments, tempo changes, velocities, percussion channel."""
 import os
 import sys
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from compose.common import Orchestra, write_midi, midi_report, check_ranges, trem, arp
+from common import Orchestra, write_midi, midi_report, check_ranges, trem, arp
 
 o = Orchestra()
 o.timesig(0, '4/4')

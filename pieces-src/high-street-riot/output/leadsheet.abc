@@ -1,0 +1,22 @@
+X:1
+T:High Street Riot
+C:Claude, after The High Street Jazz Band
+M:4/4
+L:1/8
+Q:1/4=160 "swung"
+K:Gm
+%%text THE RIFF (sousaphone, looped forever — bar 1 "the strut up", bar 2 "the snarl down")
+V:1 clef=bass name="Sousa"
+[V:1] "Gm"G,,3 z G,, _B,, C, ^C, | D,3 z _D, C, _B,,C, ^F,, :|
+%
+X:2
+T:The Anthem (the wail)
+M:4/4
+L:1/8
+Q:1/4=160
+K:Gm
+V:2 name="Cornet"
+[V:2] "Gm"d6 z c | _B2 c _d3 c _B | "Gm"G4 _Bc ^cd | d5 z2 _e |
+[V:2] "Cm7"_e5 d c2 | g4 f_e d2 | "D7#9"f4 _e2 c2 | _ed c_B _A4 ||
+W: bar 2 and the riff lean on the same b5 (Db over G) at the same moment
+W: bar 8 ends on Ab against the bass's F# — a chromatic pincer closing on G

@@ -1,10 +1,10 @@
 """Assemble the full symphony: four movements with breaths between them."""
 import os
 import sys
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from compose.common import Orchestra, write_midi, midi_report, check_ranges
-from compose import mvt1, mvt2, mvt3, mvt4
+from common import Orchestra, write_midi, midi_report, check_ranges
+import mvt1, mvt2, mvt3, mvt4
 
 def build_full(path='output/symphony_full.mid'):
     o = Orchestra()

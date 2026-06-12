@@ -13,3 +13,8 @@ __pycache__/
 # Node / web app
 web/node_modules/
 web/dist/
+
+# Soundfonts — large binaries used only for local audio rendering; download
+# rather than commit (any GM soundfont works, e.g. GeneralUser GS).
+*.sf2
+*.sf3

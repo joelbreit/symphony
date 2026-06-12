@@ -13,11 +13,11 @@ Layout (quarterLength offsets from t0):
 """
 import os
 import sys
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from compose.common import (Orchestra, write_midi, midi_report, check_ranges,
+from common import (Orchestra, write_midi, midi_report, check_ranges,
                             trem, roll, total_ql, transpose_events, parse)
-from compose.themes import T1, T1_HEAD, T2
+from themes import T1, T1_HEAD, T2
 
 BAR = 4.0
 

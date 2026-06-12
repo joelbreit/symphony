@@ -1,84 +1,63 @@
-# Symphony No. 1 in C minor — "The Window"
+# vibe-compositions
 
-A four-movement symphony for full orchestra, composed as playable MIDI by Claude
-(Fable 5). About 18½ minutes, ~13,000 notes, sixteen MIDI channels of symphonic
-orchestration: flutes, oboes, clarinets, bassoons, horns, trumpets, low brass,
-timpani, percussion, harp, celesta, and five string sections.
+A collection of original musical compositions — each generated as playable MIDI
+by Claude — gathered into one repository and surfaced together in a single
+piano-roll web player. Claude is the composer.
 
-The whole piece grows from a four-note motto — **G–C–E♭–D**, an unfinished cadence
-whose final note is withheld until the last movement. See
-[docs/program-notes.md](docs/program-notes.md) for the listener's guide and
-[docs/inspiration.md](docs/inspiration.md) for where it came from.
+## The compositions
 
-## Listening
+Each piece is a self-contained project under `pieces-src/<slug>/`, with its own
+generator source, `goal.md`, creative `docs/`, and rendered `output/`.
 
-The music is in [`output/`](output/):
+| Piece | Slug | About |
+|-------|------|-------|
+| **The Window** | [`pieces-src/the-window`](pieces-src/the-window) | Symphony No. 1 in C minor — four movements, full orchestra (music21) |
+| **The Unfinished Spire** | [`pieces-src/the-unfinished-spire`](pieces-src/the-unfinished-spire) | An anthem for the builders of things they will not see finished (midiutil) |
+| **Royal Street Rattler** | [`pieces-src/royal-street-rattler`](pieces-src/royal-street-rattler) | A Dixieland strut for six players (midiutil) |
+| **High Street Riot** | [`pieces-src/high-street-riot`](pieces-src/high-street-riot) | A grotesquely funky vamp-jam for an oversized Dixieland band (music21) |
+| **The Box Is Full** | [`pieces-src/the-box-is-full`](pieces-src/the-box-is-full) | Korobeiniki (the Tetris tune) as folk tragedy, for orchestra and square wave (music21) |
 
-| File | Movement | Length |
-|------|----------|--------|
-| `symphony_full.mid` | The complete symphony | 18:35 |
-| `mvt1.mid` | I. Kindling (C minor) | 5:38 |
-| `mvt2.mid` | II. The Garden of Forking Paths (G minor) | 2:50 |
-| `mvt3.mid` | III. What the Light Holds (A♭ major) | 3:53 |
-| `mvt4.mid` | IV. Through (C minor → C major) | 6:03 |
+Two generator lineages are in play — **music21** and **midiutil** — kept as
+independent forks per piece rather than a shared framework. See each piece's
+README for how to rebuild it.
 
-Open with GarageBand, Logic, MuseScore, VLC, or any General MIDI player. For a
-quick audio render with better sounds than a stock GM synth:
+## The web player
 
-```sh
-brew install fluid-synth
-fluidsynth -ni <your-soundfont>.sf2 output/symphony_full.mid -F symphony.wav
-```
-
-(Any GM soundfont works — GeneralUser GS is a good free one.)
-
-## The web experience
-
-[`web/`](web/) contains a React app that plays the symphony with a live
+[`web/`](web/) is a React app that plays every composition with a live
 piano-roll visualization — notes color-coded by orchestral family, a fixed
-"window of attention" playhead (the future dim, the present ignited, the past
-cooling like memory), poetic section labels, a full-piece constellation seek
-bar, and per-instrument spotlighting. Mobile-first; audio pre-rendered to AAC.
+"window of attention" playhead, poetic section labels, a full-piece
+constellation seek bar, and per-instrument spotlighting. Mobile-first; audio
+pre-rendered to AAC.
 
 ```sh
-cd web && npm install && npm run build   # → web/dist/, fully static, ~22MB
+cd web && npm install && npm run build   # → web/dist/, fully static
 ```
 
-The player hosts multiple compositions: each piece is a self-contained
-package under `web/public/pieces/`, and **[PIECES.md](PIECES.md)** documents
-how to package a new one (a MIDI file per movement is nearly all it takes —
-`tools/midi_to_piece.py` does the conversion).
+Each composition is a self-contained package under `web/public/pieces/<id>/`
+(manifest + notes JSON + audio), registered in `web/public/pieces/index.json`.
+**[PIECES.md](PIECES.md)** documents how to package a new one — a MIDI file per
+movement is nearly all it takes, and `tools/midi_to_piece.py` does the
+conversion. (The Window is the exception: its package is generated directly from
+its music21 sources by `pieces-src/the-window/export_web.py`.)
 
 See [web/README.md](web/README.md) for publishing notes and
 [web/DESIGN.md](web/DESIGN.md) for the design language.
 
-## Rebuilding from source
+## Environment
 
-The symphony is generated programmatically with music21:
+One shared Python environment at the repo root serves every piece:
 
 ```sh
 python3 -m venv .venv
-.venv/bin/pip install music21 mido
-.venv/bin/python compose/build.py        # writes all five MIDI files
-.venv/bin/python compose/validate.py     # duration, channels, dynamic-arc profile
-.venv/bin/python compose/mvt1.py         # build/validate one movement alone
+.venv/bin/pip install -r requirements.txt   # music21, mido, midiutil, matplotlib, numpy
 ```
 
-Builds are deterministic (seeded humanization), and every build enforces bar-sum
-assertions on melodies and per-instrument range guards.
+Python 3.14 works. Each piece builds from its own directory (see its README);
+generators write to that piece's local `output/`.
 
-## Layout
+## Adding a new composition
 
-```
-compose/
-  common.py    note DSL, orchestra/channel roster, textures, MIDI writer, validators
-  themes.py    the cyclic material: the Question, the Answer, themes
-  mvt1.py …    one file per movement; each runs standalone
-  build.py     full assembly with breaths between movements
-  validate.py  mido-based gates: duration, channels, dynamic arc
-docs/
-  inspiration.md     the image and the musical premise
-  plan.md            form maps, bar budgets, orchestration plan
-  program-notes.md   listener's guide
-  self-assessment.md honest accounting of strengths and limits
-```
+1. Create `pieces-src/<your-slug>/` with your generator source, a `goal.md`, and
+   `docs/` for the creative record.
+2. Generate MIDI (one file per movement) into your piece's `output/`.
+3. Package it for the player following [PIECES.md](PIECES.md).

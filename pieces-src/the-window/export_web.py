@@ -10,12 +10,12 @@ through the same tempo map that generated the MIDI, so timestamps are exact.
 import json
 import os
 import sys
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from music21 import tempo as m21tempo
 
-from compose.common import Orchestra, ROSTER
-from compose import mvt1, mvt2, mvt3, mvt4
+from common import Orchestra, ROSTER
+import mvt1, mvt2, mvt3, mvt4
 
 PART_ORDER = list(ROSTER.keys()) + ['perc']
 
@@ -200,7 +200,7 @@ def rebuild_index(pieces_dir):
     return entries
 
 def export():
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     pieces_dir = os.path.join(root, 'web', 'public', 'pieces')
     piece_dir = os.path.join(pieces_dir, 'the-window')
     os.makedirs(os.path.join(piece_dir, 'notes'), exist_ok=True)
