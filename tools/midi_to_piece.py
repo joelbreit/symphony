@@ -99,7 +99,9 @@ def extract(path: str):
         program = None
         is_drum = False
         tick = 0
-        active: dict[tuple, tuple] = {}
+        # FIFO per (channel, pitch): same-pitch notes can overlap (humanized
+        # repeats, drum rolls), so a single slot would drop every second one
+        active: dict[tuple, list] = {}
         count = 0
         for msg in tr:
             tick += msg.time
@@ -108,15 +110,22 @@ def extract(path: str):
             if hasattr(msg, 'channel') and msg.channel == 9:
                 is_drum = True
             if msg.type == 'note_on' and msg.velocity > 0:
-                active[(msg.channel, msg.note)] = (tick, msg.velocity)
+                active.setdefault((msg.channel, msg.note), []).append((tick, msg.velocity))
             elif msg.type in ('note_off', 'note_on'):
                 key = (getattr(msg, 'channel', 0), getattr(msg, 'note', 0))
-                if key in active:
-                    t0, vel = active.pop(key)
+                if active.get(key):
+                    t0, vel = active[key].pop(0)
                     notes.append([round(to_sec(t0), 3),
                                   round(max(to_sec(tick) - to_sec(t0), 0.05), 3),
                                   msg.note, len(tracks), vel])
                     count += 1
+        # stranded note_ons (no note_off anywhere — some generators omit it
+        # for one-shot percussion): the synth still plays the hit, so emit
+        # a minimum-length note rather than dropping it
+        for (_ch, pitch), pending in active.items():
+            for t0, vel in pending:
+                notes.append([round(to_sec(t0), 3), 0.05, pitch, len(tracks), vel])
+                count += 1
         if count > 0:
             tracks.append({'name': name or f'Track {len(tracks) + 1}',
                            'program': program, 'drum': is_drum, 'count': count})
