@@ -1,0 +1,210 @@
+{
+ "schema": 1,
+ "id": "the-box-is-full",
+ "title": "The Box Is Full",
+ "subtitle": "for orchestra and square wave",
+ "composer": "Claude",
+ "year": 2026,
+ "concept": "the Tetris song was a folk tragedy first; one full game, boot to top-out, for orchestra and the ghost of a Game Boy.",
+ "about": [
+  "In 1861 Nekrasov wrote of a young peddler — a korobeinik, a box-carrier — bargaining with a girl in the night rye, his box full to the brim. Everyone sings the happy verses. In the verses nobody remembers, he is robbed and killed on the road home. In 1989 the same tune shipped on a grey cartridge, and the box became the well: ten columns wide, twenty deep, filling with pieces of exactly four squares until there is no room left. Nobody wins Tetris. The song already knew that.",
+  "This piece is one full game. A woodblock ticks like the fall timer; four-note fragments drop and lock around the orchestra; the square wave — the voice of the original hardware — boots up and remembers the tune alone. The early levels strut like market patter. In the middle stands the chorale the cartridge called Music B: the night in the rye field, the turquoise ring, the reason you play at all. Then the climb — each level a ratchet up in key and tempo, a held cluster growing behind the orchestra like a stack you can't dig out of.",
+  "The biggest moment is rigged. The four-line clear blazes in D major — the dominant of G minor — so the piece's one triumphant resolution is, by construction, the trapdoor into its catastrophe. The kill screen runs at 188 with the bass rising a semitone every two bars, the machine looping the theme dead straight while the orchestra flails in three-eighth displacement around it, until the well fills with one thirteen-voice chord and cuts to four seconds of nothing.",
+  "Then the score screen: the square wave plays the chorale slow, a game-over jingle that has remembered it was an elegy all along; a solo cello takes the peddler's verse; and the piece ends exactly where the source tune ends — on F sharp over D7, the half cadence that loops forever. Two woodblock ticks. Somewhere, the next piece is already falling. I composed every note in Python over the bones of the source arrangement; the random seed is 1989."
+ ],
+ "credits": [
+  {
+   "label": "Composition",
+   "value": "Claude (Fable 5), note-by-note in Python/music21"
+  },
+  {
+   "label": "Source tune",
+   "value": "Korobeiniki (Russian folk song, 1800s), arr. Joel Breit"
+  },
+  {
+   "label": "Rendering",
+   "value": "FluidSynth with the GeneralUser GS soundfont"
+  },
+  {
+   "label": "Duration",
+   "value": "about 6¼ minutes · 9,511 notes"
+  }
+ ],
+ "theme": {
+  "accent": "#9bbc0f",
+  "instrumentColors": {
+   "square-wave": "#9bbc0f"
+  }
+ },
+ "instruments": [
+  {
+   "id": "flutes",
+   "name": "Flutes",
+   "family": "winds"
+  },
+  {
+   "id": "oboes",
+   "name": "Oboes",
+   "family": "winds"
+  },
+  {
+   "id": "clarinets",
+   "name": "Clarinets",
+   "family": "winds"
+  },
+  {
+   "id": "bassoons",
+   "name": "Bassoons",
+   "family": "winds"
+  },
+  {
+   "id": "horns",
+   "name": "Horns",
+   "family": "brass"
+  },
+  {
+   "id": "trumpets",
+   "name": "Trumpets",
+   "family": "brass"
+  },
+  {
+   "id": "trombones-tuba",
+   "name": "Trombones & Tuba",
+   "family": "brass"
+  },
+  {
+   "id": "timpani",
+   "name": "Timpani",
+   "family": "color"
+  },
+  {
+   "id": "harp",
+   "name": "Harp",
+   "family": "color"
+  },
+  {
+   "id": "square-wave",
+   "name": "Square Wave",
+   "family": "other"
+  },
+  {
+   "id": "violin-i",
+   "name": "Violin I",
+   "family": "strings"
+  },
+  {
+   "id": "violin-ii",
+   "name": "Violin II",
+   "family": "strings"
+  },
+  {
+   "id": "viola",
+   "name": "Viola",
+   "family": "strings"
+  },
+  {
+   "id": "cello",
+   "name": "Cello",
+   "family": "strings"
+  },
+  {
+   "id": "contrabass",
+   "name": "Contrabass",
+   "family": "strings"
+  },
+  {
+   "id": "percussion",
+   "name": "Percussion",
+   "family": "color"
+  }
+ ],
+ "movements": [
+  {
+   "id": "mvt1",
+   "num": "·",
+   "title": "one game",
+   "key": "G minor",
+   "tempoLabel": "by levels, ♩=92 → 188",
+   "note": "boot, nine levels, top out, score screen — the chorale in the middle is the reason you play.",
+   "duration": 373.6,
+   "noteCount": 9511,
+   "audio": "audio/mvt1.m4a",
+   "notes": "notes/mvt1.json",
+   "sections": [
+    [0, "insert cartridge"],
+    [41.74, "level 1 — the peddler struts"],
+    [83.48, "level 3 — first sweat"],
+    [121.37, "the rye field (music B)"],
+    [168.04, "the turquoise ring"],
+    [188.04, "the climb — levels 5 · 6 · 7"],
+    [238.83, "TETRIS! — four lines"],
+    [255.33, "the bottom drops"],
+    [261.05, "level 9 — kill screen"],
+    [293.0, "top out"],
+    [299.56, "score screen — the song goes on"],
+    [329.56, "the peddler's verse"],
+    [367.06, "press start"]
+   ]
+  }
+ ],
+ "emblem": {
+  "label": "the tetromino",
+  "states": [
+   {
+    "notes": [
+     {"p": "D5"},
+     {"p": "A4"},
+     {"p": "Bb4"},
+     {"p": "C5"}
+    ]
+   },
+   {
+    "notes": [
+     {"p": "D5"},
+     {"p": "A4"},
+     {"p": "Bb4"},
+     {"p": "C5"},
+     {"p": "F#5", "accent": true}
+    ],
+    "mark": "?",
+    "trigger": {"movement": "mvt1", "time": 299.56}
+   }
+  ]
+ },
+ "moments": [
+  {
+   "movement": "mvt1",
+   "time": 19.57,
+   "text": "the cartridge boots: the tune as the hardware remembers it, four notes at a time.",
+   "spotlight": "square-wave",
+   "hold": 10
+  },
+  {
+   "movement": "mvt1",
+   "time": 168.04,
+   "text": "she takes only the turquoise ring — the square wave dreams along with the violins.",
+   "spotlight": "square-wave",
+   "hold": 10
+  },
+  {
+   "movement": "mvt1",
+   "time": 238.83,
+   "text": "four lines at once — and the blaze is in the dominant: triumph and trapdoor are the same chord.",
+   "spotlight": "trumpets",
+   "hold": 10
+  },
+  {
+   "movement": "mvt1",
+   "time": 293.0,
+   "text": "the box is full.",
+   "hold": 8
+  },
+  {
+   "movement": "mvt1",
+   "time": 367.06,
+   "text": "press start — somewhere it is already falling.",
+   "spotlight": "percussion",
+   "hold": 8
+  }
+ ]
+}

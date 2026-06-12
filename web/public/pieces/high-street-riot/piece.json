@@ -1,0 +1,191 @@
+{
+ "schema": 1,
+ "id": "high-street-riot",
+ "title": "High Street Riot",
+ "subtitle": "a vamp-jam for an oversized Dixieland band",
+ "composer": "Claude",
+ "year": 2026,
+ "concept": "the setlist runs dry, the sousaphone drops one greasy riff, and a band with too many members riots on it — joyfully.",
+ "about": [
+  "When The High Street Jazz Band — college students in Morgantown, West Virginia, usually carrying more members than improv jazz politely holds — ran out of songs, they played \"G Minor Jam\": no chart, no melody, just the tuba laying down a lead and everyone piling on until it got angry. The joyful kind of angry, the kind a tuba-and-trombone-heavy horn section gets to feel when somebody finally says you may now wail. This piece is written after that ritual, from a transcription one of them kept.",
+  "Everything hangs on a two-bar sousaphone riff: a strut up — root, breath, a blues-third climb — and a snarl down, where the flat five leans on the door and a chromatic hook feeds the loop back into itself. It never stops for 124 bars. It transposes to become the changes, thins to two-beat under the solos and returns as the \"wrap it up\" signal, jumps the octave for the finale, and gets the last word alone. The anthem above it is built to scream: long falling cries that land on the riff's own snarl note, at the riff's own moment.",
+  "The form is the lifecycle of a vamp: invented, piled on, shouted, stripped to the floor, argued over in trading twos that stop taking turns, stomped in stop-time with an A♭9 slammed against the home key, collapsed — then detonated, riff up the octave, anthem on top, and the source jam's one direct quote: an E♭–A–D cluster, hammered until it gives. Dead stop. Two stabs. One fat unison G, and the tuba's wink.",
+  "Every melodic line is placed note-by-note in Python (music21); banjo, drums, tailgate smears and clarinet curls come from small constrained generators. The swing is the light, rushing, street-band kind — not the metronome-triplet kind."
+ ],
+ "credits": [
+  {
+   "label": "Composition",
+   "value": "Claude (Fable 5), generated as MIDI via Python/music21"
+  },
+  {
+   "label": "After",
+   "value": "“G Minor Jam” as played by The High Street Jazz Band, Morgantown WV"
+  },
+  {
+   "label": "Rendering",
+   "value": "FluidSynth with the GeneralUser GS soundfont"
+  },
+  {
+   "label": "Duration",
+   "value": "about 3 minutes · ~5,600 notes"
+  }
+ ],
+ "theme": {
+  "accent": "#e0492e",
+  "instrumentColors": {
+   "cornet": "#f25c4a",
+   "clarinet": "#f4b04f",
+   "tenor-sax": "#b07fe8",
+   "trombone-i": "#3fb8a4",
+   "trombone-ii": "#2e9489",
+   "sousaphone": "#6f9ec9",
+   "banjo": "#c9b48f",
+   "drums": "#8d86b8"
+  }
+ },
+ "instruments": [
+  {
+   "id": "cornet",
+   "name": "Cornet",
+   "family": "brass"
+  },
+  {
+   "id": "clarinet",
+   "name": "Clarinet",
+   "family": "winds"
+  },
+  {
+   "id": "tenor-sax",
+   "name": "Tenor Sax",
+   "family": "winds"
+  },
+  {
+   "id": "trombone-i",
+   "name": "Trombone I",
+   "family": "brass"
+  },
+  {
+   "id": "trombone-ii",
+   "name": "Trombone II",
+   "family": "brass"
+  },
+  {
+   "id": "sousaphone",
+   "name": "Sousaphone",
+   "family": "brass"
+  },
+  {
+   "id": "banjo",
+   "name": "Banjo",
+   "family": "strings"
+  },
+  {
+   "id": "drums",
+   "name": "Drums",
+   "family": "color"
+  }
+ ],
+ "movements": [
+  {
+   "id": "mvt1",
+   "num": "·",
+   "title": "High Street Riot",
+   "key": "G minor, stubbornly",
+   "tempoLabel": "Heavy swing, ♩ = 160 — and yes, it rushes",
+   "note": "one continuous jam: the lifecycle of a vamp — invented, piled on, fought over, detonated.",
+   "duration": 188.7,
+   "noteCount": 5602,
+   "audio": "audio/mvt1.m4a",
+   "notes": "notes/mvt1.json",
+   "sections": [
+    [0.0, "the sousaphone invents it"],
+    [6.0, "the band piles on"],
+    [18.0, "the shout"],
+    [30.0, "the wail"],
+    [42.0, "the floor drops"],
+    [48.0, "trombone, rude"],
+    [66.0, "the cornet thinks it's the boss"],
+    [84.0, "the clarinet, unhinged"],
+    [102.0, "the argument — nobody waits their turn"],
+    [120.0, "the stomp — A♭9 against G"],
+    [138.46, "the collapse"],
+    [144.62, "the riot"],
+    [168.03, "the cluster, hammered"],
+    [179.74, "the wink"]
+   ]
+  }
+ ],
+ "emblem": {
+  "label": "the riff",
+  "states": [
+   {
+    "label": "the strut up",
+    "notes": [
+     {
+      "p": "G3"
+     },
+     {
+      "p": "Bb3"
+     },
+     {
+      "p": "C4"
+     },
+     {
+      "p": "C#4"
+     },
+     {
+      "p": "D4",
+      "accent": true
+     }
+    ]
+   },
+   {
+    "label": "the snarl down",
+    "trigger": {
+     "movement": "mvt1",
+     "time": 120.0
+    },
+    "notes": [
+     {
+      "p": "D4"
+     },
+     {
+      "p": "Db4",
+      "accent": true
+     },
+     {
+      "p": "C4"
+     },
+     {
+      "p": "Bb3"
+     },
+     {
+      "p": "F#3"
+     }
+    ]
+   }
+  ]
+ },
+ "moments": [
+  {
+   "movement": "mvt1",
+   "time": 32.1,
+   "text": "the melody leans onto D♭ — the tuba's snarl note — and the whole band sneers in octaves.",
+   "spotlight": "cornet",
+   "hold": 9
+  },
+  {
+   "movement": "mvt1",
+   "time": 168.03,
+   "text": "the one direct quote from the original jam: an E♭–A–D cluster, struck until it gives.",
+   "hold": 9
+  },
+  {
+   "movement": "mvt1",
+   "time": 181.2,
+   "text": "dead stop. the sousaphone, alone, gets the last word.",
+   "spotlight": "sousaphone",
+   "hold": 9
+  }
+ ]
+}
