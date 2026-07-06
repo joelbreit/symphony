@@ -14,6 +14,9 @@ __pycache__/
 web/node_modules/
 web/dist/
 
+# Toolkit demo builds (regenerate with `python -m lib.demo`)
+lib/demo_output/
+
 # Soundfonts — large binaries used only for local audio rendering; download
 # rather than commit (any GM soundfont works, e.g. GeneralUser GS).
 *.sf2

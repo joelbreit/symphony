@@ -17,9 +17,13 @@ generator source, `goal.md`, creative `docs/`, and rendered `output/`.
 | **High Street Riot** | [`pieces-src/high-street-riot`](pieces-src/high-street-riot) | A grotesquely funky vamp-jam for an oversized Dixieland band (music21) |
 | **The Box Is Full** | [`pieces-src/the-box-is-full`](pieces-src/the-box-is-full) | Korobeiniki (the Tetris tune) as folk tragedy, for orchestra and square wave (music21) |
 
-Two generator lineages are in play — **music21** and **midiutil** — kept as
-independent forks per piece rather than a shared framework. See each piece's
-README for how to rebuild it.
+The shipped pieces were built on two generator lineages — **music21** and
+**midiutil** — kept as independent forks per piece; they stay frozen as-is.
+See each piece's README for how to rebuild it. The best tools from both
+lineages now live in [`lib/`](lib/), the shared composition toolkit that new
+pieces start from (note DSL, chord charts, ensemble presets, groove and
+humanize, CC expression, direct MIDI writer, assessment plots — see
+[lib/README.md](lib/README.md)).
 
 ## The web player
 
@@ -58,6 +62,7 @@ generators write to that piece's local `output/`.
 ## Adding a new composition
 
 1. Create `pieces-src/<your-slug>/` with your generator source, a `goal.md`, and
-   `docs/` for the creative record.
+   `docs/` for the creative record. Start the generator from the
+   [`lib/`](lib/) toolkit (`python -m lib.demo` shows two worked examples).
 2. Generate MIDI (one file per movement) into your piece's `output/`.
 3. Package it for the player following [PIECES.md](PIECES.md).

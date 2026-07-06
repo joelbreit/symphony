@@ -16,9 +16,14 @@ pieces live alongside it: `the-unfinished-spire`, `royal-street-rattler`,
 `high-street-riot`, `the-box-is-full`. To add a new piece, make a new
 `pieces-src/<slug>/` directory.
 
-Two generator lineages are in use, by piece: **music21** (the-window,
-the-box-is-full, high-street-riot) and **midiutil** (the-unfinished-spire,
-royal-street-rattler). They are independent forks, not a shared framework.
+The five shipped pieces were built on two independent generator lineages —
+**music21** (the-window, the-box-is-full, high-street-riot) and **midiutil**
+(the-unfinished-spire, royal-street-rattler) — and stay frozen on their own
+code (deterministic builds, published audio; don't retrofit them). The best
+of both lineages is now extracted into **`lib/`**, the shared toolkit that
+**new pieces should start from** (see `lib/README.md`): note DSL, chord
+charts, ensemble presets, groove/humanize, figures, CC expression, direct
+mido writer, and an assessment suite.
 
 ## Commands
 
@@ -34,6 +39,13 @@ cd ../../web && npm run dev            # piano-roll web app (build: npm run buil
 ```
 
 Other pieces follow their own README (typically `../../.venv/bin/python src/compose.py`).
+
+For the shared toolkit (from the repo root):
+
+```sh
+.venv/bin/python -m lib.tests    # toolkit self-tests — run after changing lib/
+.venv/bin/python -m lib.demo     # builds two worked examples into lib/demo_output/
+```
 
 If movement code changes, regenerate in order: MIDI (`build.py`) → piece package
 (`export_web.py`) → audio (fluidsynth + afconvert per `web/README.md`). The web
@@ -51,6 +63,14 @@ Environment: one shared venv at the repo root —
 
 ## Architecture
 
+`lib/` is the shared toolkit for new pieces — an event-store `Piece` over a
+tempo/meter `Timeline` and an `Ensemble` (roster as data: programs, sounding
+ranges, pans, families), written straight to MIDI with mido. Ranges are
+guarded fail-fast at note entry; section marks/cues export to `marks.json`
+for the web manifest; `lib/assess.py` renders pianoroll + dynamic-arc plots
+(optionally against measured RMS from a rendered WAV). `lib/README.md` has
+the module map; `lib/demo.py` is the worked example.
+
 The Window's source lives in `pieces-src/the-window/` (paths below are relative to it):
 
 - `common.py` — the framework: a text DSL for notes (`'G4:q Eb5:e r:h'`, chords in parens), the `Orchestra` class (fixed 16-channel roster, one part per instrument section), texture helpers (`trem`, `arp`, `roll`), velocity-based dynamics with deterministic humanization, and the MIDI writer. The writer post-processes with mido to force each track onto its roster channel (music21 merges same-program parts) and percussion onto channel 10.
@@ -60,11 +80,13 @@ The Window's source lives in `pieces-src/the-window/` (paths below are relative 
 
 ## Conventions and gotchas
 
-- Range guards per instrument live in `ROSTER` (`common.py`); `check_ranges()` must report none before a movement is done.
-- Don't multiply DSL strings (`s * 4` concatenates without spaces); use the movement-local `R(dsl, times)` helper.
-- Pizzicato/arco = GM program switches via `Orchestra.program(name, offset, 45|48)`.
+- Range guards per instrument live in `ROSTER` (`common.py`); `check_ranges()` must report none before a movement is done. (In `lib/`, ranges raise at note entry instead.)
+- Don't multiply DSL strings (`s * 4` concatenates without spaces); use the `R(dsl, times)` helper (movement-local in old pieces, `lib.dsl.R` in new ones).
+- Guard melodies with `B(dsl, n_bars)` — it catches almost every entry error.
+- Pizzicato/arco = GM program switches via `Orchestra.program(name, offset, 45|48)` (or `Piece.program` in `lib/`).
 - Write tremolos/trills as sounded notes (MIDI realism), not notation shorthand.
-- Builds are deterministic (seeded RNG in `common.py`); never remove the seed.
+- Builds are deterministic (seeded RNG); never remove the seed.
+- MIDI meta text (titles, markers) is latin-1: `lib/` sanitizes em-dashes automatically; older writers may not.
 
 ## Working process (from goal.md)
 
