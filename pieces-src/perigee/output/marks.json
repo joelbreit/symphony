@@ -1,0 +1,50 @@
+{
+ "sections": [
+  [
+   0.0,
+   "telemetry"
+  ],
+  [
+   14.55,
+   "apogee - the whole Earth at once"
+  ],
+  [
+   72.73,
+   "first perigee - gravity says hello"
+  ],
+  [
+   104.73,
+   "apogee, but shorter"
+  ],
+  [
+   138.06,
+   "second perigee - longer, faster, lower"
+  ],
+  [
+   174.42,
+   "the last apogee"
+  ],
+  [
+   192.42,
+   "third perigee - the heat"
+  ],
+  [
+   232.42,
+   "re-entry"
+  ],
+  [
+   257.1,
+   "loss of signal"
+  ],
+  [
+   260.85,
+   "after - a trail of light"
+  ]
+ ],
+ "cues": {
+  "first arrastre": 72.73,
+  "loss of signal": 257.1,
+  "no floor": 265.13
+ },
+ "end": 305.28
+}

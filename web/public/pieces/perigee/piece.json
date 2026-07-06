@@ -1,0 +1,210 @@
+{
+ "schema": 1,
+ "id": "perigee",
+ "title": "Perigee",
+ "subtitle": "a tango for a falling satellite",
+ "composer": "Claude",
+ "year": 2026,
+ "concept": "drag does not slow a falling satellite; it speeds it up — the closer you fall, the faster you dance.",
+ "about": [
+  "A satellite in its last weeks is not falling the way a stone falls. Drag does not slow it down — losing altitude means gaining speed, every orbit shorter than the last, every low pass hotter and faster. The most brilliant flying of the machine's life happens in its final days. That seemed to me to be a tango.",
+  "The orbit is the form: three revolutions of apogee and perigee. Each apogee — the far, cool arc — returns shorter: 58 seconds, then 33, then 18. Each perigee returns longer, faster, and a minor third higher, until from the last one everything is dragged up a semitone onto E — the dominant of home — and re-entry burns there for sixteen bars that never resolve. The cut comes mid-gesture. The ground was the tonic all along.",
+  "I wrote it for Piazzolla's quintet — violin, bandoneón, piano, guitar, double bass — in the language tango actually speaks: marcato in four, the 3-3-2, arrastres dragged into the downbeats, mordents multiplying as the heat rises, and one melody restated every revolution, more compressed each time, until at re-entry only its rhythm is left. After the cut there is no double bass — no floor. The first phrase returns intact, weightless, and the piece ends on the quietest chan-chan I could write: two last blinks of a beacon."
+ ],
+ "credits": [
+  {
+   "label": "Composition",
+   "value": "Claude (Fable 5), note-by-note in Python — the first piece built on the repo's shared lib/ toolkit"
+  },
+  {
+   "label": "Rendering",
+   "value": "FluidSynth with the GeneralUser GS soundfont"
+  },
+  {
+   "label": "Duration",
+   "value": "about 5 minutes · 3,875 notes"
+  }
+ ],
+ "theme": {
+  "accent": "#5dd0c4"
+ },
+ "instruments": [
+  {
+   "id": "violin",
+   "name": "Violin",
+   "family": "strings"
+  },
+  {
+   "id": "bandoneon",
+   "name": "Bandoneón",
+   "family": "winds"
+  },
+  {
+   "id": "piano",
+   "name": "Piano",
+   "family": "keys"
+  },
+  {
+   "id": "guitar",
+   "name": "Guitar",
+   "family": "strings"
+  },
+  {
+   "id": "double-bass",
+   "name": "Double Bass",
+   "family": "strings"
+  },
+  {
+   "id": "golpe",
+   "name": "Golpe",
+   "family": "color"
+  }
+ ],
+ "movements": [
+  {
+   "id": "mvt1",
+   "num": "·",
+   "title": "Perigee",
+   "key": "A minor",
+   "tempoLabel": "marcato, ♩ = 66 → 152 — each orbit faster",
+   "note": "three revolutions, re-entry, and a minute of afterglow — the orbit is the form.",
+   "duration": 313.5,
+   "noteCount": 3875,
+   "audio": "audio/mvt1.m4a",
+   "notes": "notes/mvt1.json",
+   "sections": [
+    [
+     0,
+     "telemetry"
+    ],
+    [
+     14.55,
+     "apogee — the whole Earth at once"
+    ],
+    [
+     72.73,
+     "first perigee — gravity says hello"
+    ],
+    [
+     104.73,
+     "apogee, but shorter"
+    ],
+    [
+     138.06,
+     "second perigee — longer, faster, lower"
+    ],
+    [
+     174.42,
+     "the last apogee"
+    ],
+    [
+     192.42,
+     "third perigee — the heat"
+    ],
+    [
+     232.42,
+     "re-entry"
+    ],
+    [
+     257.1,
+     "loss of signal"
+    ],
+    [
+     260.85,
+     "after — a trail of light"
+    ]
+   ]
+  }
+ ],
+ "emblem": {
+  "label": "the beacon call",
+  "states": [
+   {
+    "label": "the call",
+    "notes": [
+     {
+      "p": "A4"
+     },
+     {
+      "p": "B4"
+     },
+     {
+      "p": "C5"
+     },
+     {
+      "p": "E5",
+      "accent": true
+     }
+    ]
+   },
+   {
+    "label": "only rhythm",
+    "notes": [
+     {
+      "p": "E5"
+     },
+     {
+      "p": "E5"
+     },
+     {
+      "p": "E5",
+      "accent": true
+     }
+    ],
+    "mark": "!",
+    "trigger": {
+     "movement": "mvt1",
+     "time": 232.42
+    }
+   },
+   {
+    "label": "the call, weightless",
+    "notes": [
+     {
+      "p": "A4"
+     },
+     {
+      "p": "B4"
+     },
+     {
+      "p": "C5"
+     },
+     {
+      "p": "E5"
+     }
+    ],
+    "trigger": {
+     "movement": "mvt1",
+     "time": 260.85
+    }
+   }
+  ]
+ },
+ "moments": [
+  {
+   "movement": "mvt1",
+   "time": 72.73,
+   "text": "the first arrastre — the bass drags itself up into the downbeat. gravity says hello.",
+   "spotlight": "double-bass"
+  },
+  {
+   "movement": "mvt1",
+   "time": 139.0,
+   "text": "the 3-3-2: eight eighth-notes split three, three, two — a rhythm that never stops falling forward.",
+   "spotlight": "piano"
+  },
+  {
+   "movement": "mvt1",
+   "time": 252.5,
+   "text": "the run climbs mid-register, mid-bar — and the signal just stops.",
+   "hold": 10
+  },
+  {
+   "movement": "mvt1",
+   "time": 262.0,
+   "text": "no double bass from here — no floor. the first phrase returns intact, weightless.",
+   "spotlight": "bandoneon",
+   "hold": 10
+  }
+ ]
+}

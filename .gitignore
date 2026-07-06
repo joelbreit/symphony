@@ -21,3 +21,7 @@ lib/demo_output/
 # rather than commit (any GM soundfont works, e.g. GeneralUser GS).
 *.sf2
 *.sf3
+
+# Intermediate renders — regenerate with fluidsynth (the compressed m4a in
+# web/public/pieces/ is the shipped audio).
+pieces-src/*/output/*.wav

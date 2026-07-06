@@ -17,7 +17,8 @@ channel-remap post-hacks, and CC curves / pitch bends are first-class.
 
 ```python
 import sys, pathlib
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))  # repo root
+# repo root: parents[2] from pieces-src/<slug>/*.py, parents[3] from pieces-src/<slug>/src/*.py
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[3]))
 
 from lib import Piece, orchestra, B, R
 from lib import figures, assess

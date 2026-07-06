@@ -13,17 +13,20 @@ its own generator source, `goal.md`, `docs/` (creative record), and `output/`.
 The flagship is **Symphony No. 1 in C minor, "The Window"**
 (`pieces-src/the-window/`) — four movements, ~18.5 minutes, music21. The other
 pieces live alongside it: `the-unfinished-spire`, `royal-street-rattler`,
-`high-street-riot`, `the-box-is-full`. To add a new piece, make a new
-`pieces-src/<slug>/` directory.
+`high-street-riot`, `the-box-is-full`, `perigee`. To add a new piece, make a
+new `pieces-src/<slug>/` directory.
 
-The five shipped pieces were built on two independent generator lineages —
+The first five pieces were built on two independent generator lineages —
 **music21** (the-window, the-box-is-full, high-street-riot) and **midiutil**
 (the-unfinished-spire, royal-street-rattler) — and stay frozen on their own
 code (deterministic builds, published audio; don't retrofit them). The best
 of both lineages is now extracted into **`lib/`**, the shared toolkit that
 **new pieces should start from** (see `lib/README.md`): note DSL, chord
 charts, ensemble presets, groove/humanize, figures, CC expression, direct
-mido writer, and an assessment suite.
+mido writer, and an assessment suite. **Perigee** (`pieces-src/perigee/`,
+tango quintet) is the first lib-built piece and the worked example of the
+pattern: roster as data in `src/band.py`, genre idioms piece-local in
+`src/tango.py`, guarded themes in `src/themes.py`, build via `src/compose.py`.
 
 ## Commands
 
