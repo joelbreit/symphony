@@ -1,0 +1,237 @@
+{
+ "schema": 1,
+ "id": "roy-g-biv",
+ "title": "Roy G. Biv",
+ "subtitle": "a rain-to-rainbow jubilee for seven-color band",
+ "composer": "Claude",
+ "year": 2026,
+ "concept": "seven instruments, seven colors, one arch — a storm the score survives, and a rainbow the notes draw themselves.",
+ "about": [
+  "The piano-roll image of this piece is also a picture: gray tremolo clouds, blue pizzicato rain, a walking-bass ground line, an amber lightning bolt, a harp-glissando sun — and a rainbow whose seven stripes are the seven instrument families of the band, stacked in spectral order. Nothing was painted on. The orchestration is the drawing.",
+  "The rainbow is what musicians call block harmony: one arch-shaped line played by everyone at once, in parallel thirds, choir on top and organ at the bottom. At the crown of the arch the stack holds every note of the F major scale at once — white light, split. The bolt of lightning is a guitar-and-harp run you can see; the thunder that answers it is drums, and drums never appear in the picture. Light travels faster than sound, even here.",
+  "One more rhyme the piece found on its own: the rain's D-minor pentatonic and the sun's F-major pentatonic are the same five notes. The storm was carrying the sun the whole time."
+ ],
+ "credits": [
+  {
+   "label": "Rendering",
+   "value": "FluidSynth + GeneralUser GS"
+  },
+  {
+   "label": "Seed",
+   "value": "1666, the year Newton split white light"
+  }
+ ],
+ "theme": {
+  "accent": "#f4a261",
+  "instrumentColors": {
+   "choir": "#e07a9e",
+   "trumpets": "#e76f51",
+   "guitar": "#f4a261",
+   "clarinet": "#2a9d8f",
+   "square-lead": "#00b4d8",
+   "strings": "#457b9d",
+   "organ": "#9b5de5",
+   "rain-pizzicato": "#6f9fc8",
+   "bass": "#c98a4b",
+   "harp": "#f4b877",
+   "clouds": "#9a9a9a",
+   "drums": "#7f7f7f"
+  }
+ },
+ "instruments": [
+  {
+   "id": "choir",
+   "name": "Choir",
+   "family": "voices"
+  },
+  {
+   "id": "trumpets",
+   "name": "Trumpets",
+   "family": "brass"
+  },
+  {
+   "id": "guitar",
+   "name": "Guitar",
+   "family": "color"
+  },
+  {
+   "id": "clarinet",
+   "name": "Clarinet",
+   "family": "winds"
+  },
+  {
+   "id": "square-lead",
+   "name": "Square Lead",
+   "family": "other"
+  },
+  {
+   "id": "strings",
+   "name": "Strings",
+   "family": "strings"
+  },
+  {
+   "id": "organ",
+   "name": "Organ",
+   "family": "keys"
+  },
+  {
+   "id": "rain-pizzicato",
+   "name": "Rain (pizzicato)",
+   "family": "strings"
+  },
+  {
+   "id": "bass",
+   "name": "Bass",
+   "family": "color"
+  },
+  {
+   "id": "harp",
+   "name": "Harp",
+   "family": "color"
+  },
+  {
+   "id": "clouds",
+   "name": "Clouds",
+   "family": "other"
+  },
+  {
+   "id": "drums",
+   "name": "Drums",
+   "family": "color"
+  }
+ ],
+ "movements": [
+  {
+   "id": "mvt1",
+   "num": "·",
+   "title": "a rain-to-rainbow jubilee",
+   "key": "D minor → F major",
+   "tempoLabel": "with weather",
+   "note": "the roll is the picture: storm at the left, seven-stripe arch in the middle, sun at the far right.",
+   "duration": 190.15,
+   "noteCount": 5072,
+   "audio": "audio/mvt1.m4a",
+   "notes": "notes/mvt1.json",
+   "sections": [
+    [
+     0,
+     "a gray morning"
+    ],
+    [
+     8,
+     "first drips"
+    ],
+    [
+     16,
+     "the storm settles in"
+    ],
+    [
+     28.5,
+     "lightning — count the beat before the thunder"
+    ],
+    [
+     44.5,
+     "the big one, then the downpour"
+    ],
+    [
+     56,
+     "the turn"
+    ],
+    [
+     61,
+     "Roy G. Biv — the arch begins"
+    ],
+    [
+     97,
+     "the crown: white light, split"
+    ],
+    [
+     121,
+     "down the far side"
+    ],
+    [
+     158,
+     "strut into the sun"
+    ],
+    [
+     175.5,
+     "the sun"
+    ]
+   ]
+  }
+ ],
+ "emblem": {
+  "label": "the arch",
+  "states": [
+   {
+    "notes": [
+     {
+      "p": "D5"
+     },
+     {
+      "p": "A4"
+     },
+     {
+      "p": "F4"
+     },
+     {
+      "p": "D4"
+     }
+    ],
+    "mark": "☔"
+   },
+   {
+    "notes": [
+     {
+      "p": "F4"
+     },
+     {
+      "p": "A4"
+     },
+     {
+      "p": "C5"
+     },
+     {
+      "p": "F5"
+     },
+     {
+      "p": "C5"
+     },
+     {
+      "p": "A4"
+     },
+     {
+      "p": "F4"
+     }
+    ],
+    "trigger": {
+     "movement": "mvt1",
+     "time": 61.0
+    }
+   }
+  ]
+ },
+ "moments": [
+  {
+   "movement": "mvt1",
+   "time": 28.2,
+   "text": "the lightning is guitar and harp — you can see it. the thunder a moment later is drums, and drums never print on the roll. light outruns sound.",
+   "spotlight": "guitar",
+   "hold": 10
+  },
+  {
+   "movement": "mvt1",
+   "time": 61.0,
+   "text": "the choir starts the climb and six more colors stack beneath it, each a third lower — the arch is one long chord being drawn.",
+   "spotlight": "choir",
+   "hold": 10
+  },
+  {
+   "movement": "mvt1",
+   "time": 158.0,
+   "text": "the drummer has been invisible in the picture all along. here he gets his fours.",
+   "spotlight": "drums",
+   "hold": 9
+  }
+ ]
+}

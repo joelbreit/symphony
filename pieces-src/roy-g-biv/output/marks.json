@@ -1,0 +1,27 @@
+{
+ "sections": [
+  [
+   0.0,
+   "a gray morning"
+  ],
+  [
+   16.0,
+   "the storm"
+  ],
+  [
+   61.0,
+   "Roy G. Biv"
+  ],
+  [
+   158.0,
+   "strut into the sun"
+  ]
+ ],
+ "cues": {
+  "lightning": 28.5,
+  "the big one": 44.5,
+  "white light, split (F13)": 109.0,
+  "the sun": 175.5
+ },
+ "end": 188.64
+}

@@ -47,11 +47,14 @@ def report(piece, out=print) -> bool:
     return ok
 
 
-def pianoroll(piece, path: str, wav: str | None = None):
+def pianoroll(piece, path: str, wav: str | None = None,
+              legend_loc: str = 'lower right', lw: float = 1.6):
     """Pianoroll (family colors, opacity=velocity) over the dynamic arc.
 
     x-axis is real seconds via the tempo map. `wav`: optional rendered audio
     whose measured RMS is drawn under the designed arc for comparison.
+    `legend_loc`/`lw`: legend placement and note stroke width, for pieces
+    that care where the ink goes.
     """
     import matplotlib
     matplotlib.use('Agg')
@@ -70,7 +73,7 @@ def pianoroll(piece, path: str, wav: str | None = None):
         if spec.percussion:
             continue
         t0, t1 = piece.seconds(n.start), piece.seconds(n.start + n.dur)
-        ax.plot([t0, t1], [n.pitch] * 2, lw=1.6,
+        ax.plot([t0, t1], [n.pitch] * 2, lw=lw,
                 color=FAMILY_COLORS.get(spec.family, '#888'),
                 alpha=0.3 + 0.55 * n.vel / 127, solid_capstyle='butt')
     pitches = [n.pitch for n in piece.notes
@@ -87,7 +90,7 @@ def pianoroll(piece, path: str, wav: str | None = None):
     fams = {piece.ensemble[n.inst].family for n in piece.notes}
     ax.legend(handles=[plt.Line2D([0], [0], color=FAMILY_COLORS[f], lw=3, label=f)
                        for f in sorted(fams) if f in FAMILY_COLORS],
-              loc='lower right', ncol=4, fontsize=8, framealpha=0.9)
+              loc=legend_loc, ncol=4, fontsize=8, framealpha=0.9)
 
     # designed arc: mean velocity + note density per 2s bucket
     end_s = piece.seconds(piece.end())
