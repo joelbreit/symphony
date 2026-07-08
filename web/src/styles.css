@@ -107,9 +107,11 @@ main {
   position: absolute;
   top: 10px;
   left: 14px;
+  right: 14px;
   display: flex;
   align-items: baseline;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 6px 10px;
   pointer-events: none;
 }
 .mvt-name {
@@ -131,6 +133,104 @@ main {
   border-bottom: 1px solid transparent;
 }
 .about-btn:hover { color: var(--text); border-bottom-color: var(--text-dim); }
+
+.view-toggle {
+  pointer-events: auto;
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.view-toggle button {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 3px 9px;
+}
+.view-toggle button.active {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.view-toggle button:hover { color: var(--text); }
+
+/* ---------- sheet music ---------- */
+.sheet-scroll {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.sheet-inner { position: relative; }
+.sheet-gutter {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  background: linear-gradient(90deg, var(--bg) 0%, var(--bg) 86%, transparent 100%);
+  pointer-events: none;
+}
+.sheet-gutter-svg { position: absolute; inset: 0; }
+.sheet-label {
+  position: absolute;
+  left: 8px;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--c, var(--text-dim));
+  opacity: 0.85;
+  white-space: nowrap;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sheet-content { position: absolute; top: 0; cursor: pointer; }
+.sheet-chunk { position: absolute; top: 0; pointer-events: none; }
+.sheet-chunk svg, .sheet-gutter-svg svg { display: block; }
+/* VexFlow draws staff furniture in default black; recolor for the dark room */
+.sheet-chunk .vf-stave path,
+.sheet-gutter-svg .vf-stave path { stroke: rgba(138, 143, 163, 0.34); }
+.sheet-chunk .vf-stavebarline rect,
+.sheet-gutter-svg .vf-stavebarline rect { fill: rgba(138, 143, 163, 0.42); }
+.sheet-gutter-svg .vf-stave path[fill]:not([fill='none']),
+.sheet-gutter-svg .vf-clef path,
+.sheet-gutter-svg .vf-keysignature path,
+.sheet-gutter-svg .vf-timesignature path { fill: rgba(200, 204, 218, 0.75); stroke: none; }
+.sheet-chunk .vf-staveconnector path,
+.sheet-gutter-svg .vf-staveconnector path { stroke: rgba(138, 143, 163, 0.5); fill: rgba(138, 143, 163, 0.5); }
+.sheet-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1.5px;
+  background: color-mix(in srgb, var(--accent) 85%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 60%, transparent);
+  z-index: 2;
+  pointer-events: none;
+  will-change: transform;
+}
+.sheet-cursor::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 -36px;
+  width: 72px;
+  background: linear-gradient(90deg, transparent, rgba(233, 228, 210, 0.05), transparent);
+}
+.sheet-note { transition: filter 0.25s ease; }
+.sheet-note.lit path { fill: #ffffff; stroke: #ffffff; }
+.sheet-note.lit { filter: drop-shadow(0 0 4px rgba(255, 244, 214, 0.75)); }
+.sheet-part { transition: opacity 0.25s ease; }
+.sheet-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: 13px;
+  animation: pulse 1.6s ease-in-out infinite;
+}
 
 .overlay-section {
   position: absolute;

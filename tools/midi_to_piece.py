@@ -27,6 +27,9 @@ import sys
 
 import mido
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from midi_to_score import dump_manifest, write_scores
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PIECES_DIR = os.path.join(ROOT, 'web', 'public', 'pieces')
 
@@ -235,8 +238,7 @@ def main():
                 man.setdefault('movements', []).append(m)
         if not man.get('instruments'):
             man['instruments'] = instruments
-        with open(manifest_path, 'w') as f:
-            json.dump(man, f, indent=1, ensure_ascii=False)
+        dump_manifest(man, manifest_path)
         print('updated measured fields in existing piece.json (hand edits preserved)')
     else:
         man = {
@@ -255,10 +257,13 @@ def main():
             'moments': [],
         }
         man = {k: v for k, v in man.items() if v is not None}
-        with open(manifest_path, 'w') as f:
-            json.dump(man, f, indent=1, ensure_ascii=False)
+        dump_manifest(man, manifest_path)
         print(f'wrote skeleton {manifest_path} — now add concept/sections/about '
               f'(see PIECES.md)')
+
+    # notation data for the player's sheet-music mode
+    if write_scores(piece_dir, man, args.midis):
+        dump_manifest(man, manifest_path)
 
     entries = rebuild_index()
     print(f'index has {len(entries)} piece(s)')

@@ -17,6 +17,7 @@ export interface MovementInfo {
   noteCount?: number
   audio: string                       // path relative to the piece directory
   notes: string                       // path relative to the piece directory
+  score?: string                      // notation data for sheet-music mode (midi_to_score.py)
   sections?: [number, string][]       // [seconds, label]
   note?: string                       // short program note for this movement
 }

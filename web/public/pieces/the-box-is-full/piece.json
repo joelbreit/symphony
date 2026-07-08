@@ -144,7 +144,8 @@
     [299.56, "score screen — the song goes on"],
     [329.56, "the peddler's verse"],
     [367.06, "press start"]
-   ]
+   ],
+   "score": "score/mvt1.json"
   }
  ],
  "emblem": {
@@ -152,22 +153,44 @@
   "states": [
    {
     "notes": [
-     {"p": "D5"},
-     {"p": "A4"},
-     {"p": "Bb4"},
-     {"p": "C5"}
+     {
+      "p": "D5"
+     },
+     {
+      "p": "A4"
+     },
+     {
+      "p": "Bb4"
+     },
+     {
+      "p": "C5"
+     }
     ]
    },
    {
     "notes": [
-     {"p": "D5"},
-     {"p": "A4"},
-     {"p": "Bb4"},
-     {"p": "C5"},
-     {"p": "F#5", "accent": true}
+     {
+      "p": "D5"
+     },
+     {
+      "p": "A4"
+     },
+     {
+      "p": "Bb4"
+     },
+     {
+      "p": "C5"
+     },
+     {
+      "p": "F#5",
+      "accent": true
+     }
     ],
     "mark": "?",
-    "trigger": {"movement": "mvt1", "time": 299.56}
+    "trigger": {
+     "movement": "mvt1",
+     "time": 299.56
+    }
    }
   ]
  },

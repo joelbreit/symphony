@@ -1,9 +1,14 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Moment, NoteTuple, PieceManifest } from './types'
+import { ScoreData } from './score'
 import { DEFAULT_ACCENT, pitchRange, resolveColors } from './theme'
 import PianoRoll from './PianoRoll'
 import Minimap from './Minimap'
 import Emblem from './Emblem'
+
+const SheetMusic = lazy(() => import('./SheetMusic'))
+
+type View = 'roll' | 'score'
 
 interface Entry { movementId?: string; t?: number }
 
@@ -32,6 +37,10 @@ export default function Player({ manifest, baseDir, entry, onBack }: Props) {
   const [emblemState, setEmblemState] = useState(0)
   const [showAbout, setShowAbout] = useState(false)
   const [clock, setClock] = useState(0)
+  const [view, setViewState] = useState<View>(
+    () => (localStorage.getItem('symphony-view') === 'score' ? 'score' : 'roll'),
+  )
+  const [scores, setScores] = useState<Record<string, ScoreData | null>>({})
   const audioRef = useRef<HTMLAudioElement>(null)
   const pendingSeek = useRef<number | null>(null)
   const mvtRef = useRef(0)
@@ -64,6 +73,22 @@ export default function Player({ manifest, baseDir, entry, onBack }: Props) {
   const total = durations.reduce((a, b) => a + b, 0)
 
   const getLocalTime = useCallback(() => audioRef.current?.currentTime ?? 0, [])
+
+  const setView = useCallback((v: View) => {
+    setViewState(v)
+    localStorage.setItem('symphony-view', v)
+  }, [])
+
+  // lazy-load notation data the first time a movement is viewed as a score
+  useEffect(() => {
+    const mv = manifest.movements[mvt]
+    if (view !== 'score' || !mv.score || scores[mv.id] !== undefined) return
+    setScores(s => ({ ...s, [mv.id]: null }))
+    fetch(`${baseDir}${mv.score}`)
+      .then(r => r.json())
+      .then((data: ScoreData) => setScores(s => ({ ...s, [mv.id]: data })))
+      .catch(err => console.error('failed to load score data', err))
+  }, [view, mvt, manifest, baseDir, scores])
   const getGlobalTime = useCallback(
     () => (starts[mvtRef.current] ?? 0) + (audioRef.current?.currentTime ?? 0),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -192,6 +217,8 @@ export default function Player({ manifest, baseDir, entry, onBack }: Props) {
   }
 
   const m = manifest.movements[mvt]
+  const scoreData = m.score ? scores[m.id] : undefined
+  const sheetMode = view === 'score' && !!m.score
   const spotlight = moment?.spotlight != null ? (instIndex[moment.spotlight] ?? -1) : userSpotlight
   const overline = [manifest.composer, manifest.subtitle, manifest.year]
     .filter(Boolean).join(' · ')
@@ -213,23 +240,48 @@ export default function Player({ manifest, baseDir, entry, onBack }: Props) {
       </header>
 
       <main>
-        <PianoRoll
-          notes={notesByMvt[mvt]}
-          duration={m.duration}
-          getTime={getLocalTime}
-          playing={playing}
-          started={started}
-          spotlight={spotlight}
-          colors={colors}
-          accent={accent}
-          pitchMin={pitchMin}
-          pitchMax={pitchMax}
-        />
+        {sheetMode ? (
+          scoreData ? (
+            <Suspense fallback={<div className="sheet-loading">engraving the parts…</div>}>
+              <SheetMusic
+                score={scoreData}
+                instruments={manifest.instruments}
+                colors={colors}
+                accent={accent}
+                getTime={getLocalTime}
+                playing={playing}
+                spotlight={spotlight}
+                onSeek={sec => seekGlobal(starts[mvt] + sec)}
+              />
+            </Suspense>
+          ) : (
+            <div className="sheet-loading">engraving the parts…</div>
+          )
+        ) : (
+          <PianoRoll
+            notes={notesByMvt[mvt]}
+            duration={m.duration}
+            getTime={getLocalTime}
+            playing={playing}
+            started={started}
+            spotlight={spotlight}
+            colors={colors}
+            accent={accent}
+            pitchMin={pitchMin}
+            pitchMax={pitchMax}
+          />
+        )}
         <div className="overlay-top">
           <span className="mvt-name">{m.num} · {m.title}</span>
           {m.key && <span className="mvt-key">{m.key}</span>}
           {(manifest.about?.length || manifest.credits?.length) && (
             <button className="about-btn" onClick={() => setShowAbout(true)}>about</button>
+          )}
+          {m.score && (
+            <div className="view-toggle" role="group" aria-label="View mode">
+              <button className={view === 'roll' ? ' active' : ''} onClick={() => setView('roll')}>roll</button>
+              <button className={view === 'score' ? ' active' : ''} onClick={() => setView('score')}>score</button>
+            </div>
           )}
         </div>
         <div className="overlay-section" key={section}>{section}</div>

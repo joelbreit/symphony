@@ -189,7 +189,8 @@
      316.37,
      "coda — the Question, unresolved"
     ]
-   ]
+   ],
+   "score": "score/mvt1.json"
   },
   {
    "id": "mvt2",
@@ -251,7 +252,8 @@
      156.0,
      "evaporation"
     ]
-   ]
+   ],
+   "score": "score/mvt2.json"
   },
   {
    "id": "mvt3",
@@ -293,7 +295,8 @@
      176.0,
      "serenity — the door ajar"
     ]
-   ]
+   ],
+   "score": "score/mvt3.json"
   },
   {
    "id": "mvt4",
@@ -351,7 +354,8 @@
      292.19,
      "the window closes"
     ]
-   ]
+   ],
+   "score": "score/mvt4.json"
   }
  ],
  "emblem": {

@@ -127,79 +127,26 @@
    "audio": "audio/mvt1.m4a",
    "notes": "notes/mvt1.json",
    "sections": [
-    [
-     0.0,
-     "dawn — mist over the site"
-    ],
-    [
-     13.9,
-     "the Summons"
-    ],
-    [
-     54.1,
-     "the anthem, sung low"
-    ],
-    [
-     95.9,
-     "the anthem, tutti"
-    ],
-    [
-     116.8,
-     "the work — many hands, one gesture"
-    ],
-    [
-     139.6,
-     "the work bears fruit"
-    ],
-    [
-     155.6,
-     "one mason, alone"
-    ],
-    [
-     180.2,
-     "the doubt, passed upward"
-    ],
-    [
-     205.9,
-     "the long night"
-    ],
-    [
-     223.0,
-     "doubt at scale"
-    ],
-    [
-     231.9,
-     "silence"
-    ],
-    [
-     235.5,
-     "sunrise — the awe chord, the first bell"
-    ],
-    [
-     259.0,
-     "apotheosis — the two themes, one music"
-    ],
-    [
-     298.1,
-     "one last shadow"
-    ],
-    [
-     310.4,
-     "the peal"
-    ],
-    [
-     322.1,
-     "the next morning, far off"
-    ],
-    [
-     341.2,
-     "the final blaze"
-    ],
-    [
-     350.6,
-     "one bell rings last"
-    ]
-   ]
+    [0.0, "dawn — mist over the site"],
+    [13.9, "the Summons"],
+    [54.1, "the anthem, sung low"],
+    [95.9, "the anthem, tutti"],
+    [116.8, "the work — many hands, one gesture"],
+    [139.6, "the work bears fruit"],
+    [155.6, "one mason, alone"],
+    [180.2, "the doubt, passed upward"],
+    [205.9, "the long night"],
+    [223.0, "doubt at scale"],
+    [231.9, "silence"],
+    [235.5, "sunrise — the awe chord, the first bell"],
+    [259.0, "apotheosis — the two themes, one music"],
+    [298.1, "one last shadow"],
+    [310.4, "the peal"],
+    [322.1, "the next morning, far off"],
+    [341.2, "the final blaze"],
+    [350.6, "one bell rings last"]
+   ],
+   "score": "score/mvt1.json"
   }
  ],
  "emblem": {

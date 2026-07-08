@@ -88,63 +88,22 @@
    "audio": "audio/mvt1.m4a",
    "notes": "notes/mvt1.json",
    "sections": [
-    [
-     0.0,
-     "the streetcar bell"
-    ],
-    [
-     9.7,
-     "the Strut"
-    ],
-    [
-     29.1,
-     "clarinet takes the tune"
-    ],
-    [
-     48.5,
-     "balcony shadows"
-    ],
-    [
-     67.9,
-     "the Strut returns"
-    ],
-    [
-     87.3,
-     "around the corner to B♭"
-    ],
-    [
-     92.1,
-     "out to the river"
-    ],
-    [
-     111.5,
-     "the kid in the crowd — clarinet"
-    ],
-    [
-     130.9,
-     "the riverboat man — tenor sax"
-    ],
-    [
-     150.3,
-     "the bandleader — stop-time"
-    ],
-    [
-     169.7,
-     "the rattle, drums alone"
-    ],
-    [
-     174.5,
-     "everybody dances"
-    ],
-    [
-     193.9,
-     "full boil"
-    ],
-    [
-     213.3,
-     "three breaks and out"
-    ]
-   ]
+    [0.0, "the streetcar bell"],
+    [9.7, "the Strut"],
+    [29.1, "clarinet takes the tune"],
+    [48.5, "balcony shadows"],
+    [67.9, "the Strut returns"],
+    [87.3, "around the corner to B♭"],
+    [92.1, "out to the river"],
+    [111.5, "the kid in the crowd — clarinet"],
+    [130.9, "the riverboat man — tenor sax"],
+    [150.3, "the bandleader — stop-time"],
+    [169.7, "the rattle, drums alone"],
+    [174.5, "everybody dances"],
+    [193.9, "full boil"],
+    [213.3, "three breaks and out"]
+   ],
+   "score": "score/mvt1.json"
   }
  ],
  "emblem": {

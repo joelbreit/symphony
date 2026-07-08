@@ -272,6 +272,17 @@ def export():
         },
         'moments': all_moments,
     }
+    # notation data for the player's sheet-music mode, from the same MIDI
+    # that build.py wrote (and that the audio was rendered from)
+    here = os.path.dirname(os.path.abspath(__file__))
+    midi_paths = [os.path.join(here, 'output', f'{mv["id"]}.mid') for mv in MOVEMENTS]
+    if all(os.path.isfile(p) for p in midi_paths):
+        sys.path.insert(0, os.path.join(root, 'tools'))
+        from midi_to_score import write_scores
+        write_scores(piece_dir, manifest, midi_paths)
+    else:
+        print('output/mvt*.mid missing — run build.py first to also get sheet-music data')
+
     with open(os.path.join(piece_dir, 'piece.json'), 'w') as f:
         json.dump(manifest, f, indent=1, ensure_ascii=False)
     entries = rebuild_index(pieces_dir)
