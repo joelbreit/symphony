@@ -16,12 +16,14 @@ from lib import midi_report  # noqa: E402
 
 import loopcraft  # noqa: E402
 import palette  # noqa: E402
+import scene_deeper_focus  # noqa: E402
 import scene_focus  # noqa: E402
 
 OUT = pathlib.Path(__file__).resolve().parents[1] / 'output'
 
 SCENES = [
     dict(module=scene_focus, ensemble=palette.focus),
+    dict(module=scene_deeper_focus, ensemble=palette.deeper_focus),
     # scene_relax, scene_sleep land in M4
 ]
 

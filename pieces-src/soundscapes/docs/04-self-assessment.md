@@ -61,3 +61,15 @@ fallbacks, in order of increasing retreat: (a) re-voice on better patches /
 layer two patches per pad; (b) fewer, longer through-composed loops per
 scene; (c) one long-form loop per scene with a simple crossfade looper —
 the engine's manifest contract survives all three.
+
+## Addendum (2026-07-08): Deeper Focus joins the same gate
+
+A second scene, **Deeper Focus** (D dorian, 60 bpm — docs/03), was composed
+on Joel's request before the by-ear verdict landed. Its measurements match
+Focus: all 9 stems seam-clean by analysis (bed −42.3/−43.3 dB across the
+seam; murmurs silence-to-silence; tide within 1.8 dB of an internal grid
+boundary), composite peak −24.0 dBFS, zero holes, 30 s means flat within
+1.4 dB. Same timbre risk, same protocol — listen with
+`loop-test.html?scene=deeper-focus` or the player at `#/focus/deeper-focus`.
+The fingered-bass tide is the one new patch: judge whether it reads as a
+tide or as a GM bass demo.

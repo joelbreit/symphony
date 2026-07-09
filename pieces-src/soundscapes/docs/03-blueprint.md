@@ -25,6 +25,24 @@ home under all four.
 9 files ≈ 6.2 min audio ≈ 7.5 MB. Full-state recurrence LCM(16,10,12,14,8)
 = 1680 bars ≈ 93 min.
 
+## Deeper Focus — D dorian, 60 bpm · further down, tidal
+
+The same room as Focus later at night: the center sinks a fifth, the clock
+slows, the pulse becomes a bass tide. Cycle in threes: Dm – F – C (variant b:
+Dm – G – Am, leaning on the dorian IV). Same proven patches as Focus sunk a
+register; the one new voice is a fingered bass, chosen because a pluck's
+natural decay is seam-proof (nothing sustains across the boundary).
+
+| slot | bars | loop | variants | content | register |
+|---|---|---|---|---|---|
+| bed (always) | 16 | 64.0s | a | D–A fifth, two overlapped breath groups + organ anchor | A1–D4 |
+| pad-low | 12 | 48.0s | a, b | three overlapping chords per cycle, `voicing()` | E3–E4 |
+| haze | 14 | 56.0s | a, b | halo-pad dyads, higher and quieter than focus halo | A4–E6 |
+| murmur | 10 | 40.0s | a, b | low e-piano fragments, 2–3 phrases, long rests | D3–D4 |
+| tide | 8 | 32.0s | a, b | half-note bass rocking root–fifth on the bar grid | A1–D2 |
+
+9 files. Full-state recurrence LCM(16,12,14,10,8) = 1680 bars ≈ 112 min.
+
 ## Relax — D mixolydian, 58 bpm · warm, unhurried
 
 Cycle: D – C – G/B – D (I, ♭VII, IV6 — plagal drift, never a cadence).
@@ -57,5 +75,6 @@ resting stretches perceived recurrence far past that.)
 
 ## Accents (refined at manifest time)
 
-Focus `#8fb7c9` cool steel · Relax `#d9915e` warm amber · Sleep `#8a7fc9`
-deep violet — all muted against the room's `#0b0e14`.
+Focus `#8fb7c9` cool steel · Deeper Focus `#6d94ad` deep steel · Relax
+`#d9915e` warm amber · Sleep `#8a7fc9` deep violet — all muted against the
+room's `#0b0e14`.
