@@ -249,7 +249,10 @@ export default function ScapeVisual(props: Props) {
       const s = stateRef.current
       const nowS = performance.now() / 1000
       const sizeK = Math.max(0.65, Math.min(1.6, Math.min(w, h) / 560))
-      const maxR = Math.min(w, h) * 0.17
+      const maxR = Math.min(w, h) * 0.22
+      const span = s.data.pmax - s.data.pmin
+      const nLayers = s.data.layers.length
+      const clusterR = Math.min(w, h) * 0.07   // how tightly a voice's notes gather
       ctx.globalCompositeOperation = 'lighter'
       s.data.layers.forEach((l, li) => {
         const head = heads[li]
@@ -259,6 +262,14 @@ export default function ScapeVisual(props: Props) {
         const loop = head.loopSeconds
         const v = l.variants[head.variant]
         if (!v) return
+        // this voice's cluster drifts on its own slow Lissajous path so it
+        // meanders across the whole field instead of sitting in one corner;
+        // staggered phases + per-voice frequencies keep the voices spread apart
+        const ph = (li / Math.max(1, nLayers)) * Math.PI * 2
+        const fx = 0.028 + hash01(li * 13) * 0.03
+        const fy = 0.023 + hash01(li * 53) * 0.03
+        const cx = (0.5 + 0.4 * Math.sin(nowS * fx + ph)) * w
+        const cy = (0.5 + 0.36 * Math.sin(nowS * fy + ph * 1.7 + hash01(li * 71) * 6.28)) * h
         // j=-1 catches voices still ringing (or releasing) across the seam
         for (let j = -1; j <= 0; j++) {
           const off = j * loop - head.phase
@@ -281,23 +292,34 @@ export default function ScapeVisual(props: Props) {
             const phi = hash01(seed) * Math.PI * 2
             const breath = 1 + 0.13 * Math.sin(nowS * (2 * Math.PI / (4 + hash01(seed + 5) * 4)) + phi)
             const velN = Math.min(1, n[3] / 90)
-            // golden-ratio strides spread each layer's voices across the
-            // width — seeded hash alone bunches the few sounding notes
-            const gx = (ni * 0.61803398875 + hash01(li * 29)) % 1
-            const x = (0.07 + 0.86 * gx) * w
-              + Math.sin(nowS * 0.25 + phi) * w * 0.015
-            const y = laneY(n[2]) + Math.sin(nowS * 0.4 + phi * 1.7) * 3
-            const R = Math.min(maxR,
+            // pitch sets the whole character of the orb: low = large, soft,
+            // nebulous and faint; high = small, tight, opaque and defined
+            const pN = span > 0 ? Math.max(0, Math.min(1, (n[2] - s.data.pmin) / span)) : 0.5
+            // notes gather loosely around the voice's drifting center, each set
+            // a little off-center and nudged up/down by pitch so a melody still
+            // reads as rising and falling — the cluster stays together but roams
+            const orr = (0.28 + 0.72 * hash01(seed + 3)) * clusterR
+            const x = cx + Math.cos(phi) * orr + Math.sin(nowS * 0.25 + phi) * w * 0.012
+            const y = cy + Math.sin(phi) * orr
+              - (pN - 0.5) * clusterR * 1.4
+              + Math.sin(nowS * 0.4 + phi * 1.7) * 3
+            const pitchScale = 1.75 - 1.2 * pN          // low notes bloom wide
+            const R = Math.min(maxR * (0.5 + 0.7 * (1 - pN)),
               (7 + velN * 17) * (0.75 + Math.min(dur, 12) * 0.09)
-              * sizeK * env * breath * (0.6 + 0.55 * presence))
+              * sizeK * pitchScale * env * breath * (0.6 + 0.55 * presence))
             if (R < 0.5) continue
-            const alpha = env * (0.26 + 0.58 * velN) * (0.3 + 0.7 * presence)
+            const alpha = env * (0.24 + 0.5 * velN) * (0.3 + 0.7 * presence)
+              * (0.62 + 0.6 * pN)                        // high notes read stronger
             // the attack flashes toward white, then settles into the layer color
             const flash = Math.max(0, 1 - since / (attack + 0.25))
             const col = mix(s.rgbColors[li], WHITE, flash * 0.45)
+            // high pitches hold a solid, near-opaque core with a crisp edge;
+            // low pitches fade straight from the center into a diffuse haze
+            const coreStop = 0.08 + 0.5 * pN
+            const midFactor = 0.28 + 0.57 * pN
             const g = ctx.createRadialGradient(x, y, 0, x, y, R)
             g.addColorStop(0, rgba(col, alpha))
-            g.addColorStop(0.45, rgba(col, alpha * 0.45))
+            g.addColorStop(coreStop, rgba(col, alpha * midFactor))
             g.addColorStop(1, rgba(col, 0))
             ctx.fillStyle = g
             ctx.beginPath()
