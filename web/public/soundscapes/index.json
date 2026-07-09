@@ -1,0 +1,13 @@
+{
+ "schema": 1,
+ "scenes": [
+  {
+   "id": "focus",
+   "dir": "soundscapes/focus",
+   "title": "Focus",
+   "concept": "one steady line of attention, held.",
+   "accent": "#8fb7c9",
+   "layers": 5
+  }
+ ]
+}

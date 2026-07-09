@@ -1,0 +1,113 @@
+<!doctype html>
+<!-- M0/M1 loop-seam spike + layered listening rig — throwaway, deleted at M5.
+     Loads a scene's soundscape.json and loops every enabled stem on its own
+     cycle exactly the way the engine will (overlap scheduling, manifest
+     gains). Solo a stem to audition its seam; enable a set to hear the mix. -->
+<html>
+<head>
+<meta charset="utf-8">
+<title>soundscape stem rig</title>
+<style>
+  body { background:#0b0e14; color:#e8e6df; font:14px/1.6 monospace; padding:2rem; max-width:720px; }
+  button { font:inherit; padding:.4rem 1rem; margin-right:.5rem; }
+  label { display:block; cursor:pointer; }
+  input[type=range] { width:120px; vertical-align:middle; }
+  #log { margin-top:1rem; color:#8a8fa3; white-space:pre-line; max-height:14rem; overflow:auto; }
+  .hint { color:#8a8fa3; }
+</style>
+</head>
+<body>
+<h3>soundscape stem rig — <span id="scene">focus</span></h3>
+<p class="hint">solo each stem ≥3 loops on headphones for the seam check;
+then combos. master <input type="range" id="master" min="0" max="100" value="70"></p>
+<button id="start">start</button>
+<button id="stop" disabled>stop</button>
+<div id="layers"></div>
+<div id="log"></div>
+<script>
+const SCENE = new URLSearchParams(location.search).get('scene') || 'focus';
+const LOOKAHEAD = 3, TICK_MS = 500;
+document.getElementById('scene').textContent = SCENE;
+
+let ctx, masterGain, timer, manifest;
+const stems = [];   // {key, layer, variant, buf, gain, enabled, nextStart, iter}
+const logEl = document.getElementById('log');
+const log = s => { logEl.textContent += s + '\n'; logEl.scrollTop = 1e9; console.log('[rig]', s); };
+
+function tick() {
+  for (const s of stems) {
+    if (!s.enabled || !s.buf) continue;
+    while (s.nextStart < ctx.currentTime + LOOKAHEAD) {
+      const src = new AudioBufferSourceNode(ctx, { buffer: s.buf });
+      src.connect(s.gain);
+      src.start(s.nextStart);
+      if (s.nextStart < ctx.currentTime) log(`MISSED DEADLINE ${s.key}`);
+      s.iter++;
+      s.nextStart += s.variant.loopSeconds;
+    }
+  }
+}
+
+async function boot() {
+  manifest = await (await fetch(`soundscapes/${SCENE}/soundscape.json`)).json();
+  const div = document.getElementById('layers');
+  for (const layer of manifest.layers) {
+    for (const variant of layer.variants) {
+      const key = variant.file.replace(/^audio\//, '').replace(/\.m4a$/, '');
+      const stem = { key, layer, variant, buf: null, gain: null,
+                     enabled: layer.id === 'bed', nextStart: 0, iter: 0 };
+      stems.push(stem);
+      const label = document.createElement('label');
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.checked = stem.enabled;
+      cb.onchange = () => {
+        stem.enabled = cb.checked;
+        if (ctx) {
+          if (cb.checked) { stem.nextStart = ctx.currentTime + 0.1; tick(); }
+          stem.gain?.gain.setTargetAtTime(cb.checked ? layer.gain : 0,
+                                          ctx.currentTime, 0.3);
+        }
+      };
+      label.append(cb, ` ${key}  (${variant.loopSeconds.toFixed(1)}s loop, gain ${layer.gain})`);
+      div.append(label);
+    }
+  }
+}
+
+document.getElementById('start').onclick = async () => {
+  ctx = new AudioContext();
+  ctx.resume();                              // inside the gesture
+  masterGain = new GainNode(ctx, { gain: document.getElementById('master').value / 100 });
+  masterGain.connect(ctx.destination);
+  document.getElementById('start').disabled = true;
+  for (const s of stems) {
+    const r = await fetch(`soundscapes/${SCENE}/${s.variant.file}`);
+    s.buf = await ctx.decodeAudioData(await r.arrayBuffer());
+    s.gain = new GainNode(ctx, { gain: s.enabled ? s.layer.gain : 0 });
+    s.gain.connect(masterGain);
+    log(`${s.key}: decoded ${s.buf.duration.toFixed(2)}s (loop ${s.variant.loopSeconds}s)`);
+  }
+  // deadlines only after ALL decodes — serial decoding takes real time
+  const t0 = ctx.currentTime + 0.15;
+  for (const s of stems) s.nextStart = t0;
+  tick();
+  timer = setInterval(tick, TICK_MS);
+  document.getElementById('stop').disabled = false;
+};
+
+document.getElementById('stop').onclick = () => {
+  clearInterval(timer);
+  ctx.close();
+  log('stopped');
+  document.getElementById('start').disabled = false;
+  document.getElementById('stop').disabled = true;
+};
+
+document.getElementById('master').oninput = e =>
+  masterGain?.gain.setTargetAtTime(e.target.value / 100, ctx.currentTime, 0.05);
+
+boot();
+</script>
+</body>
+</html>

@@ -447,6 +447,109 @@ footer {
 }
 .card-meta { font-size: 11.5px; color: var(--text-dim); margin-top: 10px; opacity: 0.8; }
 
+/* ---------- soundscapes ---------- */
+.tabs { display: flex; gap: 8px; margin-top: 18px; }
+.tab {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 5px 18px;
+  border-radius: 17px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.tab.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+.tab:hover { color: var(--text); }
+
+.scape-visual {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.scape-glow {
+  width: min(46vmin, 340px);
+  height: min(46vmin, 340px);
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    color-mix(in srgb, var(--accent) 16%, transparent) 0%,
+    color-mix(in srgb, var(--accent) 5%, transparent) 45%,
+    transparent 70%);
+  transition: transform 3s ease, opacity 3s ease;
+  opacity: 0.5;
+}
+.scape-glow[data-live='yes'] {
+  opacity: 1;
+  animation: scape-breathe 9s ease-in-out infinite;
+}
+@keyframes scape-breathe {
+  0%, 100% { transform: scale(0.92); }
+  50% { transform: scale(1.06); }
+}
+
+.volume {
+  appearance: none;
+  width: 110px;
+  height: 3px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--accent) 30%, var(--line));
+  outline: none;
+}
+.volume::-webkit-slider-thumb {
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+}
+.volume::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  border: none;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+}
+.scape .legend .chip { cursor: default; }
+
+.viz-wrap { position: absolute; inset: 0; }
+.viz-wrap canvas { display: block; }
+
+.viz-toggle { display: flex; gap: 2px; }
+.viz-toggle button {
+  background: none;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: var(--text-dim);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  padding: 2px 6px;
+  cursor: pointer;
+  opacity: 0.65;
+  transition: all 0.15s ease;
+}
+.viz-toggle button:hover { color: var(--text); opacity: 1; }
+.viz-toggle button.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  opacity: 1;
+}
+.scape .time { white-space: nowrap; }
+@media (max-width: 479px) {
+  .scape .volume { width: 64px; }
+  .viz-toggle button { padding: 2px 4px; }
+}
+
 /* ---------- desktop ---------- */
 @media (min-width: 768px) {
   header { padding: 26px 32px 14px; }
