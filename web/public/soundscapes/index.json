@@ -16,6 +16,14 @@
    "concept": "further down, where the work does itself.",
    "accent": "#6d94ad",
    "layers": 5
+  },
+  {
+   "id": "motivate",
+   "dir": "soundscapes/motivate",
+   "title": "Motivate",
+   "concept": "a building montage that never cuts away.",
+   "accent": "#c9a34e",
+   "layers": 5
   }
  ]
 }

@@ -165,7 +165,12 @@ export default function SoundscapePlayer({ manifest, baseDir, seed, onBack }: {
       </div>
 
       <footer>
-        <span>{manifest.layers.length} layers · alignment never repeats</span>
+        {/* shared-form scenes (quantizeBars) vary the arrangement, not the phase */}
+        <span>{manifest.layers.length} layers · {
+          manifest.layers.some(l => (l.quantizeBars ?? 1) > 1)
+            ? 'the arrangement never settles'
+            : 'alignment never repeats'
+        }</span>
       </footer>
 
       {showAbout && (

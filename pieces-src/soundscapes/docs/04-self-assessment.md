@@ -73,3 +73,38 @@ boundary), composite peak −24.0 dBFS, zero holes, 30 s means flat within
 `loop-test.html?scene=deeper-focus` or the player at `#/focus/deeper-focus`.
 The fingered-bass tide is the one new patch: judge whether it reads as a
 tide or as a GM bass demo.
+
+## Addendum (2026-07-09): Motivate — redirected, rebuilt, same gate
+
+A third scene, **Motivate**, was first drafted in the Focus mold (G
+mixolydian, 84 bpm, pan-diatonic layers on unequal cycles). It measured
+clean, but Joel redirected before the by-ear verdict: the soundscapes
+underestimate how musical they can be — the bar is a film score for a
+tenacious building montage, closer to Perigee than to Endel. The draft was
+replaced, not patched; docs/05 records the diagnosis (the Eno phase-drift
+trick *structurally forces* emptiness) and the new architecture: one shared
+16-bar form, all loop lengths multiples of it, re-entries quantized to the
+cycle, variation moved into the conductor.
+
+The rebuilt scene (E aeolian, 104 bpm) has a real theme (horns, developed
+over two cycles; celli answer theme as the swap), a bass line with contour,
+a piano engine on the changes, string swells through a composed riser, and
+seams written as cadences (F# resolving to E across the join; the bass
+walking A–B–C–D into the downbeat).
+
+Measurements, against the same standards: engine and strings within 1.6 dB
+across the seam; ground, themes, and celesta seams all *inside* their own
+internal phrase-boundary ranges (ground +3.5 vs internal +1.2..+5.7; horn
+theme +4.4 vs −2.5..+42; cello theme −6.7 vs −9.5..+24; celesta +50.6 vs
++44..+50 — a glint out of silence is always a step, at the seam no more
+than anywhere else); flute silence-to-silence. Composite: peak −21.2 dBFS,
+zero holes, 30 s means flat within 0.70 dB. 7.4 MB (budget ≤ 8).
+
+What analysis cannot judge, for the by-ear pass (`loop-test.html?scene=
+motivate` or the player at `#/focus/motivate`): (1) **the theme's wear** —
+memorable material varied is the whole bet; if the horn melody nags after
+an hour, the fallbacks are longer theme stems, more variants, wider rests;
+(2) whether the 16-bar harmonic recurrence reads as passacaglia (holds) or
+as a stuck loop (nags) when only ground+engine are up; (3) GM brass/string
+timbre at mf — the montage register exposes the soundfont more than pads
+ever did.

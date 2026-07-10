@@ -175,8 +175,10 @@ export function createEngine(
       l.active = !l.active
       l.lastToggle = now
       if (l.active) {
-        // re-enter on the shared bar grid so grid layers stay in step
-        l.nextStart = t0 + Math.ceil((now + FADE_S / 2 - t0) / barSec) * barSec
+        // re-enter on the shared bar grid so grid layers stay in step;
+        // layers with quantizeBars (shared-form scenes) snap to the cycle
+        const qSec = (l.def.quantizeBars ?? 1) * barSec
+        l.nextStart = t0 + Math.ceil((now + FADE_S / 2 - t0) / qSec) * qSec
         fade(l, l.targetGain)
         schedule(LOOKAHEAD)
       } else {

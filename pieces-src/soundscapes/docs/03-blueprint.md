@@ -43,6 +43,36 @@ natural decay is seam-proof (nothing sustains across the boundary).
 
 9 files. Full-state recurrence LCM(16,12,14,10,8) = 1680 bars ≈ 112 min.
 
+## Motivate — E aeolian, 104 bpm · the building montage (docs/05)
+
+A different architecture from the Focus rooms, after Joel's redirect: this
+scene is **composed music on one shared 16-bar form**, not phase-drifting
+weather. Every loop length is a multiple of the cycle and re-entries snap
+to it (`quantizeBars: 16`, a small engine extension), so real harmony, a
+real theme and counterpoint stay coordinated; endless variation comes from
+the conductor (variant swaps, rests, gain drift) instead of phase drift.
+Full rationale and the form itself in docs/05.
+
+The form: `| Em C G D | ×2 | Am7 Bm7 C D | Em C G D |` — anthem rows around
+a stepwise riser; bar 16's D resolves up into bar 1's Em, the themes end on
+F# and land on E across the seam, so the loop is a cadence, not a cut.
+
+| slot | bars | loop | variants | content | register |
+|---|---|---|---|---|---|
+| ground (always) | 16 | 36.9s | a | bass stride on the changes, walk-ups into each row | A1–G2 |
+| engine (always) | 16 | 36.9s | a, b | piano ostinato from the chart: pulsing eighths / arpeggio wave | E2–D4 |
+| strings | 16 | 36.9s | a, b | legato voicings swelling through the riser / marcato quarters | G3–G4 |
+| theme | 32 | 73.8s | a, b | horns: statement + development / celli: the answer theme | E3–E5 |
+| descant | 32·16 | 73.8/36.9s | a, b | flute at risers and peaks / celesta glints | A4–G6 |
+
+9 files ≈ 7.5 min ≈ 7.4 MB. Harmonic state recurs every cycle by design;
+perceived variety lives in the conductor's arrangement space (docs/05).
+
+Craft notes (measured): all seams sit inside the stems' own internal
+phrase-boundary dynamics — the payoff of writing the seam as a resolution.
+(From the abandoned v1 draft, one durable finding: GM patch 89 decays while
+held above ~E4, so high-voiced pad chords can't cross a seam alive.)
+
 ## Relax — D mixolydian, 58 bpm · warm, unhurried
 
 Cycle: D – C – G/B – D (I, ♭VII, IV6 — plagal drift, never a cadence).
@@ -75,6 +105,6 @@ resting stretches perceived recurrence far past that.)
 
 ## Accents (refined at manifest time)
 
-Focus `#8fb7c9` cool steel · Deeper Focus `#6d94ad` deep steel · Relax
-`#d9915e` warm amber · Sleep `#8a7fc9` deep violet — all muted against the
-room's `#0b0e14`.
+Focus `#8fb7c9` cool steel · Deeper Focus `#6d94ad` deep steel · Motivate
+`#c9a34e` ember gold · Relax `#d9915e` warm amber · Sleep `#8a7fc9` deep
+violet — all muted against the room's `#0b0e14`.

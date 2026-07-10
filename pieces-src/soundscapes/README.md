@@ -1,7 +1,8 @@
 # Soundscapes — build
 
-Three loopable ambient scenes (focus / relax / sleep) for the web player's
-soundscapes tab. See `goal.md` for the brief, `docs/` for the creative record.
+Loopable ambient scenes for the web player's soundscapes tab — focus,
+deeper-focus, and motivate so far; relax and sleep planned (docs/03). See
+`goal.md` for the brief, `docs/` for the creative record.
 
 ```sh
 cd pieces-src/soundscapes

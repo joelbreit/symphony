@@ -24,6 +24,9 @@ export interface LayerDef {
   gainRange?: [number, number] // bounds for slow gain drift
   minOn?: number               // seconds before the conductor may rest it
   minOff?: number              // seconds before it may return
+  quantizeBars?: number        // re-entry snaps to this many bars (default 1);
+                               // scenes with a shared harmonic form set it to
+                               // the form length so returns land on the cycle
   variants: VariantDef[]       // conductor swaps these at loop boundaries
 }
 
