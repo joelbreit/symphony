@@ -1,7 +1,7 @@
 # Soundscapes — build
 
-Loopable ambient scenes for the web player's soundscapes tab — focus,
-deeper-focus, and motivate so far; relax and sleep planned (docs/03). See
+Loopable ambient scenes for the web player's soundscapes tab — focus and
+motivate so far; relax and sleep planned (docs/03). See
 `goal.md` for the brief, `docs/` for the creative record.
 
 ```sh
