@@ -25,3 +25,5 @@ lib/demo_output/
 # Intermediate renders — regenerate with fluidsynth (the compressed m4a in
 # web/public/pieces/ is the shipped audio).
 pieces-src/*/output/*.wav
+
+research/

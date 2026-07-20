@@ -10,6 +10,14 @@
    "layers": 5
   },
   {
+   "id": "deeper-focus",
+   "dir": "soundscapes/deeper-focus",
+   "title": "Deeper Focus",
+   "concept": "a heartbeat to work over, deep underground.",
+   "accent": "#5f7d99",
+   "layers": 5
+  },
+  {
    "id": "motivate",
    "dir": "soundscapes/motivate",
    "title": "Motivate",

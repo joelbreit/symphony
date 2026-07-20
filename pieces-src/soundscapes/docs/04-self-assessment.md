@@ -80,7 +80,7 @@ A third scene, **Motivate**, was first drafted in the Focus mold (G
 mixolydian, 84 bpm, pan-diatonic layers on unequal cycles). It measured
 clean, but Joel redirected before the by-ear verdict: the soundscapes
 underestimate how musical they can be — the bar is a film score for a
-tenacious building montage, closer to Perigee than to Endel. The draft was
+tenacious building montage, closer to Perigee than to soundscapes. The draft was
 replaced, not patched; docs/05 records the diagnosis (the Eno phase-drift
 trick *structurally forces* emptiness) and the new architecture: one shared
 16-bar form, all loop lengths multiples of it, re-entries quantized to the

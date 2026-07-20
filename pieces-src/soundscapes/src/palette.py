@@ -7,7 +7,7 @@ consistent across layers; a stem simply leaves the other instruments silent
 108 = kalimba). Reverb stays modest — the release tail must decay inside
 the ~3 s window the loop engine leaves it (docs/02, rule 7).
 """
-from lib.ensemble import Ensemble, I
+from lib.ensemble import Ensemble, I, Instrument
 
 
 def focus() -> Ensemble:
@@ -20,6 +20,25 @@ def focus() -> Ensemble:
         I('motif',  'Motif (e-piano)',      4, 'C3', 'E6', 'keys',    40),
         I('pulse',  'Pulse (kalimba)',    108, 'C4', 'C7', 'plucked', 88),
     ], name='focus', reverb=30)
+
+
+def deeper_focus() -> Ensemble:
+    """C minor, 120 bpm — the heartbeat room (research/).
+
+    Two synth basses carry the identity: the pulse (thump) and the acid
+    voice (offbeat sixteenths with slide-approaches). The drone splits into
+    an instant-attack organ anchor and a warm pad breathing overtone
+    partials above it. Hats live on the drum channel; the blip is a square
+    lead kept far down in volume — the mix is sub-heavy by design, matching
+    the measured spectral tilt (<100 Hz ~45 dB above the top octaves)."""
+    return Ensemble([
+        I('floor', 'Drone floor (organ)',   16, 'C2', 'G3', 'synth',   64, 70),
+        I('bed',   'Drone (warm pad)',      89, 'C2', 'D5', 'synth',   64),
+        I('pulse', 'Pulse (synth bass)',    38, 'C1', 'C3', 'synth',   64),
+        I('acid',  'Bass voice (synth bass)', 39, 'A1', 'C3', 'synth', 58, 80),
+        I('blip',  'Blips (square lead)',   80, 'C4', 'F5', 'synth',   70, 52),
+        Instrument('ticks', 'Ticks (hats)',  0, 0, 127, 'perc', 72, 55, True),
+    ], name='deeper-focus', reverb=24)
 
 
 def motivate() -> Ensemble:

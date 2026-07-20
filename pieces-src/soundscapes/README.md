@@ -1,8 +1,10 @@
 # Soundscapes — build
 
-Loopable ambient scenes for the web player's soundscapes tab — focus and
-motivate so far; relax and sleep planned (docs/03). See
-`goal.md` for the brief, `docs/` for the creative record.
+Loopable ambient scenes for the web player's soundscapes tab — focus,
+deeper-focus, and motivate so far; relax and sleep planned (docs/03). See
+`goal.md` for the brief, `docs/` for the creative record. Deeper-focus is
+the second take (docs/06): a rhythmic scene composed from the measurements
+in `research/`, replacing the removed ambient version.
 
 ```sh
 cd pieces-src/soundscapes

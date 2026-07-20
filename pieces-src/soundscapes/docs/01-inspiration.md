@@ -8,8 +8,7 @@ asking anything.
 
 Two lineages meet here:
 
-- **Endel** — functional sound. The insight worth stealing isn't their
-  neuroscience marketing, it's the *restraint*: narrow dynamic range, no
+- **Soundscapes** — functional sound. Narrow dynamic range, no
   cadences that demand resolution, textures tuned to sit at the edge of
   attention. Focus keeps a faint pulse (a metronome you can lean on); Sleep
   removes pulse entirely.
@@ -22,19 +21,19 @@ Two lineages meet here:
 
 Design consequences, per scene:
 
-| | Focus | Relax | Sleep |
-|---|---|---|---|
-| mode | A dorian | D mixolydian | C aeolian |
-| bpm | 72 | 58 | 48 |
-| character | steady, present | warm, unhurried | dark, nearly still |
-| pulse | soft kalimba ostinato | slow harp arpeggios | none |
-| motif | e-piano fragments | breathy flute | celesta, one or two notes |
+|           | Focus                 | Relax               | Sleep                     |
+| --------- | --------------------- | ------------------- | ------------------------- |
+| mode      | A dorian              | D mixolydian        | C aeolian                 |
+| bpm       | 72                    | 58                  | 48                        |
+| character | steady, present       | warm, unhurried     | dark, nearly still        |
+| pulse     | soft kalimba ostinato | slow harp arpeggios | none                      |
+| motif     | e-piano fragments     | breathy flute       | celesta, one or two notes |
 
 Modes, not keys: dorian and mixolydian have no leading tone, so harmony can
 circulate without ever demanding a cadence. Every progression is a cycle
 whose last bar resolves into its first — the loop *is* the phrase.
 
-One deliberate divergence from Endel: they synthesize; we compose. The stems
-are written music played by (synthesized) instruments, because that is what
+One deliberate divergence from other soundscape apps: they synthesize; we compose. 
+The stems are written music played by (synthesized) instruments, because that is what
 this repository is. Whether that reaches the bar is exactly what the
 self-assessment gate (docs/04) exists to judge.

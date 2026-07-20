@@ -1,7 +1,7 @@
 # Soundscapes — functional ambient for the listening room
 
 Three endless scenes — **Focus**, **Relax**, **Sleep** — in the spirit of
-Endel: music you put on *to do something else to*. Not pieces with arcs and
+soundscapes: music you put on *to do something else to*. Not pieces with arcs and
 arguments like the rest of this repo, but rooms with weather: they should
 sound composed, breathe slowly, and never obviously repeat.
 
