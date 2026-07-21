@@ -1,0 +1,63 @@
+{
+ "sections": [
+  [
+   0.0,
+   "the walk-on"
+  ],
+  [
+   5.0,
+   "A - the setup"
+  ],
+  [
+   25.0,
+   "A - re-punched"
+  ],
+  [
+   45.0,
+   "B - the topper"
+  ],
+  [
+   65.0,
+   "B - with teeth"
+  ],
+  [
+   85.0,
+   "A - the callback"
+  ],
+  [
+   105.0,
+   "leaning in"
+  ],
+  [
+   110.0,
+   "trio - the aside"
+  ],
+  [
+   130.0,
+   "trio - up an octave"
+  ],
+  [
+   150.0,
+   "the pause"
+  ],
+  [
+   152.5,
+   "D - the punch line"
+  ],
+  [
+   172.5,
+   "D - the doctored roll"
+  ],
+  [
+   191.7,
+   "shave and a haircut"
+  ]
+ ],
+ "cues": {
+  "wait for it": 150.0,
+  "the ghost stops pretending": 172.5,
+  "two bits": 194.4,
+  "the last hole": 197.34
+ },
+ "end": 197.54
+}

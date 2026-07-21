@@ -1,0 +1,182 @@
+{
+ "schema": 1,
+ "id": "the-punch-line",
+ "title": "The Punch Line",
+ "subtitle": "a rag for the player piano",
+ "composer": "Claude",
+ "year": 2026,
+ "concept": "a joke and a rag are the same machine — and for the last strain, the roll is doctored: more notes than any ten fingers.",
+ "about": [
+  "A joke works by building a grid of expectation and landing just beside it. That is syncopation, described exactly. In ragtime the left hand is the setup — four beats of law, stated until the ear signs the contract — and the right hand is the comedian, accepting the grid precisely so it can land somewhere else. Stop-time is the pause before the punch line. A rag is a joke told in eighth notes.",
+  "I set it inside the machine that raised the style: the player piano. Rags were sold as punched paper, and the roll is the older sibling of the MIDI file this piece was written in — holes, positions, durations, digital music sixty years early. The roll companies kept the era's best inside joke, too: their arrangers doctored the rolls, punching in octaves and filler and fourth voices no ten fingers could reach, selling parlors a ghost with too many hands. Everyone knew. Nobody minded. The fraud became the style.",
+  "So the piece plays by two-hand rules for six strains — setup, topper, callback, an aside in sixths — then stops for one entire bar of nothing. After the pause comes the punch line, and on its repeat the ghost stops pretending: the melody doubles an octave up, tremolo thirds appear from nowhere, three registers sing at once, and a five-octave run in thirty-second notes goes by that no hand alive could play. It ends the only way it could: shave and a haircut, two bits — and one last hole punched in the roll.",
+  "Form: classic multi-strain rag in A-flat, trio in D-flat, 2/4 throughout, at Joplin's printed tempo law: it is never right to play ragtime fast."
+ ],
+ "credits": [
+  {
+   "label": "Composition",
+   "value": "Claude (Fable 5), note-by-note in Python on the repo's shared lib/ toolkit"
+  },
+  {
+   "label": "Rendering",
+   "value": "FluidSynth with the GeneralUser GS soundfont"
+  },
+  {
+   "label": "Duration",
+   "value": "about 3½ minutes · 2,782 notes · 158 bars"
+  }
+ ],
+ "theme": {
+  "accent": "#e0864a"
+ },
+ "instruments": [
+  {
+   "id": "piano",
+   "name": "Piano",
+   "family": "keys"
+  }
+ ],
+ "movements": [
+  {
+   "id": "mvt1",
+   "num": "·",
+   "title": "The Punch Line",
+   "key": "A♭ major",
+   "tempoLabel": "Not fast (Joplin's law)",
+   "note": "stride left hand, syncopated right — honest for six strains, doctored for the last two.",
+   "duration": 199.04,
+   "noteCount": 2782,
+   "audio": "audio/mvt1.m4a",
+   "notes": "notes/mvt1.json",
+   "sections": [
+    [
+     0,
+     "the walk-on"
+    ],
+    [
+     5.0,
+     "A — the setup"
+    ],
+    [
+     25.0,
+     "A — re-punched"
+    ],
+    [
+     45.0,
+     "B — the topper"
+    ],
+    [
+     65.0,
+     "B — with teeth"
+    ],
+    [
+     85.0,
+     "A — the callback"
+    ],
+    [
+     105.0,
+     "leaning in"
+    ],
+    [
+     110.0,
+     "trio — the aside"
+    ],
+    [
+     130.0,
+     "trio — up an octave"
+    ],
+    [
+     150.0,
+     "the pause"
+    ],
+    [
+     152.5,
+     "D — the punch line"
+    ],
+    [
+     172.5,
+     "D — the doctored roll"
+    ],
+    [
+     191.7,
+     "shave and a haircut"
+    ]
+   ]
+  }
+ ],
+ "emblem": {
+  "label": "the oldest punch line in music",
+  "states": [
+   {
+    "notes": [
+     {
+      "p": "Ab4"
+     },
+     {
+      "p": "Eb4"
+     },
+     {
+      "p": "Eb4"
+     },
+     {
+      "p": "F4"
+     },
+     {
+      "p": "Eb4"
+     }
+    ],
+    "mark": "?"
+   },
+   {
+    "notes": [
+     {
+      "p": "Ab4"
+     },
+     {
+      "p": "Eb4"
+     },
+     {
+      "p": "Eb4"
+     },
+     {
+      "p": "F4"
+     },
+     {
+      "p": "Eb4"
+     },
+     {
+      "p": "G4"
+     },
+     {
+      "p": "Ab4",
+      "accent": true
+     }
+    ],
+    "trigger": {
+     "movement": "mvt1",
+     "time": 194.4
+    }
+   }
+  ]
+ },
+ "moments": [
+  {
+   "movement": "mvt1",
+   "time": 149.6,
+   "text": "the left hand stops. one entire bar of nothing — the pause before the punch line.",
+   "hold": 9
+  },
+  {
+   "movement": "mvt1",
+   "time": 172.5,
+   "text": "from here the roll is doctored — more notes than ten fingers. the ghost stops pretending.",
+   "hold": 10
+  },
+  {
+   "movement": "mvt1",
+   "time": 196.2,
+   "text": "two bits — and one last hole punched in the roll.",
+   "hold": 8
+  }
+ ]
+}
