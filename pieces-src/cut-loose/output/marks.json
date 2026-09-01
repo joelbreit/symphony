@@ -1,0 +1,90 @@
+{
+ "sections": [
+  [
+   0.0,
+   "the cadence"
+  ],
+  [
+   14.55,
+   "the hymn"
+  ],
+  [
+   72.73,
+   "the cry"
+  ],
+  [
+   101.82,
+   "amen"
+  ],
+  [
+   118.34,
+   "the whistle"
+  ],
+  [
+   122.79,
+   "snares on"
+  ],
+  [
+   127.84,
+   "the sousaphone riff"
+  ],
+  [
+   132.89,
+   "riffing in"
+  ],
+  [
+   137.95,
+   "the strut - the hymn cut loose"
+  ],
+  [
+   158.16,
+   "the strut - clarinet up top, the hymn underneath"
+  ],
+  [
+   178.37,
+   "around the corner to A-flat"
+  ],
+  [
+   183.42,
+   "the ramble"
+  ],
+  [
+   203.63,
+   "trombone takes it"
+  ],
+  [
+   223.84,
+   "clarinet takes it"
+  ],
+  [
+   244.05,
+   "the umbrellas go up"
+  ],
+  [
+   263.64,
+   "turn for home"
+  ],
+  [
+   268.54,
+   "home - the strut at full boil"
+  ],
+  [
+   288.13,
+   "the tag"
+  ],
+  [
+   296.7,
+   "benediction"
+  ]
+ ],
+ "cues": {
+  "the tear": 50.91,
+  "the whistle": 120.57,
+  "his first note": 136.84,
+  "the umbrellas": 244.05,
+  "the sousaphone walks": 278.34,
+  "the last chord": 294.26,
+  "benediction": 296.7
+ },
+ "end": 307.61
+}

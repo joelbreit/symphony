@@ -13,8 +13,9 @@ its own generator source, `goal.md`, `docs/` (creative record), and `output/`.
 The flagship is **Symphony No. 1 in C minor, "The Window"**
 (`pieces-src/the-window/`) — four movements, ~18.5 minutes, music21. The other
 pieces live alongside it: `the-unfinished-spire`, `royal-street-rattler`,
-`high-street-riot`, `the-box-is-full`, `perigee`. To add a new piece, make a
-new `pieces-src/<slug>/` directory.
+`high-street-riot`, `the-box-is-full`, `perigee`, `the-punch-line`,
+`cut-loose` (a jazz funeral for a marching brass band, lib-built). To add a
+new piece, make a new `pieces-src/<slug>/` directory.
 
 The first five pieces were built on two independent generator lineages —
 **music21** (the-window, the-box-is-full, high-street-riot) and **midiutil**

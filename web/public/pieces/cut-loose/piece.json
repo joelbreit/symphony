@@ -1,0 +1,263 @@
+{
+ "schema": 1,
+ "id": "cut-loose",
+ "title": "Cut Loose",
+ "subtitle": "a second line for a cornet player",
+ "composer": "Claude",
+ "year": 2026,
+ "about": [
+  "A New Orleans jazz funeral is one ritual with two musics. The band walks the hearse to the cemetery at a dirge, snares loosened, playing a hymn with the widest vibrato it has. At the grave the body is \"cut loose\" — the mourners let go — the grand marshal blows his whistle, the snare drummer tightens the snares, and the band turns for home at three times the tempo with the whole neighborhood dancing behind it. This one is for the band's own cornet player. On the way out, the front line plays the hymn without him: alto sax, trombone, clarinet, sousaphone, two drummers, and an empty chair.",
+  "One tune, two lives. The hymn's notes never change; what changes after the whistle is where the long notes land — on the and of two, hanging — and the cornet is suddenly on top of it, first note of the day, as if he had only gone on ahead and waited for the band to catch up. His entrance is staged the way second lines stage everything: one hit, silence, and a horn alone. In the second chorus the clarinet takes the strut an octave up while the cornet plays the hymn underneath in its original slow rhythm, so both lives of the tune sound at once. A new strain, the ramble, carries the trombone and clarinet choruses; the shout chorus is the hymn's opening call in block harmony with the drummers answering; then home, the tag, and — after the last chord — the cornet alone at the walking tempo, playing the call one more time.",
+  "This is a band that walks, so there is no banjo and no piano; the harmony is the riffing horns and the sousaphone, and the drums are two people, not a kit. I composed every melody, counterline, and chorus note-by-note in Python on the repository's shared toolkit, and let small constrained generators do what brass bands do by formula: the two-beat sousaphone with its chromatic walk-ups, the street beat, the riff backgrounds, the clarinet obbligato (four kinds of run this time), and the tailgate trombone. The dirge's grief is literal: the modulation wheel drives the horns' vibrato at about a third of a semitone, and it is switched off the moment the whistle blows.",
+  "The tear is the borrowed minor iv — C falling to C♭ over A♭ minor — the one chord every jazz funeral has, used once each pass. The rest is the most generous idea in American music: what a band does with a silence where a voice used to be is play his tune faster until he seems to be there."
+ ],
+ "credits": [
+  {
+   "label": "Composition",
+   "value": "Claude (Fable 5.1), note-by-note in Python on the repo's shared lib/ toolkit"
+  },
+  {
+   "label": "Rendering",
+   "value": "FluidSynth with the GeneralUser GS soundfont"
+  },
+  {
+   "label": "Duration",
+   "value": "about 5 minutes · 5,107 notes · 176 bars"
+  }
+ ],
+ "theme": {
+  "accent": "#b48af0",
+  "instrumentColors": {
+   "cornet": "#f7c948",
+   "clarinet": "#6fd3c2",
+   "alto-sax": "#e88b6a",
+   "trombone": "#c47ad9",
+   "sousaphone": "#6f9ec9",
+   "snare-drum": "#d8d3e8",
+   "bass-drum": "#8d86b8"
+  }
+ },
+ "instruments": [
+  {
+   "id": "cornet",
+   "name": "Cornet",
+   "family": "brass"
+  },
+  {
+   "id": "clarinet",
+   "name": "Clarinet",
+   "family": "winds"
+  },
+  {
+   "id": "alto-sax",
+   "name": "Alto Sax",
+   "family": "winds"
+  },
+  {
+   "id": "trombone",
+   "name": "Trombone",
+   "family": "brass"
+  },
+  {
+   "id": "sousaphone",
+   "name": "Sousaphone",
+   "family": "brass"
+  },
+  {
+   "id": "snare-drum",
+   "name": "Snare Drum",
+   "family": "color"
+  },
+  {
+   "id": "bass-drum",
+   "name": "Bass Drum",
+   "family": "color"
+  }
+ ],
+ "movements": [
+  {
+   "id": "mvt1",
+   "num": "·",
+   "title": "Cut Loose",
+   "duration": 310.5,
+   "noteCount": 5107,
+   "audio": "audio/mvt1.m4a",
+   "notes": "notes/mvt1.json",
+   "sections": [
+    [
+     0.0,
+     "the cadence — muffled snares, the walk begins"
+    ],
+    [
+     14.55,
+     "the hymn, with his chair empty"
+    ],
+    [
+     72.73,
+     "the cry"
+    ],
+    [
+     101.82,
+     "amen"
+    ],
+    [
+     118.34,
+     "silence — the whistle"
+    ],
+    [
+     122.79,
+     "snares on"
+    ],
+    [
+     127.84,
+     "the sousaphone riff"
+    ],
+    [
+     132.89,
+     "riffing in — one hit, and his first note"
+    ],
+    [
+     137.95,
+     "the strut — the hymn cut loose"
+    ],
+    [
+     158.16,
+     "clarinet up top, the hymn slow underneath"
+    ],
+    [
+     178.37,
+     "around the corner to A♭"
+    ],
+    [
+     183.42,
+     "the ramble"
+    ],
+    [
+     203.63,
+     "trombone takes it"
+    ],
+    [
+     223.84,
+     "clarinet takes it"
+    ],
+    [
+     244.05,
+     "the umbrellas go up"
+    ],
+    [
+     263.64,
+     "turn for home"
+    ],
+    [
+     268.54,
+     "home — the strut at full boil"
+    ],
+    [
+     288.13,
+     "the tag"
+    ],
+    [
+     296.7,
+     "benediction — the cornet alone"
+    ]
+   ],
+   "key": "E♭ major → A♭ major → E♭ major",
+   "tempoLabel": "Dirge ♩ = 66 · second line ♩ = 190, pushing to 196",
+   "note": "one jazz funeral: the procession, the whistle, the second line home — and the cornet's benediction.",
+   "score": "score.musicxml"
+  }
+ ],
+ "moments": [
+  {
+   "movement": "mvt1",
+   "time": 50.61,
+   "text": "IV turns minor and the tune falls a half step, C to C♭ — the tear. the one chord every jazz funeral has.",
+   "spotlight": "alto-sax",
+   "hold": 9
+  },
+  {
+   "movement": "mvt1",
+   "time": 118.77,
+   "text": "the body is cut loose. two beats of nothing — then the grand marshal: one long, two short. the snares come on.",
+   "spotlight": "snare-drum",
+   "hold": 9
+  },
+  {
+   "movement": "mvt1",
+   "time": 136.24,
+   "text": "one hit, then silence — and the cornet, first note of the day, plays the hymn's fall alone. he only went on ahead.",
+   "spotlight": "cornet",
+   "hold": 9
+  },
+  {
+   "movement": "mvt1",
+   "time": 244.05,
+   "text": "the umbrellas go up: the hymn's call shouted in A♭ by three horns, and the drummers answer.",
+   "hold": 9
+  },
+  {
+   "movement": "mvt1",
+   "time": 296.3,
+   "text": "after the last chord: the cornet alone, at the walking tempo, plays the call once more. the band answers under his last note.",
+   "spotlight": "cornet",
+   "hold": 11
+  }
+ ],
+ "concept": "the band buries its own cornet player: the hymn walks him out with his chair empty, the whistle blows, and the same tune comes home as a strut with him on top of it.",
+ "emblem": {
+  "label": "the call",
+  "states": [
+   {
+    "label": "the hymn",
+    "notes": [
+     {
+      "p": "G4"
+     },
+     {
+      "p": "Bb4"
+     },
+     {
+      "p": "Eb5"
+     },
+     {
+      "p": "D5"
+     },
+     {
+      "p": "C5"
+     },
+     {
+      "p": "Bb4"
+     }
+    ]
+   },
+   {
+    "label": "cut loose",
+    "trigger": {
+     "movement": "mvt1",
+     "time": 137.95
+    },
+    "notes": [
+     {
+      "p": "G4"
+     },
+     {
+      "p": "Bb4"
+     },
+     {
+      "p": "Eb5",
+      "accent": true
+     },
+     {
+      "p": "D5"
+     },
+     {
+      "p": "C5"
+     },
+     {
+      "p": "Bb4"
+     }
+    ]
+   }
+  ]
+ }
+}
