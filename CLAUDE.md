@@ -50,6 +50,13 @@ For the shared toolkit (from the repo root):
 .venv/bin/python -m lib.demo     # builds two worked examples into lib/demo_output/
 ```
 
+Engraved scores for the web player (from the repo root):
+
+```sh
+.venv/bin/python tools/export_scores.py            # every piece, with sync gate
+.venv/bin/python tools/export_scores.py perigee    # just one
+```
+
 If movement code changes, regenerate in order: MIDI (`build.py`) → piece package
 (`export_web.py`) → audio (fluidsynth + afconvert per `web/README.md`). The web
 app's sync depends on JSON and audio coming from the same MIDI generation.
@@ -71,8 +78,11 @@ tempo/meter `Timeline` and an `Ensemble` (roster as data: programs, sounding
 ranges, pans, families), written straight to MIDI with mido. Ranges are
 guarded fail-fast at note entry; section marks/cues export to `marks.json`
 for the web manifest; `lib/assess.py` renders pianoroll + dynamic-arc plots
-(optionally against measured RMS from a rendered WAV). `lib/README.md` has
-the module map; `lib/demo.py` is the worked example.
+(optionally against measured RMS from a rendered WAV). `lib/notation.py`
+engraves a score from that symbolic layer, and `lib/notation_m21.py` does the
+same job for the three frozen music21 pieces, which have no symbolic layer
+and must be re-run through a recording Orchestra to recover one. `lib/README.md`
+has the module map; `lib/demo.py` is the worked example.
 
 The Window's source lives in `pieces-src/the-window/` (paths below are relative to it):
 
@@ -89,6 +99,11 @@ The Window's source lives in `pieces-src/the-window/` (paths below are relative 
 - Pizzicato/arco = GM program switches via `Orchestra.program(name, offset, 45|48)` (or `Piece.program` in `lib/`).
 - Write tremolos/trills as sounded notes (MIDI realism), not notation shorthand.
 - Builds are deterministic (seeded RNG); never remove the seed.
+- Declare keys in the composition (`piece.key(beat, 'a')`, alongside tempo and
+  meter) and mark keyboards `grand=True` in the roster. Costs nothing in the
+  MIDI and means a new piece's score export is one line: `notation.export(
+  build(), '<slug>')`. Scores are always engraved from the symbolic layer,
+  never transcribed from MIDI.
 - MIDI meta text (titles, markers) is latin-1: `lib/` sanitizes em-dashes automatically; older writers may not.
 
 ## Working process (from goal.md)

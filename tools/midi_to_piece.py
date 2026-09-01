@@ -223,6 +223,16 @@ def main():
             seen[inst['id']] = 1
 
     manifest_path = os.path.join(piece_dir, 'piece.json')
+    if os.path.exists(manifest_path):
+        # the engraved score is generated alongside the MIDI, not from it:
+        # carry the field across even a --force rewrite, or the player
+        # silently loses the score toggle until someone re-runs export_score
+        with open(manifest_path) as f:
+            for m in json.load(f).get('movements', []):
+                if m.get('score'):
+                    for new in movements:
+                        if new['id'] == m['id']:
+                            new['score'] = m['score']
     if os.path.exists(manifest_path) and not args.force:
         # keep the hand-edited manifest; refresh measured fields only
         with open(manifest_path) as f:

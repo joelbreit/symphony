@@ -18,7 +18,7 @@ def quintet() -> Ensemble:
     return Ensemble([
         I('vln', 'Violin',      40, 'G3', 'E7', 'strings', 42),
         I('bnd', 'Bandoneon',   23, 'A2', 'B6', 'winds',   64, 105),
-        I('pno', 'Piano',        0, 'A0', 'C8', 'keys',    56),
+        I('pno', 'Piano',        0, 'A0', 'C8', 'keys',    56, grand=True),
         I('gtr', 'Guitar',      26, 'E2', 'B5', 'plucked', 84, 88),
         I('cb',  'Double Bass', 32, 'E1', 'A3', 'plucked', 70, 110),
         Instrument('golpe', 'Golpe', family='perc', percussion=True),

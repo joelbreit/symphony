@@ -1,18 +1,5 @@
 # lib — the shared composition toolkit
 
-The best machinery from the first five compositions, extracted into one
-package for every piece that comes after. The shipped pieces stay frozen on
-their own code (their builds are deterministic, published artifacts); new
-pieces start here and may extend this.
-
-Provenance: the note DSL, dynamics, and roster guards come from The Window /
-The Box Is Full; chord charts, `fit()` voice leading, swing, and pitch-bend
-scoops from Royal Street Rattler; per-instrument humanize classes, jazz
-articulations, and the measured-RMS feedback loop from High Street Riot;
-fail-fast range asserts and the figure library from The Unfinished Spire.
-The MIDI is written directly with mido — no music21 score container, so no
-channel-remap post-hacks, and CC curves / pitch bends are first-class.
-
 ## Quickstart
 
 ```python
@@ -57,6 +44,34 @@ changing anything in here.
 | `figures` | textures (`trem`, `arp`, `ost`, rolls, swells, `harp_arp`, `strum`) and idioms (`smear_into`, `falloff`, `curl`, `trill`, `scoop`, `press_roll`) |
 | `midiwrite` | direct mido writer (format 1, conductor track, one named track per instrument), `midi_report` |
 | `assess` | text report + pianoroll/dynamic-arc plots, optional measured-RMS overlay from a rendered WAV |
+| `notation` | engraved score (MusicXML) from the pre-humanized layer: key-aware re-spelling, ornament/strum → notation rules, grand staff, key regions; `export()` writes it into a web piece package and verifies the sync, `check_sync()` is the gate on its own |
+| `notation_m21` | the same job for the **frozen music21 pieces**, which have no symbolic layer: a recording `Orchestra` subclass, chord folding, staff frame, rest/voice/measure finishing, orchestral assembly, manifest patch. Only those three pieces need it — new pieces use `notation` |
+
+## Scores come for free
+
+A piece that declares its keys gets an engraved, audio-synced score in the
+web player for one line of export code:
+
+```python
+p.key(0, 'a')                  # in compose(), alongside tempo/meter
+p.key(S3, 'c')                 # modulations are just more declarations
+...
+notation.export(build(), 'perigee')     # in export_score.py
+```
+
+`export()` infers the staff order from the roster, the key signatures and
+spelling from `piece.key()`, and the grand staves from instruments declared
+`grand=True` in the ensemble; then it registers the score on the movement in
+`piece.json` (which is what turns on the player's score toggle) and checks
+the engraved rhythm back against the piece's own clock before it will call
+it done. Pass `beat0`/`beat1` to engrave one movement of several, `min_nom`
+to change the ornament threshold, `insts`/`keys`/`grand_staff` to override
+any inference.
+
+That last check is the point: a notation bug shows up as the score sliding
+*seconds* out of step with the audio, not as anything that looks wrong on
+the page. `tools/export_scores.py` re-runs every piece's export and reports
+the worst drift for each.
 
 ## Conventions
 

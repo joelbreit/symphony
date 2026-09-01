@@ -19,6 +19,8 @@ export interface MovementInfo {
   notes: string                       // path relative to the piece directory
   sections?: [number, string][]       // [seconds, label]
   note?: string                       // short program note for this movement
+  score?: string                      // MusicXML path relative to the piece
+                                      // directory (enables the score view)
 }
 
 export interface EmblemNote {

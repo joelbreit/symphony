@@ -39,6 +39,8 @@ class Note:
     dur: float
     vel: int
     swing: bool = True
+    nom: float = 0.0   # nominal (pre-gate) duration in beats — the notated
+                       # value; dur is the sounded (gated/humanized) length.
 
     def replace(self, **kw):
         return _dc_replace(self, **kw)
@@ -57,6 +59,7 @@ class Piece:
         self.programs: list[tuple] = []  # (inst, beat, program)
         self.marks: list[tuple] = []     # (label, beat) section boundaries
         self.cues: dict[str, float] = {} # named instants
+        self.keys: list[tuple] = []      # (beat, key name) — notation only
 
     # -- conductor -----------------------------------------------------
     def tempo(self, beat, bpm, text=None):
@@ -64,6 +67,21 @@ class Piece:
 
     def meter(self, beat, num, den):
         self.timeline.meter(beat, num, den)
+
+    def key(self, beat, name: str):
+        """Declare the key from `beat` on: 'a' minor, 'A' major, 'e-', 'F#'.
+
+        Affects notation only (key signature + how MIDI ints are spelled) —
+        the DSL has already collapsed names to ints, so this is where the
+        spelling comes back. MIDI output is untouched.
+        """
+        if not name or name[0].upper() not in 'ABCDEFG':
+            raise ValueError(f'not a key name: {name!r}')
+        self.keys.append((float(beat), name))
+
+    def key_regions(self) -> list[tuple]:
+        """Sorted [(beat, key)] for notation; C major if none was declared."""
+        return sorted(self.keys) or [(0.0, 'C')]
 
     def bar(self, bar: int, beat: float = 0.0) -> float:
         return self.timeline.bar(bar, beat)
@@ -111,7 +129,7 @@ class Piece:
                             f'{pitch_name(spec.hi)}')
                     self.notes.append(Note(inst, pp, float(t),
                                            float(d * Fraction(gate).limit_denominator(20)),
-                                           v, swing))
+                                           v, swing, nom=float(d)))
                 idx += 1
             t += d
         return float(t)

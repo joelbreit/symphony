@@ -2,6 +2,7 @@
 
 Plain asserts, no test framework — same spirit as the pieces' own guards.
 """
+import json
 import os
 import sys
 import tempfile
@@ -259,6 +260,96 @@ def test_assess_and_figures():
     assert assess.report(p, out=lambda *_: None)
     with tempfile.TemporaryDirectory(dir=os.environ.get('TMPDIR') or None) as td:
         assert os.path.exists(assess.pianoroll(p, os.path.join(td, 'r.png')))
+
+
+def test_notation_rules():
+    """The duration/ornament/chord rules that decide what reaches the page."""
+    from . import notation
+    p = Piece(solo_piano(), seed=7, title='rules')
+    p.tempo(0, 120)
+    p.meter(0, 4, 4)
+    p.key(0, 'A-')
+    p.add('piano', 0, 'C4:q D4:e r:e E4:h')          # trusted DSL values
+    p.add('piano', 4, [(60, 0.3), (62, 0.3), (64, 0.3), (65, 0.3)])  # shorthand
+    p.note('piano', 8, 72, 0.05)                     # ornament: below min_nom
+    p.note('piano', 8, 60, 1.0)
+    for i, pitch in enumerate([48, 52, 55]):         # strum: folds to a chord
+        p.note('piano', 9 + i * 0.03, pitch, 1.0)
+    sc = notation.to_score(p, beat1=12)
+    els = list(sc.recurse().notes)
+    assert not any(n.pitch.midi == 72 for n in els if hasattr(n, 'pitch')), \
+        'sub-min_nom ornament should not be engraved'
+    strum = [n for n in els if n.isChord and n.offset % 4 == 1]
+    assert strum and sorted(x.midi for x in strum[0].pitches) == [48, 52, 55], \
+        'staggered strum should fold into one chord'
+    # 0.3-beat shorthand repeated every 0.5 fills the gap as eighths
+    filled = [n for n in els if 4 <= n.offset < 8]
+    assert all(float(n.quarterLength) == 0.5 for n in filled), \
+        'detached shorthand should fill to the next onset'
+    # the key drives spelling: E-flat, not D-sharp
+    p2 = Piece(solo_piano(), seed=7, title='spelling')
+    p2.tempo(0, 120)
+    p2.key(0, 'A-')
+    p2.add('piano', 0, [(63, 1.0)])
+    names = [n.pitch.name for n in notation.to_score(p2, beat1=4).recurse().notes]
+    assert names == ['E-'], names
+
+
+def test_notation_defaults_and_export():
+    """Roster/keys/grand-staff inference, and the packaging round trip."""
+    from . import notation
+    p = Piece(rhythm_section(), seed=3, title='defaults')
+    p.tempo(0, 96)
+    p.meter(0, 4, 4)
+    p.key(0, 'c')
+    p.key(8, 'e-')
+    p.add('piano', 0, 'C4:q Eb4:q G4:h')
+    p.add('piano', 4, 'C3:w')                     # below middle C: left hand
+    p.add('bass', 0, 'C2:q C2:q G2:h')
+    p.perc(0, 'hhc:e hhc:e hhc:e hhc:e')
+    sc = notation.to_score(p, beat1=12)
+    ids = [pt.id for pt in sc.parts]
+    assert 'drums' not in ids, 'percussion is skipped'
+    assert 'piano-rh' in ids and 'piano-lh' in ids, \
+        'grand=True on the roster should split the piano onto two staves'
+    assert 'bass' in ids and 'guitar' in ids, 'roster order is staff order'
+    sig = [k.sharps for k in sc.parts[0].recurse().getElementsByClass('KeySignature')]
+    assert sig[:2] == [-3, -6], f'declared key regions should reach the page: {sig}'
+
+    with tempfile.TemporaryDirectory(dir=os.environ.get('TMPDIR') or None) as td:
+        pkg = os.path.join(td, 'pkg')
+        os.mkdir(pkg)
+        with open(os.path.join(pkg, 'piece.json'), 'w') as f:
+            json.dump({'movements': [{'id': 'mvt1'}]}, f)
+        rep = notation.export(p, pkg, beat1=12, quiet=True)
+        with open(os.path.join(pkg, 'piece.json')) as f:
+            assert json.load(f)['movements'][0]['score'] == 'score.musicxml'
+        xml = open(rep['path']).read()
+        assert '<voice>0</voice>' not in xml, 'Verovio rejects layer 0'
+        assert '<time-modification>' not in xml, \
+            'no tuplets in straight material (window rounding gone wrong)'
+        if rep['drift'] is not None:          # verovio present
+            assert rep['drift'] < 0.01, rep['drift']
+
+
+def test_notation_sync_gate():
+    """The drift check must actually fail when the score and clock disagree."""
+    from . import notation
+    p = Piece(solo_piano(), seed=5, title='gate')
+    p.tempo(0, 60)
+    p.meter(0, 4, 4)
+    p.key(0, 'C')
+    p.add('piano', 0, R('C4:q D4:q E4:q F4:q', 4))
+    with tempfile.TemporaryDirectory(dir=os.environ.get('TMPDIR') or None) as td:
+        xml = os.path.join(td, 's.musicxml')
+        notation.to_musicxml(p, path=xml, beat1=16)
+        drift, _ = notation.check_sync(p, xml)
+        if drift is None:
+            return                             # verovio not installed
+        assert drift < 0.01, drift
+        p.tempo(8, 30)                         # clock now disagrees with the page
+        late, at = notation.check_sync(p, xml)
+        assert late > 1.0 and at > 0, (late, at)
 
 
 def main():

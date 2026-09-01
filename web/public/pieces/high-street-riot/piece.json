@@ -97,6 +97,7 @@
    "noteCount": 5602,
    "audio": "audio/mvt1.m4a",
    "notes": "notes/mvt1.json",
+   "score": "score.musicxml",
    "sections": [
     [0.0, "the sousaphone invents it"],
     [6.0, "the band piles on"],

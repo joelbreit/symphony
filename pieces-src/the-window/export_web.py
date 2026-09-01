@@ -6,6 +6,10 @@ separately with fluidsynth — see web/README.md.
 
 Moments and emblem triggers are specified in quarterLengths and converted
 through the same tempo map that generated the MIDI, so timestamps are exact.
+
+Each movement's "score" field (mvtN.musicxml, written by export_score.py) is
+re-emitted here when the file is present, so regenerating the manifest never
+drops the engraved-score links.
 """
 import json
 import os
@@ -227,14 +231,19 @@ def export():
                     notes.append([round(t, 3), round(max(d, 0.05), 3), p.midi, idx, vel])
         notes.sort(key=lambda x: (x[0], x[2]))
         dur = max(to_sec(end_ql), max((n[0] + n[1]) for n in notes))
-        movements_meta.append({
+        meta = {
             'id': mv['id'], 'num': mv['num'], 'title': mv['title'], 'key': mv['key'],
             'tempoLabel': mv['tempoLabel'], 'note': mv['note'],
             'duration': round(dur, 2), 'noteCount': len(notes),
             'audio': f'audio/{mv["id"]}.m4a',
             'notes': f'notes/{mv["id"]}.json',
             'sections': [[round(to_sec(q), 2), label] for q, label in mv['sections']],
-        })
+        }
+        # engraved score (export_score.py) — keep the field on regeneration
+        score_rel = f'{mv["id"]}.musicxml'
+        if os.path.isfile(os.path.join(piece_dir, score_rel)):
+            meta['score'] = score_rel
+        movements_meta.append(meta)
         for (q, text, spot, hold) in mv.get('moments', []):
             mo = {'movement': mv['id'], 'time': round(to_sec(q), 2), 'text': text, 'hold': hold}
             if spot:

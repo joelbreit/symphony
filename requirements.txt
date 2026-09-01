@@ -3,3 +3,4 @@ mido
 midiutil
 matplotlib
 numpy
+verovio

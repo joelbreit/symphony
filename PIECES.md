@@ -93,7 +93,13 @@ estimates as last-note-end + 1.5s) may need a small bump to match.
     "note": "one-line program note shown in the About panel",
     "duration": 338.5,                 // seconds, should cover the audio length
     "audio": "audio/mvt1.m4a", "notes": "notes/mvt1.json",
-    "sections": [[0, "label"], [64.2, "another label"]]   // seconds, sorted
+    "sections": [[0, "label"], [64.2, "another label"]],  // seconds, sorted
+    "score": "score.musicxml"          // optional: engraved score (MusicXML,
+                                       // exported by lib/notation.py from the
+                                       // pre-humanized layer); enables the
+                                       // player's synced score view. Don't
+                                       // hand-edit: notation.export() sets it,
+                                       // tools/export_scores.py rebuilds all
   }],
   "emblem": {                          // optional: a motif on a small staff
     "label": "the Question",

@@ -103,6 +103,32 @@ main {
 .roll-wrap { position: absolute; inset: 0; }
 .roll-wrap canvas { display: block; }
 
+/* engraved score view (ScoreView) — Verovio SVG follows CSS `color` */
+.score-wrap {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 40px 18px 30vh;
+  color: #cfd3de;
+  scrollbar-width: thin;
+}
+.score-page { max-width: 1180px; margin: 0 auto; }
+.score-page svg { width: 100%; height: auto; fill: currentColor; display: block; }
+/* Verovio's embedded stylesheet resets color to black on the inner svg via
+   #id rules; !important is the only class-level way to win that fight */
+.score-page .definition-scale { color: inherit !important; }
+.score-page + .score-page { margin-top: 28px; }
+.score-wrap .sc-on { color: var(--accent); }
+.score-msg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+
 .overlay-top {
   position: absolute;
   top: 10px;

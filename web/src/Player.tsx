@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Moment, NoteTuple, PieceManifest } from './types'
 import { DEFAULT_ACCENT, pitchRange, resolveColors } from './theme'
 import PianoRoll from './PianoRoll'
+import ScoreView from './ScoreView'
 import Minimap from './Minimap'
 import Emblem from './Emblem'
 
@@ -31,6 +32,7 @@ export default function Player({ manifest, baseDir, entry, onBack }: Props) {
   const [moment, setMoment] = useState<Moment | null>(null)
   const [emblemState, setEmblemState] = useState(0)
   const [showAbout, setShowAbout] = useState(false)
+  const [showScore, setShowScore] = useState(false)
   const [clock, setClock] = useState(0)
   const audioRef = useRef<HTMLAudioElement>(null)
   const pendingSeek = useRef<number | null>(null)
@@ -213,21 +215,30 @@ export default function Player({ manifest, baseDir, entry, onBack }: Props) {
       </header>
 
       <main>
-        <PianoRoll
-          notes={notesByMvt[mvt]}
-          duration={m.duration}
-          getTime={getLocalTime}
-          playing={playing}
-          started={started}
-          spotlight={spotlight}
-          colors={colors}
-          accent={accent}
-          pitchMin={pitchMin}
-          pitchMax={pitchMax}
-        />
+        {showScore && m.score ? (
+          <ScoreView url={`${baseDir}${m.score}`} getTime={getLocalTime} />
+        ) : (
+          <PianoRoll
+            notes={notesByMvt[mvt]}
+            duration={m.duration}
+            getTime={getLocalTime}
+            playing={playing}
+            started={started}
+            spotlight={spotlight}
+            colors={colors}
+            accent={accent}
+            pitchMin={pitchMin}
+            pitchMax={pitchMax}
+          />
+        )}
         <div className="overlay-top">
           <span className="mvt-name">{m.num} · {m.title}</span>
           {m.key && <span className="mvt-key">{m.key}</span>}
+          {m.score && (
+            <button className="about-btn" onClick={() => setShowScore(s => !s)}>
+              {showScore && m.score ? 'roll' : 'score'}
+            </button>
+          )}
           {(manifest.about?.length || manifest.credits?.length) && (
             <button className="about-btn" onClick={() => setShowAbout(true)}>about</button>
           )}

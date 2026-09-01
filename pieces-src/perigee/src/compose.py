@@ -379,6 +379,13 @@ def build() -> Piece:
     p = Piece(quintet(), seed=1957,
               title='Perigee — a tango for a falling satellite')
     p.meter(0, 4, 4)
+    # the orbit's keys (docs/03): A minor home, C minor for the second
+    # revolution, E-flat minor for the last apogee and the heat, back to A
+    # minor (the E dominant pedal) for re-entry and after
+    p.key(S0, 'a')
+    p.key(S3, 'c')
+    p.key(S5, 'e-')
+    p.key(S7, 'a')
     telemetry(p)
     apogee1(p)
     perigee1(p)

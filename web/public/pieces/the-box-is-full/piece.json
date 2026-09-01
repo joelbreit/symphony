@@ -130,6 +130,7 @@
    "noteCount": 9526,
    "audio": "audio/mvt1.m4a",
    "notes": "notes/mvt1.json",
+   "score": "score.musicxml",
    "sections": [
     [0, "insert cartridge"],
     [41.74, "level 1 — the peddler struts"],

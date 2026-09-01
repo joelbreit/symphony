@@ -195,6 +195,11 @@ def build() -> Piece:
               title='The Punch Line — a rag for the player piano')
     p.meter(0, 2, 4)
     p.tempo(0, 96, "not fast (Joplin's law)")
+    # A-flat home, D-flat for the trio, back at the pause bar (its E-flat 7
+    # is V of A-flat)
+    p.key(0, 'A-')
+    p.key(C1, 'D-')
+    p.key(PAUSE, 'A-')
     walk_on(p)
     the_setup(p)
     the_topper(p)

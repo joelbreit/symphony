@@ -22,10 +22,12 @@ class Instrument:
     pan: int = 64            # CC10 at t=0
     volume: int = 100        # CC7 at t=0
     percussion: bool = False # channel 9, pitches are GM drum keys
+    grand: bool = False      # engraved on two staves split at middle C
 
 
-def I(key, name, program, lo, hi, family, pan=64, volume=100):
-    return Instrument(key, name, program, midi(lo), midi(hi), family, pan, volume)
+def I(key, name, program, lo, hi, family, pan=64, volume=100, grand=False):
+    return Instrument(key, name, program, midi(lo), midi(hi), family, pan,
+                      volume, grand=grand)
 
 
 class Ensemble:
@@ -92,7 +94,7 @@ def orchestra() -> Ensemble:
         I('tpt',  'Trumpets',         56, 52, 84,  'brass',   70),
         I('tbn',  'Trombones & Tuba', 57, 26, 72,  'brass',   78),
         I('timp', 'Timpani',          47, 38, 57,  'perc',    60),
-        I('hp',   'Harp',             46, 24, 103, 'plucked', 35),
+        I('hp',   'Harp',             46, 24, 103, 'plucked', 35, grand=True),
         I('cel',  'Celesta',           8, 60, 108, 'keys',    45),
         I('vln1', 'Violin I',         48, 55, 100, 'strings', 30),
         I('vln2', 'Violin II',        48, 55, 88,  'strings', 45),
@@ -119,7 +121,7 @@ def dixieland() -> Ensemble:
 def rhythm_section() -> Ensemble:
     """Piano / guitar / upright bass / drums."""
     return Ensemble([
-        I('piano',  'Piano',        0, 21, 108, 'keys',    54),
+        I('piano',  'Piano',        0, 21, 108, 'keys',    54, grand=True),
         I('guitar', 'Guitar',      26, 40, 86,  'plucked', 80, 85),
         I('bass',   'Bass',        32, 28, 60,  'plucked', 60, 105),
         Instrument('drums', 'Drums', family='perc', percussion=True),
@@ -127,5 +129,5 @@ def rhythm_section() -> Ensemble:
 
 
 def solo_piano() -> Ensemble:
-    return Ensemble([I('piano', 'Piano', 0, 21, 108, 'keys')],
+    return Ensemble([I('piano', 'Piano', 0, 21, 108, 'keys', grand=True)],
                     name='solo piano', reverb=45)
