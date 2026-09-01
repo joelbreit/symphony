@@ -35,7 +35,21 @@ Window's kept every one of its notes while shedding redundant rest-only
 voices (mvt4: 3741 rests → 2089, file 1.81 → 1.40 MB). The frozen
 generators were not touched.
 
-Still open below: items 2, 6–18.
+**The score now fits itself to the pane** (2026-07-29). Verovio lays a system
+out to `pageWidth`, and a system's *height* is fixed by its staff count — so
+what fits on screen is decided almost entirely by the page width we ask for.
+ScoreView renders one page as a probe, measures the system, and solves for
+the page width at which a whole system (every instrument, top to bottom)
+lands inside the visible height. It only widens past a comfortable reading
+size when a system actually needs it, so a two-stave rag still stacks three
+systems at full size while a sixteen-stave orchestral system compresses to
+fit. Plus `spacingStaff: 7` (a fifth off every system's height on 16 staves),
+tighter page margins, a fit/zoom control (50 %–280 %), re-fit on window
+resize, and an autoscroll anchor that parks a pane-filling system at the top.
+The Window's mvt1 went from 41 pages to 11, and all 16 staves are legible at
+once even in a 620 px-tall window.
+
+Still open below: items 2, 6–11, 13–18 (12 is easier now — far fewer pages).
 
 ## Do these first
 
@@ -110,9 +124,11 @@ Everything is concert pitch, which is right for a study score. A
 
 **12. Lazy page rendering** — M
 
-The Box Is Full renders all 53 pages up front when the score opens (2.5 MB of
-MusicXML). Render the current page plus its neighbours, fill the rest in idle
-time. This is the main reason opening the score on the big pieces feels heavy.
+The big scores still render every page up front when the score opens. The
+auto-fit cut the page counts a long way (The Window's mvt1: 41 → 11), so this
+hurts less than it did, but rendering the current page plus its neighbours
+and filling the rest in idle time is still the fix. Note the fit probe adds
+one extra layout pass, which lazy rendering would also help pay for.
 
 **13. Remember the score/roll choice, and deep-link it** — S
 

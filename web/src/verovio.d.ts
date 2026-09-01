@@ -9,6 +9,7 @@ declare module 'verovio/esm' {
     constructor(module: unknown)
     setOptions(options: Record<string, unknown>): void
     loadData(data: string): boolean
+    redoLayout(options?: Record<string, unknown>): void
     getPageCount(): number
     renderToSVG(page: number): string
     renderToTimemap(options?: Record<string, unknown>): unknown[]

@@ -109,11 +109,12 @@ main {
   inset: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 40px 18px 30vh;
+  padding: 12px 18px 30vh;
   color: #cfd3de;
   scrollbar-width: thin;
 }
-.score-page { max-width: 1180px; margin: 0 auto; }
+/* keep PAGE_MAX_PX in ScoreView.tsx in step with this */
+.score-page { max-width: 1400px; margin: 0 auto; }
 .score-page svg { width: 100%; height: auto; fill: currentColor; display: block; }
 /* Verovio's embedded stylesheet resets color to black on the inner svg via
    #id rules; !important is the only class-level way to win that fight */
@@ -127,6 +128,41 @@ main {
   color: var(--text-dim);
   font-size: 13px;
   letter-spacing: 0.06em;
+}
+.score-msg-inline { height: 60%; }
+
+.score-zoom {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(10, 12, 18, 0.72);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px;
+  backdrop-filter: blur(6px);
+}
+.score-zoom button {
+  width: 24px;
+  height: 22px;
+  border: none;
+  background: none;
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 999px;
+}
+.score-zoom button:hover:not(:disabled) { color: var(--text); }
+.score-zoom button:disabled { opacity: 0.3; cursor: default; }
+.score-zoom span {
+  min-width: 34px;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
 }
 
 .overlay-top {
@@ -188,6 +224,16 @@ main {
   max-width: 34ch;
 }
 @keyframes momentIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; } }
+/* over the score these captions sit on top of staves rather than empty roll:
+   a scrim keeps the words readable and the notation clearly behind them */
+main.scoring .overlay-section,
+main.scoring .overlay-moment {
+  width: fit-content;
+  max-width: min(34ch, 60%);
+  padding: 1px 10px 2px;
+  border-radius: 4px;
+  background: rgba(11, 14, 20, 0.82);
+}
 
 .hero-hint {
   position: absolute;

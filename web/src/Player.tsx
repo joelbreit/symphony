@@ -214,7 +214,7 @@ export default function Player({ manifest, baseDir, entry, onBack }: Props) {
         )}
       </header>
 
-      <main>
+      <main className={showScore && m.score ? 'scoring' : undefined}>
         {showScore && m.score ? (
           <ScoreView url={`${baseDir}${m.score}`} getTime={getLocalTime} />
         ) : (
