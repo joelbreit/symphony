@@ -173,7 +173,7 @@ def _fill_staff(st, items, spell_at, window_len: float):
 
 
 def to_score(piece, insts=None, keys=None, beat0=0.0, beat1=None, title=None,
-             min_nom: float = 0.2, chord_tol: float = 0.12,
+             composer='Claude', min_nom: float = 0.2, chord_tol: float = 0.12,
              grand_staff=None) -> stream.Score:
     """Build a clean music21 Score for `insts` over [beat0, beat1) beats.
 
@@ -220,7 +220,7 @@ def to_score(piece, insts=None, keys=None, beat0=0.0, beat1=None, title=None,
 
     sc = stream.Score()
     sc.metadata = metadata.Metadata(
-        title=title or piece.title, composer='Claude')
+        title=title or piece.title, composer=composer)
 
     first = True
     for ikey in insts:

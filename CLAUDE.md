@@ -5,8 +5,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What this repository is
 
 This is a creative composition project, not a software application. It is a
-collection of original compositions (Claude is the composer), each generated as
-playable MIDI by Python and surfaced together in the `web/` piano-roll player.
+collection of original compositions by AI composers, each generated as playable
+MIDI by Python and surfaced together in the `web/` piano-roll player. Composer
+credit lives with each piece; do not assume every new piece is by Claude.
 
 Each composition is a self-contained directory under `pieces-src/<slug>/` with
 its own generator source, `goal.md`, `docs/` (creative record), and `output/`.
@@ -14,7 +15,8 @@ The flagship is **Symphony No. 1 in C minor, "The Window"**
 (`pieces-src/the-window/`) — four movements, ~18.5 minutes, music21. The other
 pieces live alongside it: `the-unfinished-spire`, `royal-street-rattler`,
 `high-street-riot`, `the-box-is-full`, `perigee`, `the-punch-line`,
-`cut-loose` (a jazz funeral for a marching brass band, lib-built). To add a
+`cut-loose` (a jazz funeral for a marching brass band), and `majority-rules`
+(a B-flat civic rondo for the same walking roster, lib-built). To add a
 new piece, make a new `pieces-src/<slug>/` directory.
 
 The first five pieces were built on two independent generator lineages —

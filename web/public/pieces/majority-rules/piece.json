@@ -1,0 +1,247 @@
+{
+ "schema": 1,
+ "id": "majority-rules",
+ "title": "Majority Rules",
+ "subtitle": "a town meeting in B♭",
+ "composer": "Codex",
+ "year": 2026,
+ "concept": "a brass band mistakes a town meeting for a gig: every horn proposes a tune, every drummer objects, and the whole block votes for B♭ by playing at once.",
+ "about": [
+  "A brass band has wandered into a neighborhood town meeting, and nobody throws them out quickly enough. The cornet appoints himself chair and pounds out a motion; the clarinet heckles from the back row; the alto sax is the only person who has read the agenda and offers a graceful amendment; the trombone rises for an opposition speech that is neither honorable nor opposed to having a good time. The sousaphone is the clerk, counting every vote and quietly hauling every procedural detour back to B♭.",
+  "The form is a civic rondo rather than another vamp or second line. The square sixteen-bar motion keeps returning to be amended, interrupted, rebutted, and filibustered. When the horns finally table it, the sousaphone and two drummers conduct business alone. Roll call gives each horn four bars to vote aye in character: cornet declaims, clarinet chatters, alto sings, trombone smears. At the unanimous vote, the motion moves into three-part block harmony while the amendment becomes the trombone's counterline underneath it. Agreement, for this band, means being obnoxious in the same direction.",
+  "B♭ is the people's key: native ground for a street band, broad enough for a public melody and sturdy enough to survive parliamentary abuse. E♭ is the amendment, G minor colors the filibuster, and every dominant-chain maneuver discharges back into home because the sousaphone has already counted the votes. After three false endings and one suspicious silence, the final B♭ is not merely played. It is elected."
+ ],
+ "credits": [
+  {
+   "label": "Composition",
+   "value": "Codex (GPT 5.6 Sol), note-by-note in Python on the repository's shared lib/ toolkit"
+  },
+  {
+   "label": "Band",
+   "value": "cornet · clarinet · alto sax · trombone · sousaphone · snare drum · bass drum and mounted cymbal"
+  },
+  {
+   "label": "Rendering",
+   "value": "FluidSynth with the GeneralUser GS soundfont"
+  },
+  {
+   "label": "Duration",
+   "value": "about 3¾ minutes · 4,180 notes · 164 bars"
+  }
+ ],
+ "theme": {
+  "accent": "#f06a3c",
+  "instrumentColors": {
+   "cornet": "#ffbe3b",
+   "clarinet": "#5ed6c2",
+   "alto-sax": "#ee8d62",
+   "trombone": "#d46dba",
+   "sousaphone": "#6a9fd0",
+   "snare-drum": "#d8d3e8",
+   "bass-drum": "#8e86ae"
+  }
+ },
+ "instruments": [
+  {
+   "id": "cornet",
+   "name": "Cornet",
+   "family": "brass"
+  },
+  {
+   "id": "clarinet",
+   "name": "Clarinet",
+   "family": "winds"
+  },
+  {
+   "id": "alto-sax",
+   "name": "Alto Sax",
+   "family": "winds"
+  },
+  {
+   "id": "trombone",
+   "name": "Trombone",
+   "family": "brass"
+  },
+  {
+   "id": "sousaphone",
+   "name": "Sousaphone",
+   "family": "brass"
+  },
+  {
+   "id": "snare-drum",
+   "name": "Snare Drum",
+   "family": "color"
+  },
+  {
+   "id": "bass-drum",
+   "name": "Bass Drum",
+   "family": "color"
+  }
+ ],
+ "movements": [
+  {
+   "id": "mvt1",
+   "num": "·",
+   "title": "Majority Rules",
+   "key": "B♭ major · E♭ amendment · G minor filibuster · B♭ wins",
+   "tempoLabel": "With entirely too much confidence, ♩ = 176 · vote ♩ = 184",
+   "note": "motion, amendment, objections, filibuster, roll call — and one very loud unanimous vote.",
+   "duration": 229.75,
+   "noteCount": 4180,
+   "audio": "audio/mvt1.mp3",
+   "notes": "notes/mvt1.json",
+   "sections": [
+    [
+     0.0,
+     "call to order — the snare has the floor"
+    ],
+    [
+     5.45,
+     "the motion"
+    ],
+    [
+     27.27,
+     "the amendment"
+    ],
+    [
+     49.09,
+     "the motion, amended"
+    ],
+    [
+     70.91,
+     "point of order — four objections"
+    ],
+    [
+     81.82,
+     "the honorable opposition"
+    ],
+    [
+     103.64,
+     "rebuttal"
+    ],
+    [
+     114.55,
+     "the motion carries"
+    ],
+    [
+     136.36,
+     "the filibuster"
+    ],
+    [
+     158.18,
+     "table the motion — the clerk keeps counting"
+    ],
+    [
+     169.09,
+     "roll call"
+    ],
+    [
+     190.91,
+     "unanimous — the meeting becomes a parade"
+    ],
+    [
+     211.78,
+     "recount — three endings, none accepted"
+    ],
+    [
+     217.0,
+     "majority rules"
+    ]
+   ],
+   "score": "score.musicxml"
+  }
+ ],
+ "moments": [
+  {
+   "movement": "mvt1",
+   "time": 27.27,
+   "text": "the alto has actually read the agenda: a smoother tune in E♭, while the cornet objects in every available breath.",
+   "spotlight": "alto-sax",
+   "hold": 9
+  },
+  {
+   "movement": "mvt1",
+   "time": 70.91,
+   "text": "point of order: cornet, clarinet, alto, trombone — two bars apiece, each interrupted by the snare's minutes.",
+   "hold": 10
+  },
+  {
+   "movement": "mvt1",
+   "time": 158.18,
+   "text": "the horns are tabled. only the sousaphone clerk and the two drummers remain; naturally, business continues.",
+   "spotlight": "sousaphone",
+   "hold": 10
+  },
+  {
+   "movement": "mvt1",
+   "time": 190.91,
+   "text": "unanimous: the motion shouts in block harmony while the amendment answers from the trombone below. agreement means louder counterpoint.",
+   "hold": 11
+  },
+  {
+   "movement": "mvt1",
+   "time": 220.91,
+   "text": "after three rejected endings, the final B♭ is put to the floor. the motion carries.",
+   "spotlight": "cornet",
+   "hold": 10
+  }
+ ],
+ "emblem": {
+  "label": "the motion",
+  "states": [
+   {
+    "label": "proposed",
+    "notes": [
+     {
+      "p": "D4"
+     },
+     {
+      "p": "F4"
+     },
+     {
+      "p": "Bb4",
+      "accent": true
+     },
+     {
+      "p": "A4"
+     },
+     {
+      "p": "G4"
+     },
+     {
+      "p": "F4"
+     }
+    ]
+   },
+   {
+    "label": "carried",
+    "notes": [
+     {
+      "p": "D4"
+     },
+     {
+      "p": "F4"
+     },
+     {
+      "p": "Bb4",
+      "accent": true
+     },
+     {
+      "p": "D5"
+     },
+     {
+      "p": "F5"
+     },
+     {
+      "p": "Bb5",
+      "accent": true
+     }
+    ],
+    "trigger": {
+     "movement": "mvt1",
+     "time": 190.91
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "sections": [
+  [
+   0.0,
+   "call to order"
+  ],
+  [
+   5.45,
+   "the motion"
+  ],
+  [
+   27.27,
+   "the amendment"
+  ],
+  [
+   49.09,
+   "the motion, amended"
+  ],
+  [
+   70.91,
+   "point of order"
+  ],
+  [
+   81.82,
+   "the honorable opposition"
+  ],
+  [
+   103.64,
+   "rebuttal"
+  ],
+  [
+   114.55,
+   "the motion carries"
+  ],
+  [
+   136.36,
+   "the filibuster"
+  ],
+  [
+   158.18,
+   "table the motion"
+  ],
+  [
+   169.09,
+   "roll call"
+  ],
+  [
+   190.91,
+   "unanimous"
+  ],
+  [
+   211.78,
+   "recount"
+  ],
+  [
+   217.0,
+   "majority rules"
+  ]
+ ],
+ "cues": {
+  "the gavel": 4.09,
+  "four objections": 70.91,
+  "the clerk keeps counting": 158.18,
+  "cornet votes aye": 169.09,
+  "clarinet votes aye": 174.55,
+  "alto votes aye": 180.0,
+  "tbn votes aye": 185.45,
+  "motion and amendment agree": 190.91,
+  "the vote": 220.91
+ },
+ "end": 223.68
+}

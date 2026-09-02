@@ -1,8 +1,8 @@
 # vibe-compositions
 
-A collection of original musical compositions — each generated as playable MIDI
-by Claude — gathered into one repository and surfaced together in a single
-piano-roll web player. Claude is the composer.
+A collection of original musical compositions generated as playable MIDI by AI
+composers, gathered into one repository and surfaced together in a single
+piano-roll web player. Composer credit lives with each piece.
 
 ## The compositions
 
@@ -17,6 +17,9 @@ generator source, `goal.md`, creative `docs/`, and rendered `output/`.
 | **High Street Riot** | [`pieces-src/high-street-riot`](pieces-src/high-street-riot) | A grotesquely funky vamp-jam for an oversized Dixieland band (music21) |
 | **The Box Is Full** | [`pieces-src/the-box-is-full`](pieces-src/the-box-is-full) | Korobeiniki (the Tetris tune) as folk tragedy, for orchestra and square wave (music21) |
 | **Perigee** | [`pieces-src/perigee`](pieces-src/perigee) | A nuevo tango for a falling satellite — Piazzolla quintet (lib) |
+| **The Punch Line** | [`pieces-src/the-punch-line`](pieces-src/the-punch-line) | A classic piano rag built like a joke, with a doctored-roll punch line (lib) |
+| **Cut Loose** | [`pieces-src/cut-loose`](pieces-src/cut-loose) | A jazz funeral for a cornet player — one hymn, two lives (lib) |
+| **Majority Rules** | [`pieces-src/majority-rules`](pieces-src/majority-rules) | A B♭ town meeting hijacked by the seven-player street band (lib) |
 
 The first five pieces were built on two generator lineages — **music21** and
 **midiutil** — kept as independent forks per piece; they stay frozen as-is.
@@ -24,7 +27,8 @@ See each piece's README for how to rebuild it. The best tools from both
 lineages now live in [`lib/`](lib/), the shared composition toolkit that new
 pieces start from (note DSL, chord charts, ensemble presets, groove and
 humanize, CC expression, direct MIDI writer, assessment plots — see
-[lib/README.md](lib/README.md)). **Perigee** is the first piece built on it.
+[lib/README.md](lib/README.md)). **Perigee** is the first piece built on it;
+*The Punch Line*, *Cut Loose*, and *Majority Rules* follow the same pattern.
 
 ## The web player
 
