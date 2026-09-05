@@ -27,3 +27,7 @@ lib/demo_output/
 pieces-src/*/output/*.wav
 
 research/
+
+# Scratch / local scratchpads
+tmp/
+
