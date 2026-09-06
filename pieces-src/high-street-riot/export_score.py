@@ -147,16 +147,21 @@ def engravable(events):
     return out
 
 
-def build_staff(name, fixed_clef, events, window, conductor):
+def build_staff(name, fixed_clef, events, window, conductor, dyn_source=None):
     """One chart staff: the shared frame, then this piece's own rests.
 
     Rests are written explicitly and beat-aligned rather than left to
     makeRests, which would fill a gap with a single triple-dotted monster.
+
+    `dyn_source` is this part's raw slot list, which already carries `vel` —
+    the riot never went through a recording Orchestra, so its dynamics are
+    read straight off the chart it was written from.
     """
     p = N.staff(name, C.DISPLAY[name], fixed_clef,
                 keys=[(0, 'g')], meters=[(0, '4/4')],
                 tempi=conductor.get('tempi', ()),
                 texts=conductor.get('texts', ()))
+    placed = []
     cursor = Fraction(0)
     for t, pitches, d in events:
         for rt, rd in rests(cursor, t):
@@ -167,11 +172,19 @@ def build_staff(name, fixed_clef, events, window, conductor):
               else m21chord.Chord(sorted(pitches, key=midi_of)))
         el.duration.quarterLength = d
         p.insert(t, el)
+        placed.append((float(t), el))
         cursor = t + d
     for rt, rd in rests(cursor, window):
         r = note.Rest()
         r.duration.quarterLength = rd
         p.insert(rt, r)
+    if dyn_source:
+        vels = [(float(sl['off']), int(sl['vel']),
+                 max(midi_of(x) for x in sl['pitches']))
+                for sl in dyn_source if sl.get('pitches')]
+        marks, wedges = N.dynamics_for(vels, N.bars_from_meters([(0, '4/4')],
+                                                                window))
+        N.apply_dynamics(p, marks, wedges, placed)
     return N.finish(p, window, voices=False)
 
 
@@ -220,7 +233,8 @@ def main():
         if not events:                        # omit empty parts
             continue
         st = build_staff(name, cl, events, window,
-                         conductor if i == 0 else {})   # conductor: top staff
+                         conductor if i == 0 else {},   # conductor: top staff
+                         dyn_source=C.PARTS[name])
         sc.insert(0, st)
         staves += 1
         notes_out += len(events)

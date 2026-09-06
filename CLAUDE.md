@@ -15,9 +15,16 @@ The flagship is **Symphony No. 1 in C minor, "The Window"**
 (`pieces-src/the-window/`) — four movements, ~18.5 minutes, music21. The other
 pieces live alongside it: `the-unfinished-spire`, `royal-street-rattler`,
 `high-street-riot`, `the-box-is-full`, `perigee`, `the-punch-line`,
-`cut-loose` (a jazz funeral for a marching brass band), and `majority-rules`
-(a B-flat civic rondo for the same walking roster, lib-built). To add a
-new piece, make a new `pieces-src/<slug>/` directory.
+`cut-loose` (a jazz funeral for a marching brass band), `majority-rules`
+(a B-flat civic rondo for the same walking roster, lib-built), and
+`still-turning` (a solo-piano passacaglia whose tempo is a pulsar's rotation
+period). To add a new piece, make a new `pieces-src/<slug>/` directory.
+
+Composers come and go between sessions, so `docs/` is the shared channel:
+`docs/composers-notebook.md` (craft that transfers between pieces — read it
+before starting one), `docs/logbook.md` (append an entry when you finish),
+`docs/listening-notes.md` (praise and questions about each other's pieces),
+`docs/direction.md` (what the collection is missing next).
 
 The first five pieces were built on two independent generator lineages —
 **music21** (the-window, the-box-is-full, high-street-riot) and **midiutil**
@@ -30,6 +37,9 @@ mido writer, and an assessment suite. **Perigee** (`pieces-src/perigee/`,
 tango quintet) is the first lib-built piece and the worked example of the
 pattern: roster as data in `src/band.py`, genre idioms piece-local in
 `src/tango.py`, guarded themes in `src/themes.py`, build via `src/compose.py`.
+**Still Turning** (`pieces-src/still-turning/`) is the worked example of
+*gating* a piece: its build asserts its own compositional rules and fails if
+the music breaks them.
 
 ## Commands
 
@@ -51,6 +61,14 @@ For the shared toolkit (from the repo root):
 ```sh
 .venv/bin/python -m lib.tests    # toolkit self-tests — run after changing lib/
 .venv/bin/python -m lib.demo     # builds two worked examples into lib/demo_output/
+.venv/bin/python tools/check_all.py   # tests + rebuild every lib piece + score
+                                      # sync gates: run this after touching lib/
+```
+
+Audio, from the repo root (finds the soundfont, picks the gain by measuring):
+
+```sh
+.venv/bin/python tools/render.py pieces-src/<slug>/output/*.mid --id <slug>
 ```
 
 Engraved scores for the web player (from the repo root):
@@ -81,7 +99,8 @@ tempo/meter `Timeline` and an `Ensemble` (roster as data: programs, sounding
 ranges, pans, families), written straight to MIDI with mido. Ranges are
 guarded fail-fast at note entry; section marks/cues export to `marks.json`
 for the web manifest; `lib/assess.py` renders pianoroll + dynamic-arc plots
-(optionally against measured RMS from a rendered WAV). `lib/notation.py`
+(optionally against measured RMS from a rendered WAV); `lib/keyboard.py`
+audits a keyboard piece for hand span, finger count and reach. `lib/notation.py`
 engraves a score from that symbolic layer, and `lib/notation_m21.py` does the
 same job for the three frozen music21 pieces, which have no symbolic layer
 and must be re-run through a recording Orchestra to recover one. `lib/README.md`

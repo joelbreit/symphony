@@ -34,10 +34,11 @@ render_svg here). music21 does measures, rests, ties, and beams.
 import json
 import math
 import pathlib
+import re
 from fractions import Fraction
 
 from music21 import chord as m21chord
-from music21 import clef, expressions, instrument
+from music21 import clef, dynamics, expressions, instrument
 from music21 import key as m21key
 from music21 import layout, metadata, meter, note, stream, tempo
 
@@ -153,14 +154,204 @@ def _written(items, end: Fraction):
     return out
 
 
+# Velocity is the dynamic in this system (a piano cannot crescendo a struck
+# note, so `lib` writes loudness as velocity and the page has to read it back
+# out). Band edges are the midpoints between lib.piece.DYN's values.
+_DYN_BANDS = ((32, 'ppp'), (42, 'pp'), (54, 'p'), (66, 'mp'),
+              (79, 'mf'), (93, 'f'), (106, 'ff'), (128, 'fff'))
+
+
+def _band(v: float) -> str:
+    for hi, name in _DYN_BANDS:
+        if v < hi:
+            return name
+    return 'fff'
+
+
+def _effective_vel(n) -> float:
+    """Velocity corrected for register, because velocity is a keystroke and
+    a dynamic is a loudness.
+
+    The same force at the top of a keyboard produces far less sound than in
+    the middle — which is why a composer writing for a sampler ends up pushing
+    the top octave hard to make it speak at all. Read back literally, that
+    reads as `mf` on a page where the composer meant a distant ping. The
+    correction is one band at the very top and nothing elsewhere: low notes
+    carry perfectly well on their own.
+    """
+    if n.pitch > 84:                       # above C6
+        return n.vel - 12 * min(1.0, (n.pitch - 84) / 21.0)
+    return n.vel
+
+
+def _smooth(series, w: int = 3) -> list:
+    """Centred median over w bars, skipping empty ones — kills the flicker of
+    a median sitting on a band edge without moving any real change."""
+    out = []
+    for i in range(len(series)):
+        vals = [v for v in series[max(0, i - w // 2): i + w // 2 + 1]
+                if v is not None]
+        out.append(sorted(vals)[len(vals) // 2] if vals else None)
+    return out
+
+
+def _bar_offsets(timeline, beat0: float, beat1: float) -> list:
+    """Relative offsets of every bar line inside the window, meter-aware."""
+    out, n = [], 1
+    while n < 100000:
+        b = timeline.bar_start(n)
+        if b >= beat1:
+            break
+        if b >= beat0:
+            out.append(b - beat0)
+        n += 1
+    return out
+
+
+def _dynamic_plan(notes_rel, bars, min_gap: int = 4, ramp_bars: int = 3,
+                  ramp_span: int = 9, max_wedge_bars: int = 8):
+    """(marks, wedges) for one instrument, from its velocities.
+
+    marks: [(offset, 'mf'), ...] — a band change that has held long enough to
+    be worth printing. wedges: [(offset0, offset1, 'cresc'|'dim'), ...] where
+    the velocity moved monotonically far enough across enough bars to be a
+    hairpin rather than a step. A ramp longer than `max_wedge_bars` keeps its
+    arrival and loses its tail: a hairpin drawn across a whole system reads as
+    an underline, and the last eight bars are where the growth is heard.
+
+    Per-bar velocity is the *median* of the notes starting in that bar, not
+    the mean: an accompaniment of forty quiet sixteenths under four loud
+    melody notes is quiet, and the mean says otherwise.
+    """
+    if not bars or not notes_rel:
+        return [], []
+    edges = list(bars) + [float('inf')]
+    per_bar, k = [], 0
+    ns = sorted(notes_rel, key=lambda n: n.start)
+    for i in range(len(bars)):
+        lo, hi = edges[i], edges[i + 1]
+        vs = []
+        while k < len(ns) and ns[k].start < lo:
+            k += 1
+        j = k
+        while j < len(ns) and ns[j].start < hi:
+            vs.append(_effective_vel(ns[j]))
+            j += 1
+        per_bar.append(sorted(vs)[len(vs) // 2] if vs else None)
+    per_bar = _smooth(per_bar)
+
+    marks, wedges = [], []
+    last_band, last_i = None, -min_gap
+    run_start, prev_i = None, None
+    for i, v in enumerate(per_bar):
+        if v is None:
+            continue
+        # a hairpin is a monotonic run of bar medians, wide enough to matter;
+        # when the direction turns, the run restarts at the turn
+        if run_start is None or prev_i is None:
+            run_start = i
+        elif (v - per_bar[prev_i]) * (per_bar[prev_i] - per_bar[run_start]) < 0:
+            run_start = prev_i
+        prev_i = i
+        band = _band(v)
+        # a band has to hold to be worth printing: one bar dipping over an
+        # edge is not a dynamic, it is a note
+        nxt = next((per_bar[j] for j in range(i + 1, len(per_bar))
+                    if per_bar[j] is not None), None)
+        if band != last_band and nxt is not None and _band(nxt) != band:
+            continue
+        if band != last_band and i - last_i >= min_gap:
+            if (run_start is not None and i - run_start >= ramp_bars
+                    and abs(v - per_bar[run_start]) >= ramp_span):
+                w0 = max(run_start, i - max_wedge_bars)
+                wedges.append((bars[w0], bars[i],
+                               'cresc' if v > per_bar[run_start] else 'dim'))
+            marks.append((bars[i], band))
+            last_band, last_i, run_start = band, i, i
+    return marks, wedges
+
+
+def _beam_groups(notes):
+    """Runs of notes joined by a primary (level-1) beam."""
+    group = []
+    for el in notes:
+        bl = getattr(el, 'beams', None)
+        b = None
+        if bl is not None and bl.beamsList:
+            b = next((x for x in bl.beamsList if x.number == 1), None)
+        kind = b.type if b is not None else None
+        if kind == 'start':
+            group = [el]
+        elif kind in ('continue', 'stop') and group:
+            group.append(el)
+            if kind == 'stop':
+                yield group
+                group = []
+        else:
+            group = []
+
+
+def _join_secondary_beams(st):
+    """Four sixteenths in one beat are one double beam, not two pairs.
+
+    music21 breaks the *secondary* beams of a group at the eighth-note
+    subdivision — the primary beam runs the whole beat, the 16th beam stops
+    and restarts halfway — which engraves as two pairs of two and is what a
+    reader sees first. Modern practice beams the beat solid, so within each
+    primary group every deeper beam is made continuous wherever both
+    neighbours carry that level. Where they do not (a genuine eighth in the
+    middle of sixteenths), the break stays: it is real there.
+
+    Only groups no longer than one beat are touched. A beam that spans two
+    beats *should* break its secondary at the beat, and music21 gets that
+    case right.
+    """
+    from music21 import meter as m21meter
+    fixed = 0
+    for m in st.getElementsByClass(stream.Measure):
+        ts = m.timeSignature or next(
+            iter(st.getElementsByClass(m21meter.TimeSignature)), None)
+        beat = float(ts.beatDuration.quarterLength) if ts is not None else 1.0
+        for holder in (list(m.voices) or [m]):
+            for group in _beam_groups(holder.notes):
+                span = sum(float(el.duration.quarterLength) for el in group)
+                if span > beat + 1e-6:
+                    continue
+                levels = [max((b.number for b in el.beams.beamsList), default=0)
+                          for el in group]
+                for k in range(2, max(levels, default=0) + 1):
+                    has = [lv >= k for lv in levels]
+                    for i, el in enumerate(group):
+                        if not has[i]:
+                            continue
+                        prev = i > 0 and has[i - 1]
+                        nxt = i < len(group) - 1 and has[i + 1]
+                        if prev and nxt:
+                            want, direction = 'continue', None
+                        elif nxt:
+                            want, direction = 'start', None
+                        elif prev:
+                            want, direction = 'stop', None
+                        else:
+                            want = 'partial'
+                            direction = 'right' if i == 0 else 'left'
+                        b = next(x for x in el.beams.beamsList if x.number == k)
+                        if b.type != want or b.direction != direction:
+                            b.type, b.direction = want, direction
+                            fixed += 1
+    return fixed
+
+
 def _fill_staff(st, items, spell_at, window_len: float):
     """Insert written notes/chords into a music21 stream, pad with rests,
     and let makeNotation build measures/ties/beams."""
+    placed = []
     for o, pitches, wd in items:
         names = [spell_at(p, o) for p in pitches]
         el = note.Note(names[0]) if len(names) == 1 else m21chord.Chord(names)
         el.quarterLength = wd
         st.insert(float(o), el)
+        placed.append((float(o), el))
     st.makeRests(refStreamOrTimeRange=[0.0, window_len], fillGaps=True,
                  inPlace=True)
     st.makeNotation(inPlace=True)
@@ -170,11 +361,13 @@ def _fill_staff(st, items, spell_at, window_len: float):
     for m in st.getElementsByClass(stream.Measure):
         for i, v in enumerate(m.voices):
             v.id = i + 1
+    _join_secondary_beams(st)
+    return placed
 
 
 def to_score(piece, insts=None, keys=None, beat0=0.0, beat1=None, title=None,
              composer='Claude', min_nom: float = 0.2, chord_tol: float = 0.12,
-             grand_staff=None) -> stream.Score:
+             grand_staff=None, dyn: bool = True) -> stream.Score:
     """Build a clean music21 Score for `insts` over [beat0, beat1) beats.
 
     Everything defaults off the Piece itself, so a piece that declares its
@@ -188,6 +381,9 @@ def to_score(piece, insts=None, keys=None, beat0=0.0, beat1=None, title=None,
         none — a wrong key signature on the page is the symptom).
     grand_staff: instrument keys engraved on two staves split at middle C;
         default is every roster instrument marked `grand=True`.
+    dyn: print dynamics and hairpins, read back out of the velocities. On a
+        grand staff they go on the lower staff, which is where Verovio puts
+        them between the two — the piano convention.
     """
     if insts is None:
         insts = [i.key for i in piece.ensemble if not i.percussion]
@@ -238,8 +434,12 @@ def to_score(piece, insts=None, keys=None, beat0=0.0, beat1=None, title=None,
         else:
             staves = [(stream.Part(id=ikey), mine, None)]
 
+        marks, wedges = _dynamic_plan(
+            [n.replace(start=n.start - beat0) for n in mine],
+            _bar_offsets(tl, beat0, beat1)) if dyn else ([], [])
+
         built = []
-        for st, notes_, fixed_clef in staves:
+        for si, (st, notes_, fixed_clef) in enumerate(staves):
             st.partName = spec.name
             inst = instrument.Instrument()
             inst.partName = spec.name
@@ -260,6 +460,13 @@ def to_score(piece, insts=None, keys=None, beat0=0.0, beat1=None, title=None,
                     if beat0 <= b < beat1:
                         st.insert(b - beat0, expressions.TextExpression(label))
                 first = False
+            # one instrument, one set of dynamics: the lower staff of a grand
+            # staff carries them, everything else carries its own
+            if dyn and si == len(staves) - 1:
+                for off, name in marks:
+                    d = dynamics.Dynamic(name)
+                    d.placement = 'below'
+                    st.insert(float(off), d)
             shifted = [n.replace(start=n.start - beat0) for n in notes_]
             items = _written(_items(shifted, min_nom, chord_tol),
                              Fraction(window).limit_denominator(96))
@@ -270,7 +477,9 @@ def to_score(piece, insts=None, keys=None, beat0=0.0, beat1=None, title=None,
                 hi = max(max(p for p in pitches) for _, pitches, _ in items)
                 st.insert(0, clef.BassClef() if (lo + hi) / 2 < 60
                           else clef.TrebleClef())
-            _fill_staff(st, items, spell_at, window)
+            placed = _fill_staff(st, items, spell_at, window)
+            if dyn and si == len(staves) - 1:
+                _hang_wedges(st, placed, wedges)
             built.append(st)
 
         for st in built:
@@ -279,6 +488,29 @@ def to_score(piece, insts=None, keys=None, beat0=0.0, beat1=None, title=None,
             sc.insert(0, layout.StaffGroup(built, symbol='brace',
                                            barTogether=True))
     return sc
+
+
+def _hang_wedges(st, placed, wedges):
+    """Attach hairpin spanners to the real notes at each end of a ramp.
+
+    A wedge with no note under one of its ends is dropped rather than
+    guessed at: a hairpin that starts in a rest is worse than no hairpin.
+    """
+    if not placed:
+        return
+    # sort by offset only: two elements can share one, and music21 objects
+    # are not orderable against each other
+    placed = sorted(placed, key=lambda x: x[0])
+    offs = [o for o, _ in placed]
+    for o0, o1, kind in wedges:
+        a = next((el for o, el in placed if o >= o0 - 1e-9), None)
+        b = next((el for o, el in reversed(placed) if o <= o1 + 1e-9), None)
+        if a is None or b is None or a is b or offs[0] > o1 or offs[-1] < o0:
+            continue
+        sp = dynamics.Crescendo() if kind == 'cresc' else dynamics.Diminuendo()
+        sp.addSpannedElements([a, b])
+        sp.placement = 'below'
+        st.insert(0, sp)
 
 
 def _meter_at(timeline, beat):
@@ -294,7 +526,51 @@ def to_musicxml(piece, insts=None, path=None, **kw) -> str:
     """Write [beat0, beat1) as MusicXML. kw passed to to_score()."""
     sc = to_score(piece, insts, **kw)
     sc.write('musicxml', fp=path)
+    beat0 = float(kw.get('beat0') or 0.0)
+    beat1 = float(kw.get('beat1') or piece.end())
+    tl = piece.timeline
+    _restore_exact_tempi([tl.bpm_at(beat0)] + [bpm for b, bpm, _ in tl.tempi()
+                                              if beat0 < b < beat1], path)
     return path
+
+
+def _restore_exact_tempi(bpms, path) -> int:
+    """Put the un-rounded tempi back into the written MusicXML.
+
+    music21 exports `<per-minute>` and `<sound tempo="...">` as whole numbers.
+    For the usual integer tempo that is invisible; for a piece whose tempo is
+    set by something in the world — 134.5996 bpm, one 3/4 bar per rotation of
+    a pulsar — the rounding is a *drift*, and it grows without bound: about a
+    second lost over five minutes, which is a second of the score highlighting
+    the wrong bar. So rewrite both, in document order, from the marks the
+    score actually carries. `<sound>` drives playback and the timemap and gets
+    full precision; `<per-minute>` is what a reader sees and gets one decimal.
+    """
+    if path is None:
+        return 0
+    marks = [float(b) for b in bpms]
+    if not marks or all(b.is_integer() for b in marks):
+        return 0
+    p = pathlib.Path(path)
+    text = p.read_text()
+
+    def rewrite(txt, pattern, fmt):
+        seen = [0]
+
+        def one(m):
+            v = marks[min(seen[0], len(marks) - 1)]
+            seen[0] += 1
+            whole = m.group(0)
+            a = m.start(1) - m.start(0)
+            b = m.end(1) - m.start(0)
+            return whole[:a] + fmt(v) + whole[b:]
+        return re.sub(pattern, one, txt)
+
+    text = rewrite(text, r'<per-minute>([0-9.]+)</per-minute>',
+                   lambda v: f'{v:g}' if float(v).is_integer() else f'{v:.1f}')
+    text = rewrite(text, r'<sound tempo="([0-9.]+)"', lambda v: f'{v:.4f}')
+    p.write_text(text)
+    return len(marks)
 
 
 # ------------------------------------------------------------ packaging

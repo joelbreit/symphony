@@ -8,7 +8,7 @@
   <identification>
     <creator type="composer">Claude</creator>
     <encoding>
-      <encoding-date>2026-07-29</encoding-date>
+      <encoding-date>2026-09-06</encoding-date>
       <software>music21 v.10.3.0</software>
       <supports element="beam" type="yes" />
       <supports element="stem" type="yes" />
@@ -222,6 +222,14 @@
     </measure>
     <!--========================= Measure 12 =========================-->
     <measure implicit="no" number="12">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <p />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="44" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -234,6 +242,11 @@
         <duration>20160</duration>
         <type>half</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="1" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -326,6 +339,11 @@
         <duration>40320</duration>
         <type>whole</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="1" spread="15" type="stop" />
+        </direction-type>
+      </direction>
     </measure>
     <!--========================= Measure 17 =========================-->
     <measure implicit="no" number="17">
@@ -350,6 +368,14 @@
     </measure>
     <!--========================= Measure 20 =========================-->
     <measure implicit="no" number="20">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="57" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -357,6 +383,11 @@
     </measure>
     <!--========================= Measure 21 =========================-->
     <measure implicit="no" number="21">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="2" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>B</step>
@@ -404,6 +435,11 @@
         <duration>20160</duration>
         <type>half</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="2" spread="15" type="stop" />
+        </direction-type>
+      </direction>
     </measure>
     <!--========================= Measure 23 =========================-->
     <measure implicit="no" number="23">
@@ -442,6 +478,14 @@
     </measure>
     <!--========================= Measure 28 =========================-->
     <measure implicit="no" number="28">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mf />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="69" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -698,6 +742,14 @@
     </measure>
     <!--========================= Measure 37 =========================-->
     <measure implicit="no" number="37">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <f />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="88" />
+      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -1050,6 +1102,14 @@
     </measure>
     <!--========================= Measure 16 =========================-->
     <measure implicit="no" number="16">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="57" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -1103,6 +1163,11 @@
         <duration>20160</duration>
         <type>half</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="3" spread="15" type="stop" />
+        </direction-type>
+      </direction>
     </measure>
     <!--========================= Measure 19 =========================-->
     <measure implicit="no" number="19">
@@ -1169,6 +1234,14 @@
     </measure>
     <!--========================= Measure 28 =========================-->
     <measure implicit="no" number="28">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mf />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="69" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -1176,6 +1249,16 @@
     </measure>
     <!--========================= Measure 29 =========================-->
     <measure implicit="no" number="29">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="3" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="4" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -1392,6 +1475,14 @@
     </measure>
     <!--========================= Measure 37 =========================-->
     <measure implicit="no" number="37">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <f />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="88" />
+      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -1400,6 +1491,11 @@
         <duration>10080</duration>
         <type>quarter</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="4" spread="15" type="stop" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -1441,6 +1537,11 @@
     </measure>
     <!--========================= Measure 39 =========================-->
     <measure implicit="no" number="39">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="5" spread="15" type="diminuendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -1496,6 +1597,11 @@
         <duration>20160</duration>
         <type>half</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="5" spread="0" type="stop" />
+        </direction-type>
+      </direction>
     </measure>
     <!--========================= Measure 41 =========================-->
     <measure implicit="no" number="41">
@@ -1541,6 +1647,14 @@
     </measure>
     <!--========================= Measure 47 =========================-->
     <measure implicit="no" number="47">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <pp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="31" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -1680,6 +1794,14 @@
     </measure>
     <!--========================= Measure 8 ==========================-->
     <measure implicit="no" number="8">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <pp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="31" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -1708,6 +1830,11 @@
     </measure>
     <!--========================= Measure 10 =========================-->
     <measure implicit="no" number="10">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="6" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>G</step>
@@ -1872,6 +1999,11 @@
         <duration>40320</duration>
         <type>whole</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="6" spread="15" type="stop" />
+        </direction-type>
+      </direction>
     </measure>
     <!--========================= Measure 17 =========================-->
     <measure implicit="no" number="17">
@@ -1882,6 +2014,14 @@
     </measure>
     <!--========================= Measure 18 =========================-->
     <measure implicit="no" number="18">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="57" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -1918,6 +2058,11 @@
     </measure>
     <!--========================= Measure 20 =========================-->
     <measure implicit="no" number="20">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="1" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -1935,6 +2080,11 @@
         <duration>20160</duration>
         <type>half</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="1" spread="15" type="stop" />
+        </direction-type>
+      </direction>
     </measure>
     <!--========================= Measure 21 =========================-->
     <measure implicit="no" number="21">
@@ -1987,6 +2137,14 @@
     </measure>
     <!--========================= Measure 28 =========================-->
     <measure implicit="no" number="28">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mf />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="69" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -2202,6 +2360,11 @@
         <type>half</type>
         <dot />
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="2" spread="0" type="stop" />
+        </direction-type>
+      </direction>
       <note>
         <rest />
         <duration>10080</duration>
@@ -2294,6 +2457,14 @@
     </measure>
     <!--========================= Measure 49 =========================-->
     <measure implicit="no" number="49">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <ppp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="19" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -2301,6 +2472,11 @@
     </measure>
     <!--========================= Measure 50 =========================-->
     <measure implicit="no" number="50">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="2" spread="15" type="diminuendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -2498,6 +2674,14 @@
     </measure>
     <!--========================= Measure 15 =========================-->
     <measure implicit="no" number="15">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <pp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="31" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -2568,6 +2752,11 @@
     </measure>
     <!--========================= Measure 23 =========================-->
     <measure implicit="no" number="23">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="3" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>F</step>
@@ -2588,6 +2777,11 @@
         <duration>40320</duration>
         <type>whole</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="3" spread="15" type="stop" />
+        </direction-type>
+      </direction>
     </measure>
     <!--========================= Measure 25 =========================-->
     <measure implicit="no" number="25">
@@ -2612,6 +2806,14 @@
     </measure>
     <!--========================= Measure 28 =========================-->
     <measure implicit="no" number="28">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="57" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -2619,6 +2821,11 @@
     </measure>
     <!--========================= Measure 29 =========================-->
     <measure implicit="no" number="29">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="4" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>A</step>
@@ -2721,6 +2928,14 @@
     </measure>
     <!--========================= Measure 37 =========================-->
     <measure implicit="no" number="37">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mf />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="69" />
+      </direction>
       <note>
         <pitch>
           <step>F</step>
@@ -2729,6 +2944,11 @@
         <duration>40320</duration>
         <type>whole</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="4" spread="15" type="stop" />
+        </direction-type>
+      </direction>
     </measure>
     <!--========================= Measure 38 =========================-->
     <measure implicit="no" number="38">
@@ -3061,6 +3281,14 @@
     </measure>
     <!--========================= Measure 26 =========================-->
     <measure implicit="no" number="26">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <pp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="31" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -3068,6 +3296,11 @@
     </measure>
     <!--========================= Measure 27 =========================-->
     <measure implicit="no" number="27">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="5" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>G</step>
@@ -3149,6 +3382,14 @@
     </measure>
     <!--========================= Measure 30 =========================-->
     <measure implicit="no" number="30">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mf />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="69" />
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -3158,6 +3399,11 @@
         <duration>20160</duration>
         <type>half</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="5" spread="15" type="stop" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>D</step>
@@ -3220,6 +3466,11 @@
     </measure>
     <!--========================= Measure 33 =========================-->
     <measure implicit="no" number="33">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="6" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>A</step>
@@ -3383,9 +3634,22 @@
         <duration>40320</duration>
         <type>whole</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="6" spread="15" type="stop" />
+        </direction-type>
+      </direction>
     </measure>
     <!--========================= Measure 41 =========================-->
     <measure implicit="no" number="41">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <f />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="88" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -3393,6 +3657,11 @@
     </measure>
     <!--========================= Measure 42 =========================-->
     <measure implicit="no" number="42">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="1" spread="15" type="diminuendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>G</step>
@@ -3444,6 +3713,11 @@
         <type>whole</type>
         <accidental>natural</accidental>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="1" spread="0" type="stop" />
+        </direction-type>
+      </direction>
     </measure>
     <!--========================= Measure 45 =========================-->
     <measure implicit="no" number="45">
@@ -3475,6 +3749,14 @@
     </measure>
     <!--========================= Measure 49 =========================-->
     <measure implicit="no" number="49">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <ppp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="19" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -3863,6 +4145,14 @@
     </measure>
     <!--========================= Measure 41 =========================-->
     <measure implicit="no" number="41">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <f />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="88" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -4294,6 +4584,14 @@
     </measure>
     <!--========================= Measure 41 =========================-->
     <measure implicit="no" number="41">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <f />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="88" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -4711,6 +5009,14 @@
     </measure>
     <!--========================= Measure 39 =========================-->
     <measure implicit="no" number="39">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="57" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -4718,6 +5024,11 @@
     </measure>
     <!--========================= Measure 40 =========================-->
     <measure implicit="no" number="40">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="2" spread="15" type="diminuendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>D</step>
@@ -4899,6 +5210,14 @@
     </measure>
     <!--========================= Measure 43 =========================-->
     <measure implicit="no" number="43">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <p />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="44" />
+      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -4909,6 +5228,11 @@
         <stem>up</stem>
         <beam number="1">begin</beam>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="2" spread="0" type="stop" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -5371,6 +5695,15 @@
       <backup>
         <duration>40320</duration>
       </backup>
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <pp />
+          </dynamics>
+        </direction-type>
+        <staff>2</staff>
+        <sound dynamics="31" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -6730,6 +7063,12 @@
       <backup>
         <duration>40320</duration>
       </backup>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="3" spread="0" type="crescendo" />
+        </direction-type>
+        <staff>2</staff>
+      </direction>
       <note>
         <pitch>
           <step>B</step>
@@ -7082,6 +7421,12 @@
         <staff>2</staff>
         <beam number="1">end</beam>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="3" spread="15" type="stop" />
+        </direction-type>
+        <staff>2</staff>
+      </direction>
     </measure>
     <!--========================= Measure 23 =========================-->
     <measure implicit="no" number="23">
@@ -7184,6 +7529,15 @@
       <backup>
         <duration>40320</duration>
       </backup>
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mp />
+          </dynamics>
+        </direction-type>
+        <staff>2</staff>
+        <sound dynamics="57" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -8743,6 +9097,12 @@
         <staff>2</staff>
         <beam number="1">end</beam>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="4" spread="0" type="stop" />
+        </direction-type>
+        <staff>2</staff>
+      </direction>
     </measure>
     <!--========================= Measure 41 =========================-->
     <measure implicit="no" number="41">
@@ -8935,6 +9295,15 @@
       <backup>
         <duration>40320</duration>
       </backup>
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <pp />
+          </dynamics>
+        </direction-type>
+        <staff>2</staff>
+        <sound dynamics="31" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -9030,6 +9399,12 @@
       <backup>
         <duration>40320</duration>
       </backup>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="4" spread="15" type="diminuendo" />
+        </direction-type>
+        <staff>2</staff>
+      </direction>
       <note>
         <pitch>
           <step>A</step>
@@ -9443,6 +9818,14 @@
     </measure>
     <!--========================= Measure 42 =========================-->
     <measure implicit="no" number="42">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <pp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="31" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -9568,6 +9951,14 @@
     </measure>
     <!--========================= Measure 47 =========================-->
     <measure implicit="no" number="47">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <ppp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="19" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -9689,6 +10080,19 @@
           <line>2</line>
         </clef>
       </attributes>
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="57" />
+      </direction>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="5" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -9905,6 +10309,14 @@
     </measure>
     <!--========================= Measure 9 ==========================-->
     <measure implicit="no" number="9">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mf />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="69" />
+      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -9913,6 +10325,11 @@
         <duration>10080</duration>
         <type>quarter</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="5" spread="15" type="stop" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -10047,6 +10464,11 @@
     </measure>
     <!--========================= Measure 14 =========================-->
     <measure implicit="no" number="14">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="6" spread="15" type="diminuendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>A</step>
@@ -10124,6 +10546,11 @@
         <duration>40320</duration>
         <type>whole</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="6" spread="0" type="stop" />
+        </direction-type>
+      </direction>
     </measure>
     <!--========================= Measure 17 =========================-->
     <measure implicit="no" number="17">
@@ -10162,6 +10589,14 @@
     </measure>
     <!--========================= Measure 22 =========================-->
     <measure implicit="no" number="22">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="57" />
+      </direction>
       <note>
         <rest measure="yes" />
         <duration>40320</duration>
@@ -10169,6 +10604,11 @@
     </measure>
     <!--========================= Measure 23 =========================-->
     <measure implicit="no" number="23">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="1" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>A</step>
@@ -10247,6 +10687,19 @@
     </measure>
     <!--========================= Measure 26 =========================-->
     <measure implicit="no" number="26">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mf />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="69" />
+      </direction>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="2" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -10256,6 +10709,11 @@
         <duration>20160</duration>
         <type>half</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="1" spread="15" type="stop" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>D</step>
@@ -10351,6 +10809,14 @@
     </measure>
     <!--========================= Measure 30 =========================-->
     <measure implicit="no" number="30">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <f />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="88" />
+      </direction>
       <note>
         <pitch>
           <step>B</step>
@@ -10361,6 +10827,11 @@
         <type>half</type>
         <dot />
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="2" spread="15" type="stop" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -10554,6 +11025,11 @@
     </measure>
     <!--========================= Measure 37 =========================-->
     <measure implicit="no" number="37">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="3" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -10648,6 +11124,14 @@
     </measure>
     <!--========================= Measure 40 =========================-->
     <measure implicit="no" number="40">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <ff />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="107" />
+      </direction>
       <note>
         <pitch>
           <step>F</step>
@@ -10656,6 +11140,11 @@
         <duration>20160</duration>
         <type>half</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="3" spread="15" type="stop" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -10733,6 +11222,19 @@
     </measure>
     <!--========================= Measure 44 =========================-->
     <measure implicit="no" number="44">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <p />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="44" />
+      </direction>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="4" spread="15" type="diminuendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>B</step>
@@ -10845,6 +11347,14 @@
     </measure>
     <!--========================= Measure 49 =========================-->
     <measure implicit="no" number="49">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <pp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="31" />
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -10854,6 +11364,11 @@
         <duration>20160</duration>
         <type>half</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="4" spread="0" type="stop" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>D</step>
@@ -10937,6 +11452,14 @@
           <line>2</line>
         </clef>
       </attributes>
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <p />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="44" />
+      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -11219,6 +11742,11 @@
     </measure>
     <!--========================= Measure 23 =========================-->
     <measure implicit="no" number="23">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="5" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>F</step>
@@ -11250,6 +11778,19 @@
     </measure>
     <!--========================= Measure 25 =========================-->
     <measure implicit="no" number="25">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="57" />
+      </direction>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="6" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>G</step>
@@ -11260,6 +11801,11 @@
         <type>whole</type>
         <accidental>flat</accidental>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="5" spread="15" type="stop" />
+        </direction-type>
+      </direction>
     </measure>
     <!--========================= Measure 26 =========================-->
     <measure implicit="no" number="26">
@@ -11317,6 +11863,14 @@
     </measure>
     <!--========================= Measure 29 =========================-->
     <measure implicit="no" number="29">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <f />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="88" />
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -11326,6 +11880,11 @@
         <duration>10080</duration>
         <type>quarter</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="6" spread="15" type="stop" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>A</step>
@@ -11426,6 +11985,11 @@
     </measure>
     <!--========================= Measure 33 =========================-->
     <measure implicit="no" number="33">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="1" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -11640,6 +12204,19 @@
     </measure>
     <!--========================= Measure 41 =========================-->
     <measure implicit="no" number="41">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <ff />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="107" />
+      </direction>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="2" spread="15" type="diminuendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>D</step>
@@ -11658,6 +12235,11 @@
         <duration>10080</duration>
         <type>quarter</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="1" spread="15" type="stop" />
+        </direction-type>
+      </direction>
       <note>
         <rest />
         <duration>30240</duration>
@@ -11697,6 +12279,14 @@
     </measure>
     <!--========================= Measure 45 =========================-->
     <measure implicit="no" number="45">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <pp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="31" />
+      </direction>
       <note>
         <pitch>
           <step>A</step>
@@ -11706,6 +12296,11 @@
         <duration>40320</duration>
         <type>whole</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="2" spread="0" type="stop" />
+        </direction-type>
+      </direction>
     </measure>
     <!--========================= Measure 46 =========================-->
     <measure implicit="no" number="46">
@@ -11907,6 +12502,14 @@
           <line>3</line>
         </clef>
       </attributes>
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <p />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="44" />
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -12207,6 +12810,11 @@
     </measure>
     <!--========================= Measure 23 =========================-->
     <measure implicit="no" number="23">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="3" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -12230,6 +12838,19 @@
     </measure>
     <!--========================= Measure 25 =========================-->
     <measure implicit="no" number="25">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="57" />
+      </direction>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="4" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>D</step>
@@ -12239,6 +12860,11 @@
         <duration>40320</duration>
         <type>whole</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="3" spread="15" type="stop" />
+        </direction-type>
+      </direction>
     </measure>
     <!--========================= Measure 26 =========================-->
     <measure implicit="no" number="26">
@@ -12303,6 +12929,14 @@
     </measure>
     <!--========================= Measure 29 =========================-->
     <measure implicit="no" number="29">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mf />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="69" />
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -12312,6 +12946,11 @@
         <duration>40320</duration>
         <type>whole</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="4" spread="15" type="stop" />
+        </direction-type>
+      </direction>
     </measure>
     <!--========================= Measure 30 =========================-->
     <measure implicit="no" number="30">
@@ -12372,6 +13011,11 @@
     </measure>
     <!--========================= Measure 34 =========================-->
     <measure implicit="no" number="34">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="5" spread="15" type="diminuendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -12516,6 +13160,14 @@
     </measure>
     <!--========================= Measure 42 =========================-->
     <measure implicit="no" number="42">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="57" />
+      </direction>
       <note>
         <pitch>
           <step>G</step>
@@ -12535,6 +13187,11 @@
         <duration>5040</duration>
         <type>eighth</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="5" spread="0" type="stop" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>G</step>
@@ -13223,6 +13880,14 @@
     </measure>
     <!--========================= Measure 46 =========================-->
     <measure implicit="no" number="46">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <pp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="31" />
+      </direction>
       <note>
         <pitch>
           <step>D</step>
@@ -13418,6 +14083,19 @@
           <line>4</line>
         </clef>
       </attributes>
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <p />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="44" />
+      </direction>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="6" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>A</step>
@@ -13583,6 +14261,19 @@
     </measure>
     <!--========================= Measure 9 ==========================-->
     <measure implicit="no" number="9">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="57" />
+      </direction>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="1" spread="15" type="diminuendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -13591,6 +14282,11 @@
         <duration>10080</duration>
         <type>quarter</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="6" spread="15" type="stop" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -13810,6 +14506,19 @@
     </measure>
     <!--========================= Measure 17 =========================-->
     <measure implicit="no" number="17">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <pp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="31" />
+      </direction>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="2" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>D</step>
@@ -13819,6 +14528,11 @@
         <duration>10080</duration>
         <type>quarter</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="1" spread="0" type="stop" />
+        </direction-type>
+      </direction>
       <note>
         <rest />
         <duration>10080</duration>
@@ -13994,6 +14708,19 @@
     </measure>
     <!--========================= Measure 23 =========================-->
     <measure implicit="no" number="23">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <p />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="44" />
+      </direction>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="3" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>F</step>
@@ -14002,6 +14729,11 @@
         <duration>20160</duration>
         <type>half</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="2" spread="15" type="stop" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -14076,6 +14808,19 @@
     </measure>
     <!--========================= Measure 27 =========================-->
     <measure implicit="no" number="27">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="57" />
+      </direction>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="4" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -14085,6 +14830,11 @@
         <duration>20160</duration>
         <type>half</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="3" spread="15" type="stop" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>D</step>
@@ -14160,6 +14910,19 @@
     </measure>
     <!--========================= Measure 31 =========================-->
     <measure implicit="no" number="31">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mf />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="69" />
+      </direction>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="5" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>F</step>
@@ -14168,6 +14931,11 @@
         <duration>20160</duration>
         <type>half</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="4" spread="15" type="stop" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>A</step>
@@ -14283,6 +15051,19 @@
     </measure>
     <!--========================= Measure 37 =========================-->
     <measure implicit="no" number="37">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <f />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="88" />
+      </direction>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="6" spread="15" type="diminuendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -14291,6 +15072,11 @@
         <duration>10080</duration>
         <type>quarter</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="5" spread="15" type="stop" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -14414,6 +15200,14 @@
     </measure>
     <!--========================= Measure 42 =========================-->
     <measure implicit="no" number="42">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="57" />
+      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -14424,6 +15218,11 @@
         <stem>up</stem>
         <beam number="1">begin</beam>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="6" spread="0" type="stop" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -14809,6 +15608,14 @@
     </measure>
     <!--========================= Measure 46 =========================-->
     <measure implicit="no" number="46">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <pp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="31" />
+      </direction>
       <note>
         <pitch>
           <step>A</step>
@@ -14982,6 +15789,14 @@
           <line>4</line>
         </clef>
       </attributes>
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <pp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="31" />
+      </direction>
       <note>
         <pitch>
           <step>A</step>
@@ -15187,6 +16002,11 @@
     </measure>
     <!--========================= Measure 17 =========================-->
     <measure implicit="no" number="17">
+      <direction placement="below">
+        <direction-type>
+          <wedge number="1" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>D</step>
@@ -15281,6 +16101,19 @@
     </measure>
     <!--========================= Measure 25 =========================-->
     <measure implicit="no" number="25">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <p />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="44" />
+      </direction>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="2" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>G</step>
@@ -15291,6 +16124,11 @@
         <type>whole</type>
         <accidental>flat</accidental>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="1" spread="15" type="stop" />
+        </direction-type>
+      </direction>
     </measure>
     <!--========================= Measure 26 =========================-->
     <measure implicit="no" number="26">
@@ -15329,6 +16167,19 @@
     </measure>
     <!--========================= Measure 29 =========================-->
     <measure implicit="no" number="29">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="57" />
+      </direction>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="3" spread="0" type="crescendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>A</step>
@@ -15338,6 +16189,11 @@
         <duration>40320</duration>
         <type>whole</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="2" spread="15" type="stop" />
+        </direction-type>
+      </direction>
     </measure>
     <!--========================= Measure 30 =========================-->
     <measure implicit="no" number="30">
@@ -15431,6 +16287,19 @@
     </measure>
     <!--========================= Measure 37 =========================-->
     <measure implicit="no" number="37">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mf />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="69" />
+      </direction>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="4" spread="15" type="diminuendo" />
+        </direction-type>
+      </direction>
       <note>
         <pitch>
           <step>F</step>
@@ -15439,6 +16308,11 @@
         <duration>40320</duration>
         <type>whole</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="3" spread="15" type="stop" />
+        </direction-type>
+      </direction>
     </measure>
     <!--========================= Measure 38 =========================-->
     <measure implicit="no" number="38">
@@ -15495,6 +16369,14 @@
     </measure>
     <!--========================= Measure 42 =========================-->
     <measure implicit="no" number="42">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <mp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="57" />
+      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -15503,6 +16385,11 @@
         <duration>40320</duration>
         <type>whole</type>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge number="4" spread="0" type="stop" />
+        </direction-type>
+      </direction>
     </measure>
     <!--========================= Measure 43 =========================-->
     <measure implicit="no" number="43">
@@ -15569,6 +16456,14 @@
     </measure>
     <!--========================= Measure 46 =========================-->
     <measure implicit="no" number="46">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <pp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="31" />
+      </direction>
       <note>
         <pitch>
           <step>F</step>
@@ -15649,6 +16544,14 @@
     </measure>
     <!--========================= Measure 50 =========================-->
     <measure implicit="no" number="50">
+      <direction placement="below">
+        <direction-type>
+          <dynamics default-x="-36" default-y="-80">
+            <ppp />
+          </dynamics>
+        </direction-type>
+        <sound dynamics="19" />
+      </direction>
       <note>
         <pitch>
           <step>A</step>

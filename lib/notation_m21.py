@@ -24,6 +24,7 @@ from fractions import Fraction
 
 from music21 import chord as m21chord
 from music21 import clef as m21clef
+from music21 import dynamics as m21dynamics
 from music21 import expressions, instrument
 from music21 import key as m21key
 from music21 import layout, meter, note
@@ -55,6 +56,10 @@ def recorder(base, roster, as_events, transpose_events):
     streams. Each lineage passes its own base class and DSL helpers.
 
     rec[name]  : (onset Fraction, pitch tokens, nominal dur Fraction)
+    vels[name] : (onset, velocity, top pitch) — the *platonic* velocity, the
+        ramp without the humanizer's jitter, which is what a dynamic mark
+        means. Computed here rather than read back, so the frozen code's RNG
+        stream is not touched and its MIDI does not move.
     arco[name] : (onset, 'pizz.'|'arco') from program switches
     """
 
@@ -62,6 +67,7 @@ def recorder(base, roster, as_events, transpose_events):
         def __init__(self):
             super().__init__()
             self.rec = {name: [] for name in roster}
+            self.vels = {name: [] for name in roster}
             self.arco = {name: [] for name in roster}
 
         def add(self, name, offset, notes, vel='mf', gate: float = 0.95,
@@ -70,11 +76,23 @@ def recorder(base, roster, as_events, transpose_events):
             if transpose:
                 events = transpose_events(events, transpose)
             t = Fraction(offset).limit_denominator(96)
+            v0 = _vel_of(vel)
+            v1 = _vel_of(vel_end) if vel_end is not None else v0
+            n_sounding = sum(1 for p, _ in events if p is not None)
+            idx = 0
             for p, d in events:
                 d = Fraction(d).limit_denominator(96)
                 if p is not None and name in self.rec:
-                    self.rec[name].append(
-                        (t, p if isinstance(p, list) else [p], d))
+                    toks = p if isinstance(p, list) else [p]
+                    self.rec[name].append((t, toks, d))
+                    frac = idx / (n_sounding - 1) if n_sounding > 1 else 0.0
+                    v = round(v0 + (v1 - v0) * frac) + (
+                        8 if accent_first and idx == 0 else 0)
+                    self.vels[name].append(
+                        (float(t), max(1, min(127, v)),
+                         max(P(x).midi for x in toks)))
+                if p is not None:
+                    idx += 1
                 t += d
             return super().add(name, offset, notes, vel=vel, gate=gate,
                                vel_end=vel_end, transpose=transpose,
@@ -88,6 +106,41 @@ def recorder(base, roster, as_events, transpose_events):
             super().program(name, offset, prog)
 
     return NotationOrchestra
+
+
+_DYN_NAMES = {'ppp': 28, 'pp': 36, 'p': 48, 'mp': 60,
+              'mf': 72, 'f': 86, 'ff': 100, 'fff': 112}
+
+
+def _vel_of(v) -> int:
+    return _DYN_NAMES[v] if isinstance(v, str) else int(v)
+
+
+def bars_from_meters(meters, window: float) -> list:
+    """Bar-line offsets from the conductor's meter map — meter changes and
+    all, because a dynamic belongs on a downbeat."""
+    out, segs = [], sorted((float(o), ts) for o, ts in meters)
+    if not segs:
+        return out
+    for i, (o, ts) in enumerate(segs):
+        num, den = (int(x) for x in ts.split('/'))
+        bar_len = num * 4.0 / den
+        end = segs[i + 1][0] if i + 1 < len(segs) else float(window)
+        t = o
+        while t < end - 1e-9 and len(out) < 100000:
+            out.append(t)
+            t += bar_len
+    return out
+
+
+def dynamics_for(vels, bars):
+    """(marks, wedges) for one instrument — the same reader `lib.notation`
+    uses on the symbolic layer, fed the recorded velocities."""
+    from types import SimpleNamespace
+
+    from .notation import _dynamic_plan
+    notes = [SimpleNamespace(start=t, vel=v, pitch=p) for t, v, p in vels]
+    return _dynamic_plan(notes, bars)
 
 
 def merged_events(rec):
@@ -156,14 +209,36 @@ def staff(part_id, part_name, clef_cls, *, keys=(), meters=(), tempi=(),
     return st
 
 
-def add_events(st, events):
-    """Insert (onset, [Pitch], duration) triples as notes and chords."""
+def add_events(st, events, placed=None):
+    """Insert (onset, [Pitch], duration) triples as notes and chords.
+
+    `placed`, if given, collects (offset, element) so hairpin spanners can be
+    attached to the notes at each end of a ramp."""
     for t, pitches, d in events:
         el = (note.Note(pitches[0]) if len(pitches) == 1
               else m21chord.Chord(pitches))
         el.duration.quarterLength = d
         st.insert(t, el)
+        if placed is not None:
+            placed.append((float(t), el))
     return st
+
+
+def apply_dynamics(st, marks, wedges, placed):
+    """Print the dynamics: marks into the staff, hairpins onto the notes.
+
+    Must run before `finish()` — makeNotation is what files everything into
+    measures, and a Dynamic inserted afterwards lands outside them."""
+    from .notation import _hang_wedges
+    for off, name in marks:
+        d = m21dynamics.Dynamic(name)
+        d.placement = 'below'
+        st.insert(float(off), d)
+    _hang_wedges(st, placed, wedges)
+    return st
+
+
+from .notation import _join_secondary_beams        # noqa: E402  (shared rule)
 
 
 def finish(st, window, *, voices=True, collapse_rest_voices=True):
@@ -195,6 +270,7 @@ def finish(st, window, *, voices=True, collapse_rest_voices=True):
             vs = keep
         for i, v in enumerate(vs):
             v.id = i + 1
+    _join_secondary_beams(out)
     return out
 
 
@@ -207,7 +283,7 @@ def grand_split(events):
 
 def orchestral_score(sc, roster, o, *, clefs, window, conductor, keys,
                      grand_staff=('hp',), skip=(), collapse_rest_voices=True,
-                     omit_empty=True, out=print):
+                     omit_empty=True, dyn=True, out=print):
     """Fill `sc` with one staff per roster entry, in roster order.
 
     Tempo marks and section texts go on the top staff only (Verovio reads
@@ -219,6 +295,7 @@ def orchestral_score(sc, roster, o, *, clefs, window, conductor, keys,
     movement to movement.
     """
     meters = conductor['meters']
+    bars = bars_from_meters(meters, window) if dyn else []
     first, staves = True, 0
     for name, spec in roster.items():
         if name in skip:
@@ -242,7 +319,12 @@ def orchestral_score(sc, roster, o, *, clefs, window, conductor, keys,
                 st = staff(f'{name}-{suffix}', label, cl, keys=keys,
                            meters=cond['meters'], tempi=cond.get('tempi', ()),
                            texts=list(cond.get('texts', ())) + list(tx))
-                built.append(finish(add_events(st, ev), window,
+                placed = []
+                add_events(st, ev, placed)
+                if dyn and suffix == 'lh':   # between the staves, as piano goes
+                    marks, wedges = dynamics_for(o.vels[name], bars)
+                    apply_dynamics(st, marks, wedges, placed)
+                built.append(finish(st, window,
                                     collapse_rest_voices=collapse_rest_voices))
             for st in built:
                 sc.insert(0, st)
@@ -253,7 +335,12 @@ def orchestral_score(sc, roster, o, *, clefs, window, conductor, keys,
             st = staff(name, label, clefs[name], keys=keys,
                        meters=meters, tempi=top.get('tempi', ()),
                        texts=list(top.get('texts', ())) + list(texts))
-            sc.insert(0, finish(add_events(st, events), window,
+            placed = []
+            add_events(st, events, placed)
+            if dyn:
+                marks, wedges = dynamics_for(o.vels[name], bars)
+                apply_dynamics(st, marks, wedges, placed)
+            sc.insert(0, finish(st, window,
                                 collapse_rest_voices=collapse_rest_voices))
             staves += 1
         first = False

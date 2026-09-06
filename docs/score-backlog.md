@@ -25,6 +25,20 @@ it, pinned part ids so re-exports diff cleanly, notation coverage in
 the non-force path always preserved it, so the earlier note that it "drops"
 the field was only true with `--force`.
 
+**Beat groups are beamed solid** (2026-09-06). music21 broke the *secondary*
+beams of a group at the eighth-note subdivision: four sixteenths in one beat
+came out with the primary beam running the whole beat and the 16th beam
+stopping and restarting halfway, which engraves — and reads — as two pairs of
+two. `lib/notation._join_secondary_beams` now makes every deeper beam
+continuous inside a primary group, wherever both neighbours actually carry
+that level; a genuine eighth in the middle of sixteenths still breaks it,
+because there the break is real. Groups longer than one beat are left alone:
+a beam spanning two beats *should* break its secondary at the beat, and
+music21 gets that one right. `finish()` in `notation_m21` calls the same
+function, so the frozen three are fixed too. Verified structurally across all
+eleven score files: 0 remaining cases of a secondary beam stopping between
+two adjacent short notes.
+
 **The three music21 exporters are consolidated** into `lib/notation_m21.py`
 (the recording Orchestra subclass, chord folding, staff frame, rest/voice
 finishing, orchestral assembly, manifest patch, sync gate). Piece-local
@@ -56,14 +70,26 @@ Still open below: items 2, 6–11, 13–18 (12 is easier now — far fewer pages
 **1. Consolidate the three music21 export scripts** — M — *done*
 (`lib/notation_m21.py`)
 
-**2. Dynamics on the page** — M
+**2. Dynamics on the page** — M — *done* (2026-09-06)
 
-The scores currently have no `p`, `f`, or hairpins at all. Velocity is the
-dynamic in this system, so the information exists: quantize each staff's
-velocity into plateaus, emit the plateau as a dynamic mark, and emit a hairpin
-where a plateau ramps. This is the single biggest visual gap between what we
-render and what a real study score looks like — right now the page looks
-uninflected while the audio is doing a lot.
+Every score in the collection now prints dynamics and hairpins, read back out
+of the velocities: `lib/notation._dynamic_plan` bands the per-bar median
+velocity, smooths it over three bars, prints a mark where a band change holds,
+and draws a hairpin where the median ramped monotonically far enough to be a
+ramp rather than a step (capped at eight bars so it does not become an
+underline). `lib/notation_m21` feeds the same reader — the recording
+`Orchestra` now captures the platonic velocity alongside the platonic rhythm
+(without touching the frozen RNG stream), and High Street Riot reads its
+velocities straight off the chart dicts it was written from. Counts, and they
+look like the pieces: The Window mvt1 198 marks / 155 hairpins, Perigee 79/34,
+Cut Loose 60/29, Still Turning 28/11, The Punch Line 19/9. All eight exports
+still gate at 0–1 ms drift.
+
+One finding worth keeping, because it will bite the next person: **velocity is
+a keystroke and a dynamic is a loudness**, and at the top of a keyboard those
+are very different numbers. A composer pushing a thin A7 sample so it speaks
+at all is not writing `mf`. `_effective_vel` takes one band off the top
+octave; below that it does nothing, because low notes carry on their own.
 
 **3. Click a note to seek** — S/M
 

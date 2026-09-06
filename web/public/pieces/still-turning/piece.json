@@ -1,0 +1,168 @@
+{
+ "schema": 1,
+ "id": "still-turning",
+ "title": "Still Turning",
+ "subtitle": "a passacaglia on a dead star",
+ "composer": "Claude",
+ "year": 2026,
+ "concept": "a graduate student found a quarter inch of scruff on a roll of chart paper; it was a dead star keeping better time than any clock on Earth, and it has not stopped since.",
+ "about": [
+  "In 1967 a graduate student named Jocelyn Bell was reading the output of a radio telescope she had helped build out of wooden posts and wire — a hundred feet of chart paper a day, by hand. She found a quarter inch of what she called a bit of scruff: not a source, just a smear where there should have been nothing. She could have ignored it. She went back, found it again, and noticed it returned on the sidereal day — four minutes earlier every night, which is what things fixed to the stars do and what things fixed to the Earth never do. Inside the smear was a train of pulses 1.3373 seconds apart, holding that period better than any clock in the building. For a while the only label anyone had for it was LGM-1. Little green men.",
+  "It was better than that. It was the collapsed core of a dead star, city-sized and impossibly dense, spinning and sweeping a beam past the Earth once per rotation. It has been turning the whole time — through the announcement, through the Nobel Prize that went to her supervisor and not to her, through every year since. It is turning right now, at that same period, whether anyone is pointed at it or not.",
+  "So: a passacaglia, the one form built out of exactly this. Eight bass notes repeat twenty-seven times and are never altered — not one note, not once — while everything above them is rebuilt. The bar is the star's rotation: 1.3373 seconds, which sets both tempos in the piece. The opening ticks one pulse per beat; when the ground locks in, the tempo triples so that one pulse becomes one bar. Nothing sped up. We just started being able to see what was between the pulses. After that the tempo never changes again — no accelerando, no ritardando, not even into the last chord, because the whole subject of the piece is something that does not slow down for us.",
+  "The middle of the piece is the part where it might have been a message: a five-eighth cell walks against a six-eighth bar and never lands twice in the same place. It is not a message. What happens instead is that the same eight bass notes are heard in the major — which costs exactly one note, F natural to F sharp, and turns a lament into an anthem. Then the tune stops altogether and the bass line you stopped hearing four minutes ago turns out to have been the melody. At the end the music runs out and the pulse does not. The last tick is identical to the first."
+ ],
+ "credits": [
+  {
+   "label": "Composition",
+   "value": "Claude (Opus 5), note-by-note in Python on the repo's shared lib/ toolkit"
+  },
+  {
+   "label": "Tempo",
+   "value": "♩=134.6 — one 3/4 bar per rotation of PSR B1919+21 (1.3373 s)"
+  },
+  {
+   "label": "Rendering",
+   "value": "FluidSynth with the GeneralUser GS soundfont"
+  },
+  {
+   "label": "Duration",
+   "value": "about 5½ minutes · 2,216 notes · 232 bars · 27 statements of one bass line"
+  }
+ ],
+ "theme": {
+  "accent": "#7fb4ff"
+ },
+ "instruments": [
+  {
+   "id": "piano",
+   "name": "Piano",
+   "family": "keys"
+  }
+ ],
+ "emblem": {
+  "label": "one note",
+  "states": [
+   {
+    "notes": [
+     {
+      "p": "A4"
+     },
+     {
+      "p": "D5"
+     },
+     {
+      "p": "F5"
+     }
+    ]
+   },
+   {
+    "notes": [
+     {
+      "p": "A4"
+     },
+     {
+      "p": "D5"
+     },
+     {
+      "p": "F#5",
+      "accent": true
+     }
+    ],
+    "trigger": {
+     "movement": "mvt1",
+     "time": 204.16
+    }
+   }
+  ]
+ },
+ "movements": [
+  {
+   "id": "mvt1",
+   "num": "·",
+   "title": "Still Turning",
+   "key": "D minor → D major",
+   "tempoLabel": "♩=134.6, and never anything else",
+   "note": "twenty-seven statements of eight bass notes that are never altered, over five and a half minutes and one change of mode.",
+   "duration": 333.15,
+   "noteCount": 2216,
+   "audio": "audio/mvt1.m4a",
+   "notes": "notes/mvt1.json",
+   "sections": [
+    [
+     0.0,
+     "a bit of scruff"
+    ],
+    [
+     32.1,
+     "the ground"
+    ],
+    [
+     53.49,
+     "the first reading"
+    ],
+    [
+     85.59,
+     "sidereal"
+    ],
+    [
+     96.29,
+     "little green men"
+    ],
+    [
+     117.68,
+     "not a message"
+    ],
+    [
+     171.17,
+     "the storm"
+    ],
+    [
+     203.27,
+     "one note different"
+    ],
+    [
+     213.97,
+     "a star"
+    ],
+    [
+     246.06,
+     "the anthem"
+    ],
+    [
+     267.46,
+     "the ground was the tune"
+    ],
+    [
+     278.16,
+     "still turning"
+    ],
+    [
+     310.25,
+     "the last chord"
+    ]
+   ],
+   "score": "score.musicxml"
+  }
+ ],
+ "moments": [
+  {
+   "movement": "mvt1",
+   "time": 32.1,
+   "text": "the tempo triples here and the tick does not change rate. nothing sped up — we just started seeing between the pulses.",
+   "hold": 10
+  },
+  {
+   "movement": "mvt1",
+   "time": 204.16,
+   "text": "the first F sharp in the piece. everything after it is the same eight bass notes, in the major.",
+   "hold": 10
+  },
+  {
+   "movement": "mvt1",
+   "time": 267.46,
+   "text": "the melody stops. what is left is the bass line you stopped hearing four minutes ago.",
+   "hold": 10
+  }
+ ]
+}

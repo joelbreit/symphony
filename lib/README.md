@@ -44,8 +44,9 @@ changing anything in here.
 | `figures` | textures (`trem`, `arp`, `ost`, rolls, swells, `harp_arp`, `strum`) and idioms (`smear_into`, `falloff`, `curl`, `trill`, `scoop`, `press_roll`) |
 | `midiwrite` | direct mido writer (format 1, conductor track, one named track per instrument), `midi_report` |
 | `assess` | text report + pianoroll/dynamic-arc plots, optional measured-RMS overlay from a rendered WAV |
-| `notation` | engraved score (MusicXML) from the pre-humanized layer: key-aware re-spelling, ornament/strum → notation rules, grand staff, key regions; `export()` writes it into a web piece package and verifies the sync, `check_sync()` is the gate on its own |
-| `notation_m21` | the same job for the **frozen music21 pieces**, which have no symbolic layer: a recording `Orchestra` subclass, chord folding, staff frame, rest/voice/measure finishing, orchestral assembly, manifest patch. Only those three pieces need it — new pieces use `notation` |
+| `keyboard` | playability audit for keyboard pieces: onsets split into two hands, then checked for span, finger count and reach at the seconds the tempo actually allows. `keyboard.report(piece)` prints and returns True if clean |
+| `notation` | engraved score (MusicXML) from the pre-humanized layer: key-aware re-spelling, ornament/strum → notation rules, grand staff, key regions, **dynamics and hairpins read back out of the velocities**; `export()` writes it into a web piece package and verifies the sync, `check_sync()` is the gate on its own |
+| `notation_m21` | the same job for the **frozen music21 pieces**, which have no symbolic layer: a recording `Orchestra` subclass (rhythm *and* platonic velocity), chord folding, staff frame, rest/voice/measure finishing, orchestral assembly, manifest patch. Only those three pieces need it — new pieces use `notation` |
 
 ## Scores come for free
 
@@ -73,11 +74,49 @@ That last check is the point: a notation bug shows up as the score sliding
 the page. `tools/export_scores.py` re-runs every piece's export and reports
 the worst drift for each.
 
+### Dynamics come with them
+
+Velocity is the dynamic in this system, so the page reads it back: the per-bar
+median velocity is banded (the midpoints of `piece.DYN`), smoothed over three
+bars, printed as a mark wherever a band change holds, and drawn as a hairpin
+wherever the median ramped monotonically far enough to be a ramp instead of a
+step. Pass `dyn=False` to `to_score` for a bare score.
+
+Two things it knows that are worth knowing yourself. **Use the median, not the
+mean** — forty quiet accompaniment sixteenths under four loud melody notes is
+a quiet bar, and the mean disagrees. And **velocity is a keystroke while a
+dynamic is a loudness**: the same force at the top of a keyboard makes far
+less sound, so a composer pushing a thin top octave to make it speak is not
+writing `mf`. `_effective_vel` takes one band off above C6 and leaves
+everything else alone.
+
+Beaming is corrected on the way out, too: music21 breaks the secondary beams
+of a beat group at the eighth, so four sixteenths engrave as two pairs of two.
+`_join_secondary_beams` joins every deeper beam inside a primary group where
+both neighbours carry it, and leaves the break where it is real (an eighth in
+the middle of sixteenths) or correct (a group longer than one beat).
+
+### One trap, because it is invisible
+
+music21 writes `<per-minute>` and `<sound tempo>` as **whole** BPM. A piece at
+♩=120 never notices; a piece whose tempo comes from something in the world
+(♩=134.5996, one 3/4 bar per rotation of a pulsar) loses about a second over
+five minutes, and a second is the score highlighting the wrong bar.
+`to_musicxml` restores the exact tempi from the piece's own timeline after
+music21 has written the file.
+
 ## Conventions
 
 - All offsets and durations are **beats = quarter notes**, absolute from 0.
   Bars are 1-indexed via `piece.bar(n)` and honor the meter map.
 - Everything is deterministic from the `Piece(seed=…)`; never remove seeds.
+  After changing anything here, run `tools/check_all.py`: it rebuilds every
+  lib-built piece and fails if one byte of anybody's finished MIDI moved.
+- `piece.add(..., rigid=True)` exempts material from swing, lean and timing
+  jitter while keeping velocity jitter — a machine inside a human
+  performance (a click, a sequencer line, a pulse the piece is about). It
+  still draws from the RNG, so marking something rigid does not reshuffle
+  the humanization of anything else.
 - Range violations **raise at note entry**. If a player earns an exception
   (the sousa wail), pass `check_range=False` for that one call.
 - `hairpin()` values persist: after a decrescendo, reset CC11 before the
@@ -91,6 +130,9 @@ the worst drift for each.
 
 ## Deliberately not here (yet)
 
+- **Dynamics and articulations on the engraved page** — see
+  `docs/score-backlog.md` items 2 and 9. Velocity is the dynamic in this
+  system, so the information exists; the score just doesn't print it.
 - **Rhythm-section generators** (rattler's chart-driven banjo/tuba/drums,
   `obbligato`, `tailgate`): opinionated style code — port them when a piece
   needs them, generalizing from the original in that piece's own src first

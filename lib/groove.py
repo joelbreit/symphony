@@ -1,5 +1,10 @@
 """Groove and humanization, applied at write time.
 
+A note marked `rigid` opts out of swing, lean and timing jitter but keeps
+velocity jitter — for a machine part inside a human performance (a click, a
+sequencer line, a pulse the piece is about). It draws from the RNG exactly
+like every other note, so marking one rigid does not reshuffle the rest.
+
 Swing is a piecewise-linear time warp (Royal Street Rattler's approach —
 warps starts *and* ends, so durations breathe with the feel) rather than a
 nudge of offbeat notes. Humanize gives each instrument family its own
@@ -51,15 +56,15 @@ def apply_groove(notes, ensemble, rng, swing=None, humanize=DEFAULT_HUMANIZE,
     out = []
     for n in notes:
         start, dur = n.start, n.dur
-        if swing is not None and n.swing:
+        if swing is not None and n.swing and not n.rigid:
             t1 = swing_warp(start + dur, swing, swing_unit)
             start = swing_warp(start, swing, swing_unit)
             dur = max(0.05, t1 - start)
         if humanize is not None:
             inst = ensemble[n.inst]
-            jit = humanize.jitter_for(inst)
-            start = max(0.0, start + humanize.lean.get(n.inst, 0.0)
-                        + rng.uniform(-jit, jit))
+            jit = 0.0 if n.rigid else humanize.jitter_for(inst)
+            lean = 0.0 if n.rigid else humanize.lean.get(n.inst, 0.0)
+            start = max(0.0, start + lean + rng.uniform(-jit, jit))
             vel = max(1, min(127, n.vel + rng.randint(-humanize.vel, humanize.vel)))
         else:
             vel = n.vel

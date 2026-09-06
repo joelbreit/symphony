@@ -8,7 +8,7 @@ import sys
 import tempfile
 from fractions import Fraction
 
-from . import assess, figures
+from . import assess, figures, keyboard
 from .chords import chord_at, fit, parse_chord, voicing
 from .dsl import B, R, parse, total_beats, transpose
 from .ensemble import DRUMS, Ensemble, Instrument, dixieland, orchestra, \
@@ -350,6 +350,59 @@ def test_notation_sync_gate():
         p.tempo(8, 30)                         # clock now disagrees with the page
         late, at = notation.check_sync(p, xml)
         assert late > 1.0 and at > 0, (late, at)
+
+
+def test_rigid_notes():
+    """rigid opts out of swing/lean/jitter, keeps the RNG stream intact."""
+    from .groove import apply_groove
+    import random
+    p = Piece(solo_piano(), seed=3)
+    p.add('piano', 0, 'C4:e D4:e E4:e F4:e')
+    p.add('piano', 2, 'C4:e D4:e E4:e F4:e', rigid=True)
+    p.add('piano', 4, 'G4:q A4:q')
+    hum = Humanize(timing=0.05, tight_timing=0.05, vel=4, lean={'piano': 0.1})
+    out = apply_groove(p.notes, p.ensemble, random.Random(9), swing=2 / 3,
+                       humanize=hum)
+    loose, rigid = out[:4], out[4:8]
+    assert any(abs(n.start - s) > 1e-9 for n, s in zip(loose, (0, .5, 1, 1.5)))
+    assert all(n.start == s for n, s in zip(rigid, (2, 2.5, 3, 3.5))), \
+        [n.start for n in rigid]
+    assert any(n.vel != 72 for n in rigid)        # velocity still jitters
+    # a rigid note draws from the RNG like any other: marking material rigid
+    # must not reshuffle the humanization of everything after it
+    q = Piece(solo_piano(), seed=3)
+    q.add('piano', 0, 'C4:e D4:e E4:e F4:e')
+    q.add('piano', 2, 'C4:e D4:e E4:e F4:e')       # same material, not rigid
+    q.add('piano', 4, 'G4:q A4:q')
+    out2 = apply_groove(q.notes, q.ensemble, random.Random(9), swing=2 / 3,
+                        humanize=hum)
+    assert [n.start for n in out2[-2:]] == [n.start for n in out[-2:]]
+
+
+def test_keyboard_audit():
+    p = Piece(solo_piano(), seed=1)
+    p.tempo(0, 120)
+    p.add('piano', 0, [([48, 55, 64, 72], 1)])           # two easy hands
+    assert keyboard.audit(p) == []
+    lh, rh = keyboard.split_hands([48, 55, 64, 72])
+    assert lh == [48, 55] and rh == [64, 72]
+
+    # six notes inside a 9th are two ordinary hands, not a problem
+    p.add('piano', 1, [([60, 62, 64, 65, 67, 69], 1)])
+    assert keyboard.audit(p) == [], keyboard.audit(p)
+    # twelve chromatic notes are not
+    p.add('piano', 2, [(list(range(60, 72)), 1)])
+    assert {i.kind for i in keyboard.audit(p)} == {'fingers'}
+
+    # both hands busy, then both must leap: 125 ms allows ~20 semitones
+    r = Piece(solo_piano(), seed=1)
+    r.tempo(0, 120)
+    r.add('piano', 0, [([36, 43, 72, 79], 0.25)])
+    r.add('piano', 0.25, [([48, 55, 72, 79], 0.25)])      # left hand up a 12th
+    assert not any(i.kind == 'reach' for i in keyboard.audit(r))
+    r.add('piano', 0.5, [([84, 91, 96, 103], 0.25)])      # left hand up 3 oct
+    reaches = [i for i in keyboard.audit(r) if i.kind == 'reach']
+    assert reaches and reaches[0].hand == 'L', reaches
 
 
 def main():

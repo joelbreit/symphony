@@ -41,6 +41,10 @@ class Note:
     swing: bool = True
     nom: float = 0.0   # nominal (pre-gate) duration in beats — the notated
                        # value; dur is the sounded (gated/humanized) length.
+    rigid: bool = False  # exempt from swing, lean and timing jitter: a
+                         # machine inside the performance (click, sequencer
+                         # line, a pulse the piece is *about*). Velocity
+                         # still jitters — only the clock is exact.
 
     def replace(self, **kw):
         return _dc_replace(self, **kw)
@@ -98,7 +102,8 @@ class Piece:
     # -- notes -----------------------------------------------------------
     def add(self, inst: str, start, notes, vel='mf', vel_end=None,
             gate: float = 0.95, transpose: int = 0, accent_first: bool = False,
-            swing: bool = True, check_range: bool = True) -> float:
+            swing: bool = True, check_range: bool = True,
+            rigid: bool = False) -> float:
         """Insert events at absolute beat `start`. Returns the end beat.
 
         notes: DSL string or [(pitch, dur), ...]. vel/vel_end: dynamic names
@@ -129,7 +134,7 @@ class Piece:
                             f'{pitch_name(spec.hi)}')
                     self.notes.append(Note(inst, pp, float(t),
                                            float(d * Fraction(gate).limit_denominator(20)),
-                                           v, swing, nom=float(d)))
+                                           v, swing, nom=float(d), rigid=rigid))
                 idx += 1
             t += d
         return float(t)

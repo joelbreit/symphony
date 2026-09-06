@@ -1,0 +1,65 @@
+{
+ "sections": [
+  [
+   0.0,
+   "a bit of scruff"
+  ],
+  [
+   32.1,
+   "the ground"
+  ],
+  [
+   53.49,
+   "the first reading"
+  ],
+  [
+   85.59,
+   "sidereal"
+  ],
+  [
+   96.29,
+   "little green men"
+  ],
+  [
+   117.68,
+   "not a message"
+  ],
+  [
+   171.17,
+   "the storm"
+  ],
+  [
+   203.27,
+   "one note different"
+  ],
+  [
+   213.97,
+   "a star"
+  ],
+  [
+   246.06,
+   "the anthem"
+  ],
+  [
+   267.46,
+   "the ground was the tune"
+  ],
+  [
+   278.16,
+   "still turning"
+  ],
+  [
+   310.25,
+   "the last chord"
+  ]
+ ],
+ "cues": {
+  "the first guess": 20.06,
+  "the lock": 32.1,
+  "the question": 113.67,
+  "it is not a message": 192.57,
+  "the first F sharp": 204.16,
+  "the summit": 256.76
+ },
+ "end": 331.65
+}

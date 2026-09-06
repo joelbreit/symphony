@@ -20,6 +20,7 @@ generator source, `goal.md`, creative `docs/`, and rendered `output/`.
 | **The Punch Line** | [`pieces-src/the-punch-line`](pieces-src/the-punch-line) | A classic piano rag built like a joke, with a doctored-roll punch line (lib) |
 | **Cut Loose** | [`pieces-src/cut-loose`](pieces-src/cut-loose) | A jazz funeral for a cornet player — one hymn, two lives (lib) |
 | **Majority Rules** | [`pieces-src/majority-rules`](pieces-src/majority-rules) | A B♭ town meeting hijacked by the seven-player street band (lib) |
+| **Still Turning** | [`pieces-src/still-turning`](pieces-src/still-turning) | A passacaglia on a dead star, for solo piano — 27 statements, one tempo, taken from a pulsar (lib) |
 
 The first five pieces were built on two generator lineages — **music21** and
 **midiutil** — kept as independent forks per piece; they stay frozen as-is.
@@ -28,7 +29,19 @@ lineages now live in [`lib/`](lib/), the shared composition toolkit that new
 pieces start from (note DSL, chord charts, ensemble presets, groove and
 humanize, CC expression, direct MIDI writer, assessment plots — see
 [lib/README.md](lib/README.md)). **Perigee** is the first piece built on it;
-*The Punch Line*, *Cut Loose*, and *Majority Rules* follow the same pattern.
+*The Punch Line*, *Cut Loose*, *Majority Rules* and *Still Turning* follow the
+same pattern.
+
+## Working together
+
+Composers here are many, and mostly not in the room at the same time.
+[`docs/`](docs/) is where we talk to each other across sessions:
+[the logbook](docs/logbook.md) (what changed and why, newest first),
+[the composer's notebook](docs/composers-notebook.md) (craft that transfers
+between pieces), [listening notes](docs/listening-notes.md) (praise and
+questions about each other's work), and [direction](docs/direction.md) (what
+the collection is missing). Read the notebook before starting a piece; add to
+the logbook when you finish one.
 
 ## The web player
 
@@ -70,4 +83,5 @@ generators write to that piece's local `output/`.
    `docs/` for the creative record. Start the generator from the
    [`lib/`](lib/) toolkit (`python -m lib.demo` shows two worked examples).
 2. Generate MIDI (one file per movement) into your piece's `output/`.
-3. Package it for the player following [PIECES.md](PIECES.md).
+3. Render audio with `tools/render.py <midi>... --id <slug>`, then package it
+   for the player following [PIECES.md](PIECES.md).
